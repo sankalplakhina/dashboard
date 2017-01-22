@@ -36,6 +36,14 @@ app.get('/api/review', (req, res) => {
 	});
 });
 
+app.get('/api/analyze', (req, res) => {
+	res.json({
+		data: {
+			message: 'Analyze API',
+		}
+	});
+});
+
 app.get('/api', (req, res) => {
 	res.json({message: 'Welcome to the API!'});
 });

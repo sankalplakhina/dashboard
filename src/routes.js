@@ -5,6 +5,7 @@ import { IndexRoute, Route } from 'react-router';
 import AppContainer from './components/appContainer/appContainer';
 import ExploreContainer from './components/pages/exploreContainer/containers/exploreContainer';
 import ReviewContainer from './components/pages/reviewContainer/containers/reviewContainer';
+import AnalyzeContainer from './components/pages/analyzeContainer/containers/analyzeContainer';
 import Home from './components/pages/home/containers/home';
 import NotFound from './components/pages/notFound/components/notFound';
 
@@ -35,6 +36,7 @@ export default (store) => {
       <IndexRoute component={Home} />
       <Route path="explore" component={ExploreContainer}/>
       <Route path="review" component={ReviewContainer}/>
+      <Route path="analyze" component={AnalyzeContainer}/>
       <Route path="*" component={NotFound} status={404} />
     </Route>
     );
