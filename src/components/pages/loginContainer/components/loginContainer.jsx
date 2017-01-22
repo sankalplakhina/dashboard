@@ -12,7 +12,7 @@ class LoginContainer extends React.Component {
 			    <div className="loginBox">
 			        <h1>Login</h1>
 			        <p><em>Login with your username or email</em></p>
-			        <LoginContent />
+			        <LoginContent {...this.props} />
 			        <h1>Don’t have an account? <Link to="/register">Create one</Link></h1>
 			    </div>
 			</div>

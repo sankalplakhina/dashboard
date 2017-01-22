@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router'
 // import { load } from '../actions/analyzeContainerActions';
 // import { analyzeDataLoaded } from '../selectors/analyzeContainerSelectors';
 import LoginContainer from '../components/loginContainer';
@@ -13,12 +14,16 @@ import LoginContainer from '../components/loginContainer';
 //     }
 // };
 
-function mapStateToProps(state) {
-  	return {};
+function mapStateToProps(state, ownProps) {
+  	return {
+  		onLoginSuccess() {
+  			ownProps.router.replace('/explore');
+  		}
+  	};
 }
 
 function mapDispatchToProps(dispatch) {
   	return {};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginContainer));
