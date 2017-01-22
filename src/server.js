@@ -60,6 +60,7 @@ proxy.on('error', (error, req, res) => {
 app.use(morgan('dev', {}));
 
 app.use('/assets', express.static(path.resolve(__dirname, '../public/assets')));
+app.use('/public', express.static(path.resolve(__dirname, '../public')));
 app.use(favicon(path.join(__dirname, '../public/static/images/favicon', 'favicon.ico')));
 
 app.use((req, res) => {

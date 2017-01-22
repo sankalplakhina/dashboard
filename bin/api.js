@@ -20,6 +20,14 @@ app.get('/api/home', (req, res) => {
 	});
 });
 
+app.get('/api/explore', (req, res) => {
+	res.json({
+		data: {
+			message: 'Explore API',
+		}
+	});
+});
+
 app.get('/api', (req, res) => {
 	res.json({message: 'Welcome to the API!'});
 });

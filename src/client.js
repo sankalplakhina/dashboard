@@ -38,6 +38,7 @@ ReactDOM.render(
 
 if (process.env.NODE_ENV !== 'production') {
   global.React = React; // enable debugger
+  global.$store = store; // enable debugger
 
   if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-react-checksum']) {
     console.error('Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');

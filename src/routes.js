@@ -3,8 +3,8 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import AppContainer from './components/appContainer/appContainer';
+import ExploreContainer from './components/pages/exploreContainer/containers/exploreContainer';
 import Home from './components/pages/home/containers/home';
-import About from './components/pages/about/containers/about';
 import NotFound from './components/pages/notFound/components/notFound';
 
 export default (store) => {
@@ -32,8 +32,7 @@ export default (store) => {
     return (
     <Route path="/" component={AppContainer}>
       <IndexRoute component={Home} />
-      <Route path="home" component={Home}/>
-      <Route path="about" component={About}/>
+      <Route path="explore" component={ExploreContainer}/>
       <Route path="*" component={NotFound} status={404} />
     </Route>
     );
