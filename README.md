@@ -1,1 +1,1 @@
-# isomorphic-universal-react-redux-boilerplate-seed
+# Thirdwatch - Mobile Data Management Platform
