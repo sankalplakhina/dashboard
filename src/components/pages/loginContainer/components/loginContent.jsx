@@ -7,8 +7,8 @@ class LoginContent extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			email: 'test',
-			password: 'test'
+			email: '',
+			password: ''
 		};
 		this.onSubmitClick = this.onSubmitClick.bind(this);
 		this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -41,7 +41,7 @@ class LoginContent extends React.Component {
 
 		return (
 			<div className="content">
-			    <form>
+			    <form onSubmit={this.onSubmitClick}>
 			        <input type="text" value={email} onChange={this.onChangeEmail} placeholder="E-mail or username" required />
 			        <input type="password" value={password} onChange={this.onChangePassword} placeholder="Password" required />
 			        <div className="rememberMe">
@@ -50,7 +50,7 @@ class LoginContent extends React.Component {
 			            	<span></span>Remember Me
 			            </label>
 			        </div>
-			        <input type="submit" value="LOGIN" onClick={this.onSubmitClick} />
+			        <input type="submit" value="LOGIN" />
 			        <div className="text-left">
 			        	<a href="#">Forgot your password?</a>
 			        </div>
