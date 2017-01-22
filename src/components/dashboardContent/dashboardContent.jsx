@@ -7,6 +7,7 @@ import { Link } from 'react-router';
 
 import DashboardBreadcrumbs from '~/src/components/dashboardBreadcrumbs/dashboardBreadcrumbs';
 import ExploreContent from '~/src/components/pages/exploreContainer/components/exploreContent';
+import ReviewContent from '~/src/components/pages/reviewContainer/components/reviewContent';
 
 class DashboardContent extends React.Component {
     render() {
@@ -19,6 +20,7 @@ class DashboardContent extends React.Component {
                     </div>
                 </div>
                 {isExploreView && <ExploreContent />}
+                {isReviewView && <ReviewContent />}
             </div>
         );
     }

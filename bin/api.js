@@ -28,6 +28,14 @@ app.get('/api/explore', (req, res) => {
 	});
 });
 
+app.get('/api/review', (req, res) => {
+	res.json({
+		data: {
+			message: 'Review API',
+		}
+	});
+});
+
 app.get('/api', (req, res) => {
 	res.json({message: 'Welcome to the API!'});
 });
