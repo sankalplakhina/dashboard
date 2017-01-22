@@ -17,7 +17,9 @@ class DashboardContent extends React.Component {
         	<div className="scrollaleContent">
                 <div className="scrollFix">
                     <div className="fxdContent">
-                        <DashboardBreadcrumbs isExploreView />
+                        {isExploreView && <DashboardBreadcrumbs isExploreView />}
+                        {isReviewView && <DashboardBreadcrumbs isReviewView />}
+                        {isAnalyzeView && <DashboardBreadcrumbs isAnalyzeView />}
                     </div>
                 </div>
                 {isExploreView && <ExploreContent />}

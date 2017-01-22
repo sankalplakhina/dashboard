@@ -6,7 +6,7 @@ class AnalyzeContent extends React.Component {
 	render() {
 		return (
 			<div className="content">
-		  		AnalyzeContent
+		  		<div style={{minHeight: '750px'}}>AnalyzeContent</div>
 			</div>
 		);
 	}

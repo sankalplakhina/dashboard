@@ -6,7 +6,7 @@ class ReviewContent extends React.Component {
 	render() {
 		return (
 			<div className="content">
-		  		ReviewContent
+		  		<div style={{minHeight: '750px'}}>ReviewContent</div>
 			</div>
 		);
 	}

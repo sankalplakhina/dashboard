@@ -38,7 +38,7 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        loader: 'style!css?importLoaders=2&sourceMap&localIdentName=[local]__[hash:base64:5]!less-loader'
+        loader: 'style!css?importLoaders=2&localIdentName=[local]__[hash:base64:5]!less-loader'
       },
       {
         test: /\.css$/,
