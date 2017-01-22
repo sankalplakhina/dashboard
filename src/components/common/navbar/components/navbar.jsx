@@ -5,10 +5,12 @@ import Helmet from 'react-helmet';
 import { Link } from 'react-router';
 
 import twLogo from '~/public/static/images/twLogo.png';
-// import style from '../navbar.less';
 
 class Navbar extends React.Component {
   render() {
+
+  	const { addFakeNavSpace } = this.props;
+
     return (
     	<nav className="navbar navbar-default navbar-fixed-top">
     	    <div className="container-fluid nopad">
@@ -20,9 +22,9 @@ class Navbar extends React.Component {
     	                <span className="icon-bar"></span>
     	                <span className="icon-bar"></span>
     	            </button>
-    	            <a className="navbar-brand navPad" href="explore.html">
+    	            <Link className="navbar-brand navPad" to="/explore">
     	            	<img src={twLogo} />
-    	            </a>
+    	            </Link>
     	        </div>
 
     	        {/* <!-- Collect the nav links, forms, and other content for toggling --> */}
@@ -41,13 +43,20 @@ class Navbar extends React.Component {
     	            </div>
     	        </div>
     	        {/* <!-- /.navbar-collapse --> */}
-    	        <div className="navFakeSpace">
-    	            <div></div>
-    	        </div>
+    	        {
+    	        	addFakeNavSpace &&
+    	        	<div className="navFakeSpace">
+    	        		<div></div>
+    	        	</div>
+    	        }
     	    </div>
     	</nav>
     );
   }
 }
+
+Navbar.defaultProps = {
+  addFakeNavSpace: true
+};
 
 export default Navbar;

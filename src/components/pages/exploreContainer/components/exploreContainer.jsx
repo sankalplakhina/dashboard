@@ -10,6 +10,7 @@ class ExploreContainer extends React.Component {
 		const { isExploreView } = this.props;
 		return (
 			<div className="wrapper">
+				<Helmet title="Explore - Thirdwatch - Mobile Data Management Platform" />
 		  		<DashboardSidenav isExploreView />
 		  		<DashboardContent isExploreView />
 			</div>

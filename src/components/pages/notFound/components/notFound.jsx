@@ -1,9 +1,5 @@
-/* eslint react/prefer-stateless-function: 0 */
-
 import React from 'react';
 import { Link } from 'react-router';
-
-import style from '../notFound.css';
 
 class NotFound extends React.Component {
   render() {

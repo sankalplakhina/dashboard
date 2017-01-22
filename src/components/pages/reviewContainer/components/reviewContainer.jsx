@@ -10,6 +10,7 @@ class ReviewContainer extends React.Component {
 		const { isReviewView } = this.props;
 		return (
 			<div className="wrapper">
+				<Helmet title="Review - Thirdwatch - Mobile Data Management Platform" />
 		  		<DashboardSidenav isReviewView />
 		  		<DashboardContent isReviewView />
 			</div>

@@ -10,6 +10,7 @@ class AnalyzeContainer extends React.Component {
 		const { isAnalyzeView } = this.props;
 		return (
 			<div className="wrapper">
+				<Helmet title="Analyze - Thirdwatch - Mobile Data Management Platform" />
 		  		<DashboardSidenav isAnalyzeView />
 		  		<DashboardContent isAnalyzeView />
 			</div>
