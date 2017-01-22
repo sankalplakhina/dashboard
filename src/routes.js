@@ -34,7 +34,7 @@ export default (store) => {
 
     return (
     <Route path="/" component={AppContainer}>
-      <IndexRoute component={Home} />
+      <IndexRoute component={LoginContainer} />
       <Route path="login" component={LoginContainer}/>
       <Route path="explore" component={ExploreContainer}/>
       <Route path="review" component={ReviewContainer}/>

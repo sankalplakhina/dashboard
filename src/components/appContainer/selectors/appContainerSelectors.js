@@ -1,5 +1,6 @@
 export const isLoginViewSelector = (state) => {
-  return state.routing.locationBeforeTransitions.pathname === "/login";
+	const location = state.routing.locationBeforeTransitions.pathname;
+  	return location === '/login' || location === '/';
 };
 
 export const isExploreViewSelector = (state) => {
