@@ -6,6 +6,7 @@ import Helmet from 'react-helmet';
 import { Link } from 'react-router';
 
 import DashboardBreadcrumbs from '~/src/components/dashboardBreadcrumbs/dashboardBreadcrumbs';
+import DashboardDatePicker from '~/src/components/dashboardDatePicker/containers/dashboardDatePicker';
 import ExploreContent from '~/src/components/pages/exploreContainer/components/exploreContent';
 import ReviewContent from '~/src/components/pages/reviewContainer/components/reviewContent';
 import AnalyzeContent from '~/src/components/pages/analyzeContainer/components/analyzeContent';
@@ -16,10 +17,11 @@ class DashboardContent extends React.Component {
         return (
         	<div className="scrollaleContent">
                 <div className="scrollFix">
-                    <div className="fxdContent">
+                    <div className="fxdContent clearfix">
                         {isExploreView && <DashboardBreadcrumbs isExploreView />}
                         {isReviewView && <DashboardBreadcrumbs isReviewView />}
                         {isAnalyzeView && <DashboardBreadcrumbs isAnalyzeView />}
+                        <DashboardDatePicker />
                     </div>
                 </div>
                 {isExploreView && <ExploreContent />}

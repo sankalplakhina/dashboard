@@ -8,7 +8,7 @@ class DashboardBreadcrumbs extends React.Component {
     render() {
         const { isExploreView, isReviewView, isAnalyzeView } = this.props;
         return (
-            <div className="breadcrumbs">
+            <div className="breadcrumbs pull-left">
                 <Link to="/">Home</Link> &nbsp; / &nbsp;
                 {isExploreView && <Link to="/explore">Explore</Link>}
                 {isReviewView && <Link to="/review">Review</Link>}
