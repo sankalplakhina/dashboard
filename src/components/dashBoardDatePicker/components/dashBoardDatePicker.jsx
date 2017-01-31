@@ -31,7 +31,7 @@ class DashboardDatePicker extends React.Component {
 
 	render() {
 		const { predefined, showDatePicker } = this.state;
-		const format = 'dddd, D MMMM YYYY';
+		const format = 'DD MMM YYYY';
 		return (
 			<div className="dbDatePicker pull-right">
 				<div className="dates">
@@ -39,13 +39,7 @@ class DashboardDatePicker extends React.Component {
 					  type='text'
 					  readOnly
 					  onClick={this.onInputClick}
-					  value={ predefined['startDate'] && predefined['startDate'].format(format).toString() }
-					/>
-					<input
-					  type='text'
-					  readOnly
-					  onClick={this.onInputClick}
-					  value={ predefined['endDate'] && predefined['endDate'].format(format).toString() }
+					  value={ `${predefined['startDate'] && predefined['startDate'].format(format).toString()} - ${predefined['endDate'] && predefined['endDate'].format(format).toString()}` }
 					/>
 				</div>
 				<div className={cx("dateRange", {"show": showDatePicker})}>
