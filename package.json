@@ -52,6 +52,7 @@
     "file-loader": "^0.9.0",
     "http-proxy": "^1.15.1",
     "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.4",
     "morgan": "^1.7.0",
     "postcss-loader": "^0.13.0",
     "pretty-error": "^2.0.1",

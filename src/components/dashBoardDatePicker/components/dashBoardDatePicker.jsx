@@ -1,53 +1,52 @@
 import React from 'react';
 import cx from 'classnames';
+import moment from 'moment';
 import { defaultRanges, Calendar, DateRange } from 'react-date-range';
 
 class DashboardDatePicker extends React.Component {
 
 	constructor(props, context) {
-		super(props, context);
-	    this.state = {
-	    	showDatePicker: false,
-	    	predefined: {
-	    		startDate: '',
-	    		endDate: ''
-	    	},
-	    };
-	    this.onDateRangeChange = this.onDateRangeChange.bind(this);
-	    this.onInputClick = this.onInputClick.bind(this);
+		super();
+		this.handleDatePickerClick = this.handleDatePickerClick.bind(this);
+		this.initDateRange = this.initDateRange.bind(this);
+		this.handleDateRangeSelection = this.handleDateRangeSelection.bind(this);
 	}
 
-	onInputClick() {
-		this.setState({
-			showDatePicker : !this.state.showDatePicker
-		});
+	handleDatePickerClick() {
+		const { isDatePickerVisible, onDatePickerClick } = this.props;
+		onDatePickerClick(isDatePickerVisible);
 	}
 
-	onDateRangeChange(payload) {
-		this.setState({
-			predefined : payload
-		});
+	initDateRange(payload) {
+		const { dateRange, onDateRangeSelection } = this.props;
+		onDateRangeSelection(payload);
+	}
+
+	handleDateRangeSelection(payload) {
+		const { onDateRangeSelection } = this.props;
+		onDateRangeSelection(payload);
+		this.handleDatePickerClick();
 	}
 
 	render() {
-		const { predefined, showDatePicker } = this.state;
-		const format = 'DD MMM YYYY';
+
+		const { format, dateRange, isDatePickerVisible } = this.props;
 		return (
 			<div className="dbDatePicker pull-right">
 				<div className="dates">
 					<input
 					  type='text'
 					  readOnly
-					  onClick={this.onInputClick}
-					  value={ `${predefined['startDate'] && predefined['startDate'].format(format).toString()} - ${predefined['endDate'] && predefined['endDate'].format(format).toString()}` }
+					  onClick={this.handleDatePickerClick}
+					  value={ `${dateRange['startDate'] && dateRange['startDate'].format(format).toString()} - ${dateRange['endDate'] && dateRange['endDate'].format(format).toString()}` }
 					/>
 				</div>
-				<div className={cx("dateRange", {"show": showDatePicker})}>
+				<div className={cx("dateRange", {"show": isDatePickerVisible})}>
 					<DateRange
 						linkedCalendars={ true }
 						ranges={ defaultRanges }
-						onInit={ this.onDateRangeChange }
-						onChange={ this.onDateRangeChange }
+						onInit={this.initDateRange}
+						onChange={this.handleDateRangeSelection}
 						theme={{
 						  Calendar : { width: 200 },
 						  PredefinedRanges : { marginLeft: 10, marginTop: 10 }
@@ -57,6 +56,10 @@ class DashboardDatePicker extends React.Component {
 			</div>
 		);
 	}
+}
+
+DashboardDatePicker.defaultProps = {
+	format: 'DD MMM YYYY'
 }
 
 export default DashboardDatePicker;
