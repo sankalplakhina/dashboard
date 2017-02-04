@@ -33,22 +33,25 @@ app.get('/api/explore', (req, res) => {
 				cols: ['stats', 'matchedOrders', 'scoreDistribution'],
 				stats: {
 					title : 'STATS',
+					type: 'table',
 					rows: [
-						{ type: 'row', text: 'Average Score', icon: 'images/score.png', count:  84},
-						{ type: 'row', text: 'Average Order Amount', count:  12421.43},
+						{ type: 'tableRow', text: 'Average Score', icon: 'score.png', count:  84},
+						{ type: 'tableRow', text: 'Average Order Amount', count:  12421.43},
 					]
 				},
 				matchedOrders: {
 					title: 'Matched Orders',
+					type: 'table',
 					rows: [
-						{ type: 'row', text: 'Total', count:  472},
-						{ type: 'row', text: 'Bad', count:  '12%', risky: true},
-						{ type: 'row', text: 'Not Bad', count:  '92%', safe: true},
-						{ type: 'row', text: 'Unlabled', count:  '0%', safe: true},
+						{ type: 'tableRow', text: 'Total', count:  472},
+						{ type: 'tableRow', text: 'Bad', count:  '12%', risky: true},
+						{ type: 'tableRow', text: 'Not Bad', count:  '92%', safe: true},
+						{ type: 'tableRow', text: 'Unlabled', count:  '0%', safe: true},
 					]
 				},
 				scoreDistribution: {
 					title: 'Score distribution',
+					type: 'chart',
 					rows: [
 						{
 							type: 'pieChart',

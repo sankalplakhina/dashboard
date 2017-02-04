@@ -10,20 +10,22 @@ class QuickInfo extends React.Component {
 		const { cols } = data;
 		return (
 			<div className="quickInfo">
-		  		{cols.map((column, idx)=>{
-		  			return (
-		  				<div
-		  					className={cx('orderInfo', {
-		  								   'colorLightGrey': !data[column].risky,
-		  								   'colorRed': data[column].risky
-		  								})}
-		  					key={idx}
-		  				>
-		  					<small>{data[column].title}</small>
-		  					<big>{data[column].count}</big>
-		  				</div>
-		  			);
-		  		})}
+		  		{
+		  			cols.map((column, idx)=>{
+			  			return (
+			  				<div
+			  					className={cx('orderInfo', {
+			  								   'colorLightGrey': !data[column].risky,
+			  								   'colorRed': data[column].risky
+			  								})}
+			  					key={idx}
+			  				>
+			  					<small>{data[column].title}</small>
+			  					<big>{data[column].count}</big>
+			  				</div>
+			  			);
+			  		})
+		  		}
 			</div>
 		);
 	}
