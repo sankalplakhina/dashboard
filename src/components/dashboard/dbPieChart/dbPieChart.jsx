@@ -24,15 +24,16 @@ class DbPieChart extends React.Component {
     	const { width, height, title, data, colors, centerText } = this.props;
     	const { isChartVisible } = this.state;
         return (
-        	<div className={styles.dbPieChart} style={{width: width, height: height}}>
+        	<div className={styles.dbPieChart} style={{width: width}}>
         		{ title && <div className={styles.title}>{title}</div> }
+        		<div className={styles.chartArea}>
 				{
 					isChartVisible &&
 					<PieChart width={width} height={height}>
 						<Pie
 							data={data}
-							cx={125}
-							cy={90}
+							cx={width/2}
+							cy={height/2}
 							innerRadius={60}
 							outerRadius={80}
 							fill="#8884d8"
@@ -48,12 +49,13 @@ class DbPieChart extends React.Component {
 				}
 				{
 					isChartVisible &&
-					<div className={styles.chartDetails}>
+					<div className={styles.chartDetails} style={{width: width, height: height}}>
 						<div>
 							{centerText.map((text, idx) => <div key={idx}>{text}</div>)}
 						</div>
 					</div>
 				}
+				</div>
 			</div>
         );
     }

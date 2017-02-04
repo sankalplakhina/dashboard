@@ -91,7 +91,6 @@ app.get('/api/analyze', (req, res) => {
 				],
 			},
 			pieGraphs: {
-				type: 'chart',
 				cols: [
 					{
 						type: 'pieChart',
