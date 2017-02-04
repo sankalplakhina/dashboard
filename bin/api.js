@@ -23,7 +23,51 @@ app.get('/api/home', (req, res) => {
 app.get('/api/explore', (req, res) => {
 	res.json({
 		data: {
-			message: 'Explore API',
+			rows: ['quickInfo', 'avgStats'],
+			quickInfo: {
+				cols: ['newOrders', 'riskyOrders'],
+				newOrders: {title: 'New Orders', count: 30},
+				riskyOrders: {title: 'Risky Orders', count: 30, risky: true},
+			},
+			avgStats: {
+				cols: ['stats', 'matchedOrders', 'scoreDistribution'],
+				stats: {
+					title : 'STATS',
+					rows: [
+						{ type: 'row', text: 'Average Score', icon: 'images/score.png', count:  84},
+						{ type: 'row', text: 'Average Order Amount', count:  12421.43},
+					]
+				},
+				matchedOrders: {
+					title: 'Matched Orders',
+					rows: [
+						{ type: 'row', text: 'Total', count:  472},
+						{ type: 'row', text: 'Bad', count:  '12%', risky: true},
+						{ type: 'row', text: 'Not Bad', count:  '92%', safe: true},
+						{ type: 'row', text: 'Unlabled', count:  '0%', safe: true},
+					]
+				},
+				scoreDistribution: {
+					title: 'Score distribution',
+					rows: [
+						{
+							type: 'pieChart',
+							data: [
+								{name: 'Group A', value: 400},
+								{name: 'Group B', value: 300},
+								{name: 'Group C', value: 300},
+								{name: 'Group D', value: 200}
+							],
+							colors: [
+								'#0088FE',
+								'#00C49F',
+								'#FFBB28',
+								'#FF8042'
+							],
+						},
+					]
+				}
+			}
 		}
 	});
 });
