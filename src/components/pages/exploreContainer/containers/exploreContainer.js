@@ -1,12 +1,12 @@
 import { asyncConnect } from 'redux-connect';
 import { load } from '../actions/exploreContainerActions';
-import { exploreDataLoaded } from '../selectors/exploreContainerSelectors';
+import { isExploreDataLoaded } from '../selectors/exploreContainerSelectors';
 import ExploreContainer from '../components/exploreContainer';
 
 const asyncProps = {
     promise: ({ store: { dispatch, getState } }) => {
     	const state = getState();
-    	if (!exploreDataLoaded(state)) {
+    	if (!isExploreDataLoaded(state)) {
     		return dispatch(load());
     	}
     	return null;
