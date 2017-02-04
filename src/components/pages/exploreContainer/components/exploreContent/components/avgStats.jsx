@@ -1,6 +1,7 @@
 import React from 'react';
 import AvgStatsTitleRow from './avgStatsTitleRow';
 import AvgStatsTableRow from './avgStatsTableRow';
+import DbPieChart from '~/src/components/dashboard/dbPieChart/dbPieChart';
 
 class AvgStats extends React.Component {
 
@@ -17,7 +18,7 @@ class AvgStats extends React.Component {
 		  				switch(data[column].type) {
 
 		  					case 'table':
-	  					    Content = <table className="avgTable" width="100%">
+	  					      Content = <table className="avgTable" width="100%">
 											<tbody>
 											{
 												data[column].rows.map(
@@ -30,7 +31,10 @@ class AvgStats extends React.Component {
 							break;
 
 							case 'chart':
-							Content = <div>Chart here</div>
+							  Content = data[column].rows.map(
+											(row, idx) =>
+											<DbPieChart {...row} key={idx} />
+									  	);
 							break;
 		  				}
 

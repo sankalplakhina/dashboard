@@ -56,17 +56,14 @@ app.get('/api/explore', (req, res) => {
 						{
 							type: 'pieChart',
 							data: [
-								{name: 'Group A', value: 400},
-								{name: 'Group B', value: 300},
-								{name: 'Group C', value: 300},
-								{name: 'Group D', value: 200}
+								{name: 'Safe Orders', value: 475},
+								{name: 'Risky Orders', value: 25},
 							],
 							colors: [
-								'#0088FE',
-								'#00C49F',
-								'#FFBB28',
-								'#FF8042'
+								'#29b6f6',
+								'#d0011b',
 							],
+							centerText: ['25/500', 'Risky Orders']
 						},
 					]
 				}
