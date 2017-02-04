@@ -47,6 +47,7 @@ class DashboardDatePicker extends React.Component {
 						ranges={ defaultRanges }
 						onInit={this.initDateRange}
 						onChange={this.handleDateRangeSelection}
+						twoStepChange={true}
 						theme={{
 						  Calendar : { width: 200 },
 						  PredefinedRanges : { marginLeft: 10, marginTop: 10 }
