@@ -102,6 +102,7 @@ app.get('/api/explore', (req, res) => {
 							cols: ['left', 'right'],
 							left: {
 								rows: ['orders', 'payment', 'billingShipping', 'itemOrdered'],
+								widthSize: 8,
 								orders: {
 									type: 'table',
 									widthSize: 12,
@@ -199,33 +200,40 @@ app.get('/api/explore', (req, res) => {
 								}
 							},
 							right: {
+								widthSize: 4,
 								rows: ['item1', 'item2', 'item3', 'item4', 'item5', 'item6'],
 								item1: {
+									type: 'item',
 									icon: 'statusReliable.png',
 									text: 'Account age',
 									postText: 'Gurgaon Is Safe Zone : Yes',
 								},
 								item2: {
+									type: 'item',
 									icon: 'statusReliable.png',
 									text: 'Account age',
 									postText: '1 year : Reliable',
 								},
 								item3: {
+									type: 'item',
 									icon: 'statusTooFast.png',
 									text: 'Time to order',
 									postText: '5 min : Too fast, abnormal',
 								},
 								item4: {
+									type: 'item',
 									icon: 'statusNone.png',
 									text: 'IP Address location',
 									postText: 'Delhi : None',
 								},
 								item5: {
+									type: 'item',
 									icon: 'statusReliable.png',
 									text: 'Device Cost',
 									postText: 'Rs 25K : Healthy',
 								},
 								item6: {
+									type: 'item',
 									icon: 'statusTooFast.png',
 									text: 'Email address provider',
 									postText: 'gmail/ht.com : Reliable',
@@ -246,6 +254,7 @@ app.get('/api/explore', (req, res) => {
 						_collapsedData: {
 							cols: ['left', 'right'],
 							left: {
+								widthSize: 8,
 								rows: ['orders', 'payment', 'billingShipping', 'itemOrdered'],
 								orders: {
 									type: 'table',
@@ -344,33 +353,40 @@ app.get('/api/explore', (req, res) => {
 								}
 							},
 							right: {
+								widthSize: 4,
 								rows: ['item1', 'item2', 'item3', 'item4', 'item5', 'item6'],
 								item1: {
+									type: 'item',
 									icon: 'statusReliable.png',
 									text: 'Account age',
 									postText: 'Gurgaon Is Safe Zone : Yes',
 								},
 								item2: {
+									type: 'item',
 									icon: 'statusReliable.png',
 									text: 'Account age',
 									postText: '1 year : Reliable',
 								},
 								item3: {
+									type: 'item',
 									icon: 'statusTooFast.png',
 									text: 'Time to order',
 									postText: '5 min : Too fast, abnormal',
 								},
 								item4: {
+									type: 'item',
 									icon: 'statusNone.png',
 									text: 'IP Address location',
 									postText: 'Delhi : None',
 								},
 								item5: {
+									type: 'item',
 									icon: 'statusReliable.png',
 									text: 'Device Cost',
 									postText: 'Rs 25K : Healthy',
 								},
 								item6: {
+									type: 'item',
 									icon: 'statusTooFast.png',
 									text: 'Email address provider',
 									postText: 'gmail/ht.com : Reliable',
