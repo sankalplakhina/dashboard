@@ -43,7 +43,12 @@ class AvgStats extends React.Component {
 		  						classNames="col-md-4"
 		  						key={idx}
 		  						title={data[column].title}>
-		  						<div className="abtDtats">{Content}</div>
+		  						{
+		  							data[column].rows && data[column].rows.length &&
+		  							<div className="abtDtats">
+		  							{Content}
+		  							</div>
+		  						}
 		  					</AvgStatsTitleRow>
 		  				);
 		  			})

@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { Link } from 'react-router';
 import QuickInfo from './quickInfo';
 import AvgStats from './avgStats';
+import StatsPanels  from './statsPanels/containers/statsPanels';
 
 class ExploreContent extends React.Component {
 	render() {
@@ -17,6 +18,7 @@ class ExploreContent extends React.Component {
 		  						<div className="col-sm-12">
 		  							{(row === 'quickInfo') && <QuickInfo data={data[row]} /> }
 		  							{(row === 'avgStats') && <AvgStats data={data[row]} /> }
+		  							{(row === 'statsPanels') && <StatsPanels data={data[row]} /> }
 		  						</div>
 		  					</div>
 		  				);

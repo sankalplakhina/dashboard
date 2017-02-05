@@ -57,6 +57,8 @@
     "postcss-loader": "^0.13.0",
     "pretty-error": "^2.0.1",
     "react": "^15.3.2",
+    "react-bind-handlers": "^1.0.5",
+    "react-bootstrap": "^0.30.7",
     "react-date-range": "^0.9.2",
     "react-dom": "^15.3.2",
     "react-helmet": "^4.0.0",

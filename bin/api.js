@@ -95,10 +95,7 @@ app.get('/api/explore', (req, res) => {
 						order: {
 							title: '07SND73H',
 							risky: true,
-							paras: ['cockatrice8414', 'Dec 3, 2016 1:10 PM (3 days ago)']
-						},
-						lastPaymentAbuseStatus: {
-							buttonOptions: ['Approve', 'Block']
+							paras: ['cockatrice8414', 'Dec 3, 2016 1:10 PM (3 days ago)'],
 						},
 						isExpanded: true,
 						_collapsedData: {
@@ -245,9 +242,6 @@ app.get('/api/explore', (req, res) => {
 							title: '08SND73H',
 							risky: true,
 							paras: ['cockatrice8514', 'Dec 4, 2016 1:10 PM (3 days ago)']
-						},
-						lastPaymentAbuseStatus: {
-							buttonOptions: ['Approve', 'Block']
 						},
 						_collapsedData: {
 							cols: ['left', 'right'],
