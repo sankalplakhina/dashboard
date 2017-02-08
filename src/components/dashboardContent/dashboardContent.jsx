@@ -5,11 +5,11 @@ import Helmet from 'react-helmet';
 
 import { Link } from 'react-router';
 
-import DashboardBreadcrumbs from '~/src/components/dashboardBreadcrumbs/dashboardBreadcrumbs';
-import DashboardDatePicker from '~/src/components/dashBoardDatePicker/containers/dashboardDatePicker';
-import ExploreContent from '~/src/components/pages/exploreContainer/components/exploreContent/containers/exploreContent';
-import ReviewContent from '~/src/components/pages/reviewContainer/components/reviewContent';
-import AnalyzeContent from '~/src/components/pages/analyzeContainer/components/analyzeContent/containers/analyzeContent';
+import DashboardBreadcrumbs from 'src/components/dashboardBreadcrumbs/dashboardBreadcrumbs';
+import DashboardDatePicker from 'src/components/dashBoardDatePicker/containers/dashboardDatePicker';
+import ExploreContent from 'src/components/pages/exploreContainer/components/exploreContent/containers/exploreContent';
+import ReviewContent from 'src/components/pages/reviewContainer/components/reviewContent';
+import AnalyzeContent from 'src/components/pages/analyzeContainer/components/analyzeContent/containers/analyzeContent';
 
 class DashboardContent extends React.Component {
     render() {

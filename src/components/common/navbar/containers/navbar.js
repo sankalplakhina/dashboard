@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { isLoginViewSelector } from '~/src/components/appContainer/selectors/appContainerSelectors';
+import { isLoginViewSelector } from 'src/components/appContainer/selectors/appContainerSelectors';
 import Navbar from '../components/navbar';
 
 function mapStateToProps(state) {

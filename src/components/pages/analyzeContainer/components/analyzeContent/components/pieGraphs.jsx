@@ -1,5 +1,5 @@
 import React from 'react';
-import DbPieChart from '~/src/components/dashboard/dbPieChart/dbPieChart';
+import DbPieChart from 'src/components/dashboard/dbPieChart/dbPieChart';
 
 class PieGraphs extends React.Component {
 

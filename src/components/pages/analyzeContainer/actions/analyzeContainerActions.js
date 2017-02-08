@@ -1,5 +1,5 @@
 import * as ACTIONS from './analyzeContainerActionTypes';
-import { dateRangeSelector } from '~/src/components/dashBoardDatePicker/selectors/dashboardDatePickerSelectors';
+import { dateRangeSelector } from 'src/components/dashBoardDatePicker/selectors/dashboardDatePickerSelectors';
 
 export function loadFail(error) {
   return {

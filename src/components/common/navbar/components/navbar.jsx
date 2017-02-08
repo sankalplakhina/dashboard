@@ -4,7 +4,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
 
-import twLogo from '~/public/static/images/twLogo.png';
+import twLogo from 'public/static/images/twLogo.png';
 
 class Navbar extends React.Component {
   render() {
