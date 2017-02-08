@@ -1,4 +1,4 @@
-import _defaults from 'lodash.defaults';
+import _ from 'lodash';
 import * as ACTIONS from '../actions/dashboardDatePickerActionTypes';
 
 const initialState = {
@@ -12,12 +12,12 @@ const initialState = {
 export function dashboard(state = initialState, action = {}) {
     switch (action.type) {
         case ACTIONS.SET_IS_DATE_PICKER_VISIBLE:
-        return _defaults({
+        return _.defaults({
             isDatePickerVisible: action.isDatePickerVisible
         }, state);
 
         case ACTIONS.SET_DATE_RANGE:
-        return _defaults({
+        return _.defaults({
             dateRange: action.dateRange
         }, state);
 
