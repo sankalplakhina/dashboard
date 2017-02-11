@@ -1,6 +1,5 @@
 import React from 'react';
 import cx from 'classnames';
-import styles from './statsPanel.css';
 import { bindHandlers } from 'react-bind-handlers';
 import PanelGroup from 'react-bootstrap/lib/PanelGroup';
 import Panel from 'react-bootstrap/lib/Panel';
@@ -34,7 +33,7 @@ class StatsPanel extends React.Component {
 		return (
 			<div className="clearfix">
 				<AvgStats data={panelTitle} />
-				<div className={styles.statsPanel}>
+				<div className="statsPanel">
 					<PanelGroup activeKey={activeKey} accordion>
 						{
 							rows.map(

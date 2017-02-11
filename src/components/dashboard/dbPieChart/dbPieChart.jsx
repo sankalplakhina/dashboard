@@ -3,7 +3,6 @@ import Pie from 'recharts/lib/polar/Pie';
 import Tooltip from 'recharts/lib/component/Tooltip';
 import Cell from 'recharts/lib/component/Cell';
 import React from 'react';
-import styles from './dbPieChart.css';
 
 class DbPieChart extends React.Component {
 	constructor(){
@@ -27,9 +26,9 @@ class DbPieChart extends React.Component {
     	const { width, height, title, data, colors, centerText } = this.props;
     	const { isChartVisible } = this.state;
         return (
-        	<div className={styles.dbPieChart} style={{width: width}}>
-        		{ title && <div className={styles.title}>{title}</div> }
-        		<div className={styles.chartArea}>
+        	<div className="dbPieChart" style={{width: width}}>
+        		{ title && <div className="title">{title}</div> }
+        		<div className="chartArea">
 				{
 					isChartVisible &&
 					<PieChart width={width} height={height}>
@@ -52,7 +51,7 @@ class DbPieChart extends React.Component {
 				}
 				{
 					isChartVisible &&
-					<div className={styles.chartDetails} style={{width: width, height: height}}>
+					<div className="chartDetails" style={{width: width, height: height}}>
 						<div>
 							{centerText.map((text, idx) => <div key={idx}>{text}</div>)}
 						</div>
