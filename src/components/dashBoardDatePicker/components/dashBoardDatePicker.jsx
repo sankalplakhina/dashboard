@@ -1,7 +1,9 @@
 import React from 'react';
 import cx from 'classnames';
 import moment from 'moment';
-import { defaultRanges, Calendar, DateRange } from 'react-date-range';
+import defaultRanges from 'react-date-range/lib/defaultRanges';
+import Calendar from 'react-date-range/lib/Calendar';
+import DateRange from 'react-date-range/lib/DateRange';
 
 class DashboardDatePicker extends React.Component {
 

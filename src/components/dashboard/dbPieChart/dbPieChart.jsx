@@ -1,4 +1,7 @@
-import { PieChart, Pie, Tooltip, Cell } from 'Recharts';
+import PieChart from 'recharts/lib/chart/PieChart';
+import Pie from 'recharts/lib/polar/Pie';
+import Tooltip from 'recharts/lib/component/Tooltip';
+import Cell from 'recharts/lib/component/Cell';
 import React from 'react';
 import styles from './dbPieChart.css';
 
