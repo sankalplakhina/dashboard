@@ -1,13 +1,13 @@
 import React from 'react';
 import Navbar from 'src/components/common/navbar/containers/navbar';
 import Footer from 'src/components/common/footer/containers/footer';
-import styles from './styles/appContainer.less';
+import styles from 'src/less/styles.less';
 
 class AppContainer extends React.Component {
 
 	render() {
 		return (
-			<div className={styles.app}>
+			<div>
 				<Navbar />
 				{this.props.children}
 				<Footer />

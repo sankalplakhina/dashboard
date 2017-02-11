@@ -1,6 +1,6 @@
 import path from 'path';
-
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import { webpackHost, webpackPort, reduxDevTools } from '../config/env';
 import webpack from 'webpack';
@@ -42,35 +42,49 @@ module.exports = {
                 }],
             },
             {
-                test: /\.less$/,
-                use: [
-                    "style-loader",
-                    {
-                        loader: "css-loader",
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [{
+                        loader: 'css-loader',
                         options: {
-                            importLoaders: 2,
                             sourceMap: false,
-                            localIdentName: "[local]__[hash:base64:5]",
-                        },
-                    },
-                    "less-loader"
-                ],
-                // loader: 'style!css?importLoaders=2&sourceMap&localIdentName=[local]__[hash:base64:5]!less-loader'
+                            importLoaders: 1
+                        }
+                    }]
+                })
             },
             {
-                test: /\.css$/,
-                use: [
-                    "style-loader",
-                    {
-                        loader: "css-loader",
-                        options: {
-                            importLoaders: 2,
-                            sourceMap: false,
-                            localIdentName: "[local]__[hash:base64:5]",
+                test: /\.less$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: true,
+                                importLoaders: 2
+                            }
                         },
-                    },
-                ],
-                // loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss',
+                        {
+                          loader: "postcss-loader",
+                          options: {
+                            sourceMap: true,
+                            plugins: function () {
+                              return [
+                                require('autoprefixer')
+                              ];
+                            },
+                          }
+                        },
+                        {
+                            loader: 'less-loader',
+                            options: {
+                                sourceMap: true,
+                            }
+                        }
+                    ]
+                })
             },
             {
                 test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
@@ -81,7 +95,6 @@ module.exports = {
                         mimetype: "application/font-woff",
                     },
                 },
-                // loader: 'url?limit=10000&mimetype=application/font-woff',
             },
             {
                 test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
@@ -92,7 +105,6 @@ module.exports = {
                         mimetype: "application/font-woff",
                     },
                 },
-                // loader: 'url?limit=10000&mimetype=application/font-woff',
             },
             {
                 test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
@@ -103,12 +115,16 @@ module.exports = {
                         mimetype: "application/octet-stream",
                     },
                 },
-                // loader: 'url?limit=10000&mimetype=application/octet-stream',
             },
             {
                 test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                use: ["file-loader"],
-                // loader: 'file',
+                use: {
+                    loader: "url-loader",
+                    options: {
+                        limit: 10000,
+                        mimetype: "application/vnd.ms-fontobject",
+                    },
+                },
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
@@ -119,7 +135,10 @@ module.exports = {
                         mimetype: "image/svg+xml",
                     },
                 },
-                // loader: 'url?limit=10000&mimetype=image/svg+xml',
+            },
+            {
+                test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
+                use: ["file-loader"],
             },
             {
                 test: webpackIsomorphicTools.regular_expression('images'),
@@ -129,7 +148,6 @@ module.exports = {
                         limit: 10240,
                     },
                 },
-                // loader: 'url-loader?limit=10240',
             },
         ],
     },
@@ -143,6 +161,11 @@ module.exports = {
     plugins: [
         // hot reload
         new webpack.HotModuleReplacementPlugin(),
+        // extract CSS into separate file
+        new ExtractTextPlugin({
+            filename: 'styles.css',
+            allChunks: true
+        }),
         // for file created by WebpackIsomorphicToolsPlugin
         new webpack.IgnorePlugin(/webpack-stats\.json$/),
         // for optimized loading of lodash modules
