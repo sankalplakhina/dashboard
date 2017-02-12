@@ -108,72 +108,50 @@ app.get('/api/explore', (req, res) => {
 									type: 'table',
 									widthSize: 12,
 									heading: {
+										class: 'order',
 										icon: 'orders.png',
 										title: 'Orders'
 									},
-									tableTitle: {
-										cols: ['orderId', 'amount', 'date', 'payment', 'status', 'attempts'],
-										orderId: {
-											title: 'Order ID'
-										},
-										amount: {
-											title: 'Amount'
-										},
-										date: {
-											title: 'Date'
-										},
-										payment: {
-											title: 'Payment'
-										},
-										status: {
-											title: 'Status'
-										},
-										attempts: {
-											title: 'Attempts'
-										}
-									},
-									rows: [],
+									columns: [
+										{ key: 'orderId', label: 'Order ID' },
+										{ key: 'amount', label: 'Amount' },
+										{ key: 'date', label: 'Date' },
+										{ key: 'payment', label: 'Payment' },
+										{ key: 'status', label: 'Status' },
+										{ key: 'attempts', label: 'Attempts' },
+									],
+									rows: [
+										{ orderId: '7834h48', amount: '$843', date: 'Dec8, 2016 21:35', payment: 'Credit Card', status: 'Success', attempts: '3' },
+										{ orderId: '7834h48', amount: '$843', date: 'Dec8, 2016 21:35', payment: 'Debit Card', status: 'Success', attempts: '3' },
+									],
 								},
 								payment: {
 									type: 'table',
 									widthSize: 12,
 									heading: {
+										class: 'payment',
 										icon: 'payment.png',
 										title: 'Payment'
 									},
-									tableTitle: {
-										cols: ['status', 'txnType', 'amount', 'date', 'payment', 'gateway', 'avs-cvv', 'last4'],
-										status: {
-											title: 'Order ID'
-										},
-										txnType: {
-											title: 'Amount'
-										},
-										amount: {
-											title: 'Date'
-										},
-										date: {
-											title: 'Payment'
-										},
-										payment: {
-											title: 'Status'
-										},
-										attempts: {
-											title: 'Attempts'
-										},
-										'avs-cvv': {
-											title: 'AVS/CVV'
-										},
-										last4: {
-											title: 'Last 4'
-										}
-									},
-									rows: [],
+									columns: [
+										{ key: 'status', label: 'Status' },
+										{ key: 'txnType', label: 'TXN Type' },
+										{ key: 'amount', label: 'Amount' },
+										{ key: 'date', label: 'Date' },
+										{ key: 'payment', label: 'Payment' },
+										{ key: 'gateway', label: 'Gateway' },
+										{ key: 'avsCvv', label: 'AVS/CVV' },
+										{ key: 'last4', label: 'Last 4' },
+									],
+									rows: [
+										{ status: 'Success', txnType: 'Sale', amount: '$843', date: 'Dec8, 2016 21:35', payment: 'Credit Card', gateway: 'Stripe', avsCvv: 'TODO', last4: 'Last 4' },
+									],
 								},
 								billingShipping: {
 									type: 'map',
 									widthSize: 6,
 									heading: {
+										class: 'billShopping',
 										icon: 'billingShipping.png',
 										title: 'Billing and Shipping'
 									},
@@ -182,22 +160,23 @@ app.get('/api/explore', (req, res) => {
 									type: 'table',
 									widthSize: 6,
 									heading: {
+										class: 'itemOrdered',
 										icon: 'orders.png',
 										title: 'Item Ordered'
 									},
-									tableTitle: {
-										cols: ['item', 'quantity', 'price'],
-										item: {
-											title: 'Item'
-										},
-										quantity: {
-											title: 'Quantity'
-										},
-										price: {
-											title: 'Price'
-										},
-									},
-									rows: [],
+									columns: [
+										{ key: 'item', label: 'Item' },
+										{ key: 'quantity', label: 'Quantity' },
+										{ key: 'price', label: 'Price' },
+									],
+									rows: [
+										{ item: 'Iphone 6', quantity: '33', price: '$1043'},
+										{ item: 'Iphone 6s', quantity: '13', price: '$1243'},
+										{ item: 'Iphone 6s', quantity: '13', price: '$1243'},
+										{ item: 'MI5', quantity: '45', price: '$698'},
+										{ item: 'One Plus 3', quantity: '8', price: '$843'},
+										{ item: 'One Plus 3', quantity: '8', price: '$843'},
+									],
 								}
 							},
 							right: {
@@ -255,78 +234,55 @@ app.get('/api/explore', (req, res) => {
 						_collapsedData: {
 							cols: ['left', 'right'],
 							left: {
-								widthSize: 8,
 								rows: ['orders', 'payment', 'billingShipping', 'itemOrdered'],
+								widthSize: 8,
 								orders: {
 									type: 'table',
 									widthSize: 12,
 									heading: {
+										class: 'order',
 										icon: 'orders.png',
 										title: 'Orders'
 									},
-									tableTitle: {
-										cols: ['orderId', 'amount', 'date', 'payment', 'status', 'attempts'],
-										orderId: {
-											title: 'Order ID'
-										},
-										amount: {
-											title: 'Amount'
-										},
-										date: {
-											title: 'Date'
-										},
-										payment: {
-											title: 'Payment'
-										},
-										status: {
-											title: 'Status'
-										},
-										attempts: {
-											title: 'Attempts'
-										}
-									},
-									rows: [],
+									columns: [
+										{ key: 'orderId', label: 'Order ID' },
+										{ key: 'amount', label: 'Amount' },
+										{ key: 'date', label: 'Date' },
+										{ key: 'payment', label: 'Payment' },
+										{ key: 'status', label: 'Status' },
+										{ key: 'attempts', label: 'Attempts' },
+									],
+									rows: [
+										{ orderId: '7834h48', amount: '$843', date: 'Dec8, 2016 21:35', payment: 'Credit Card', status: 'Success', attempts: '3' }
+									],
 								},
 								payment: {
 									type: 'table',
 									widthSize: 12,
 									heading: {
+										class: 'payment',
 										icon: 'payment.png',
 										title: 'Payment'
 									},
-									tableTitle: {
-										cols: ['status', 'txnType', 'amount', 'date', 'payment', 'gateway', 'avs-cvv', 'last4'],
-										status: {
-											title: 'Order ID'
-										},
-										txnType: {
-											title: 'Amount'
-										},
-										amount: {
-											title: 'Date'
-										},
-										date: {
-											title: 'Payment'
-										},
-										payment: {
-											title: 'Status'
-										},
-										attempts: {
-											title: 'Attempts'
-										},
-										'avs-cvv': {
-											title: 'AVS/CVV'
-										},
-										last4: {
-											title: 'Last 4'
-										}
-									},
-									rows: [],
+									columns: [
+										{ key: 'status', label: 'Status' },
+										{ key: 'txnType', label: 'TXN Type' },
+										{ key: 'amount', label: 'Amount' },
+										{ key: 'date', label: 'Date' },
+										{ key: 'payment', label: 'Payment' },
+										{ key: 'gateway', label: 'Gateway' },
+										{ key: 'avsCvv', label: 'AVS/CVV' },
+										{ key: 'last4', label: 'Last 4' },
+									],
+									rows: [
+										{ status: 'Success', txnType: 'Sale', amount: '$843', date: 'Dec8, 2016 21:35', payment: 'Credit Card', gateway: 'Stripe', avsCvv: 'TODO', last4: 'Last 4' },
+									],
 								},
 								billingShipping: {
 									type: 'map',
 									widthSize: 6,
 									heading: {
+										class: 'billingShipping',
 										icon: 'billingShipping.png',
 										title: 'Billing and Shipping'
 									},
@@ -335,22 +291,23 @@ app.get('/api/explore', (req, res) => {
 									type: 'table',
 									widthSize: 6,
 									heading: {
+										class: 'itemOrdered',
 										icon: 'orders.png',
 										title: 'Item Ordered'
 									},
-									tableTitle: {
-										cols: ['item', 'quantity', 'price'],
-										item: {
-											title: 'Item'
-										},
-										quantity: {
-											title: 'Quantity'
-										},
-										price: {
-											title: 'Price'
-										},
-									},
-									rows: [],
+									columns: [
+										{ key: 'item', label: 'Item' },
+										{ key: 'quantity', label: 'Quantity' },
+										{ key: 'price', label: 'Price' },
+									],
+									rows: [
+										{ item: 'Iphone 6', quantity: '33', price: '$1043'},
+										{ item: 'Iphone 6s', quantity: '13', price: '$1243'},
+										{ item: 'Iphone 6s', quantity: '13', price: '$1243'},
+										{ item: 'MI5', quantity: '45', price: '$698'},
+										{ item: 'One Plus 3', quantity: '8', price: '$843'},
+										{ item: 'One Plus 3', quantity: '8', price: '$843'},
+									],
 								}
 							},
 							right: {

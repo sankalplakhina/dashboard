@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 class NotFound extends React.Component {
   render() {
     return (
-    	<div className={style.root}>
+    	<div>
     		404 Not Found
     		<Link to="/">Go Home</Link>
     	</div>
