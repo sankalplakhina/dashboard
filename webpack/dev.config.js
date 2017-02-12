@@ -18,6 +18,7 @@ module.exports = {
     entry: {
         main: [
             `webpack-hot-middleware/client?path=http://${webpackHost}:${webpackPort}/__webpack_hmr`,
+            './src/less/styles.less',
             './src/client.js',
         ],
     },
@@ -45,13 +46,26 @@ module.exports = {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: [{
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: false,
-                            importLoaders: 1
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: false,
+                                importLoaders: 1
+                            }
+                        },
+                        {
+                          loader: "postcss-loader",
+                          options: {
+                            sourceMap: true,
+                            plugins: function () {
+                              return [
+                                require('autoprefixer')
+                              ];
+                            },
+                          }
                         }
-                    }]
+                    ]
                 })
             },
             {
