@@ -13,7 +13,10 @@ const ReviewContent = ({ data }) => {
 	  				return (
 	  					<div className="row" key={idx}>
 		  					<div className={cx("col-sm-12",{'reviewTable':isReviewTable})}>
-		  						{isReviewTable && <DbTable className="reviewDatatable" data={data[row]} /> }
+		  						{isReviewTable && <DbTable className="reviewDatatable"
+		  													data={data[row]}
+		  													searchEnabled={true}
+		  													/> }
 		  					</div>
 	  					</div>
 	  				);

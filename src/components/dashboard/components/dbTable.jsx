@@ -1,7 +1,8 @@
+import _ from 'lodash';
 import React from 'react';
 import { bindHandlers } from 'react-bind-handlers';
 import cx from 'classnames';
-import { Table, Thead, Th, Tr, Td } from 'reactable';
+import { Table, Thead, Th, Tr, Td, Sort } from 'reactable';
 
 class DbTable extends React.Component {
 
@@ -13,6 +14,42 @@ class DbTable extends React.Component {
 		};
 	}
 
+	getFilterable(columns) {
+		return columns.map(col => {
+			switch(col.key) {
+				default:
+				return col.key
+			}
+		});
+	}
+
+	getSortable(columns) {
+		return columns.map(col => {
+			switch(col.key) {
+				case 'score':
+				return {
+					column: col.key,
+					sortFunction: function(a, b){
+			            var nameA = a.props.children[1];
+			            var nameB = b.props.children[1];
+			            return Sort.CaseInsensitive(nameA, nameB);
+			        }
+				};
+				case 'latestPaymentAbuseStatus':
+				return {
+					column: col.key,
+					sortFunction: function(a, b){
+			            var nameA = a.props.children;
+			            var nameB = b.props.children;
+			            return Sort.CaseInsensitive(nameA, nameB);
+			        }
+				};
+				default:
+				return col.key
+			}
+		});
+	}
+
 	handleSort({column, direction}) {
 		this.setState({
 			selectedColumn: column
@@ -21,7 +58,7 @@ class DbTable extends React.Component {
 
     render() {
 
-    	const { data: { rows, columns }, className } = this.props;
+    	const { data: { rows, columns }, className, searchEnabled } = this.props;
     	const { selectedColumn } = this.state;
     	let appliedClass = this.classes;
     	if (className) {
@@ -30,9 +67,9 @@ class DbTable extends React.Component {
         return (
 			<Table
 				className={appliedClass}
-				filterable={columns.map(col => col.key)}
-				hideFilterInput
-				sortable
+				filterable={this.getFilterable(columns)}
+				hideFilterInput={!searchEnabled}
+				sortable={this.getSortable(columns)}
 				onSort={this.handleSort}
 			>
 				<Thead>
@@ -56,7 +93,7 @@ class DbTable extends React.Component {
 				 						const isSelectedBySort = (selectedColumn === key);
 				 						const value = row[key];
 				 						let children = value;
-				 						if (value !== null && typeof value === 'object') {
+				 						if (_.isObject(value)) {
 				 							switch(value.type) {
 				 								case 'score':
 				 								children = (
@@ -104,6 +141,10 @@ class DbTable extends React.Component {
 			</Table>
         );
     }
+}
+
+DbTable.defaultProps = {
+	searchEnabled: false
 }
 
 export default bindHandlers(DbTable);

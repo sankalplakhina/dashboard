@@ -375,9 +375,9 @@ app.get('/api/review', (req, res) => {
 				],
 				rows: [
 					{ score: {type: 'score', icon: 'score.png', text: '35'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'North India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Approved', safe: true}, },
-					{ score: {type: 'score', icon: 'score.png', text: '36'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'North India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
+					{ score: {type: 'score', icon: 'score.png', text: '36'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'South India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
 					{ score: {type: 'score', icon: 'score.png', text: '37'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'North India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Approved', safe: true} },
-					{ score: {type: 'score', icon: 'score.png', text: '38'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'North India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
+					{ score: {type: 'score', icon: 'score.png', text: '38'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'South India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
 				],
 			}
 		}
