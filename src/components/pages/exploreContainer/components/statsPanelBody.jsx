@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import DbTable from 'src/components/dashboard/components/DbTable';
 import StatsPanelBodyHeading from './statsPanelBodyHeading';
-import StatsPanelMap from './statsPanelMap';
+import StatsPanelBase from './statsPanelBase';
 
 const StatsPanelBody = ({ data }) => {
 
@@ -20,24 +20,31 @@ const StatsPanelBody = ({ data }) => {
 
 									let ws = widthSize || 12;
 									let header = (heading && <StatsPanelBodyHeading heading={heading} />) || null;
+									let body = null;
+									let footer = null;
 
 									switch(type) {
 
 										case 'table':
+										body = <DbTable data={data[column][row]} />
 										return (
-											<DbTable
+											<StatsPanelBase
 												widthSize={ws}
 												header={header}
+												body={body}
+												footer={footer}
 												data={data[column][row]}
-												key={index}
-											/>
+												key={index} />
 										);
 
 										case 'map':
+										body = "Map";
 										return (
-											<StatsPanelMap
+											<StatsPanelBase
 												widthSize={ws}
 												header={header}
+												body={body}
+												footer={footer}
 												data={data[column][row]}
 												key={index} />
 										);

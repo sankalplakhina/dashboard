@@ -144,7 +144,7 @@ app.get('/api/explore', (req, res) => {
 										{ key: 'last4', label: 'Last 4' },
 									],
 									rows: [
-										{ status: 'Success', txnType: 'Sale', amount: '$843', date: 'Dec8, 2016 21:35', payment: 'Credit Card', gateway: 'Stripe', avsCvv: 'TODO', last4: 'Last 4' },
+										{ status: 'Success', txnType: 'Sale', amount: '$843', date: 'Dec8, 2016 21:35', payment: 'Credit Card', gateway: 'Stripe', avsCvv: {type: 'avsCvv', items: [{text: 'AVS Y', safe: true}, {text: 'CVV N', risky: true}]}, last4: 'Last 4' },
 									],
 								},
 								billingShipping: {
@@ -362,7 +362,24 @@ app.get('/api/explore', (req, res) => {
 app.get('/api/review', (req, res) => {
 	res.json({
 		data: {
-			message: 'Review API',
+			rows: ['reviewTable'],
+			reviewTable: {
+				type: 'table',
+				columns: [
+					{ key: 'score', label: 'Score' },
+					{ key: 'id', label: 'ID' },
+					{ key: 'timeLeft', label: 'Time Left' },
+					{ key: 'queue', label: 'Queue' },
+					{ key: 'route', label: 'Route' },
+					{ key: 'latestPaymentAbuseStatus', label: 'Latest Payment Abuse Status' },
+				],
+				rows: [
+					{ score: {type: 'score', icon: 'score.png', text: '35'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'North India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Approved', safe: true}, },
+					{ score: {type: 'score', icon: 'score.png', text: '36'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'North India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
+					{ score: {type: 'score', icon: 'score.png', text: '37'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'North India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Approved', safe: true} },
+					{ score: {type: 'score', icon: 'score.png', text: '38'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'North India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
+				],
+			}
 		}
 	});
 });

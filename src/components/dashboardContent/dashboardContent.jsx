@@ -8,7 +8,7 @@ import { Link } from 'react-router';
 import DashboardBreadcrumbs from 'src/components/dashboardBreadcrumbs/dashboardBreadcrumbs';
 import DashboardDatePicker from 'src/components/dashBoardDatePicker/containers/dashboardDatePicker';
 import ExploreContent from 'src/components/pages/exploreContainer/containers/exploreContent';
-import ReviewContent from 'src/components/pages/reviewContainer/components/reviewContent';
+import ReviewContent from 'src/components/pages/reviewContainer/containers/reviewContent';
 import AnalyzeContent from 'src/components/pages/analyzeContainer/containers/analyzeContent';
 
 class DashboardContent extends React.Component {

@@ -1,15 +1,26 @@
 import React from 'react';
-import Helmet from 'react-helmet';
-import { Link } from 'react-router';
+import cx from 'classnames';
+import DbTable from 'src/components/dashboard/components/DbTable';
 
-class ReviewContent extends React.Component {
-	render() {
-		return (
-			<div className="content">
-		  		<div style={{minHeight: '750px'}}>ReviewContent</div>
-			</div>
-		);
-	}
+const ReviewContent = ({ data }) => {
+	console.log('data', data);
+	const { rows } = data;
+	return (
+		<div className="content">
+	  		{
+	  			rows.map((row, idx) => {
+	  				const isReviewTable = (row === 'reviewTable');
+	  				return (
+	  					<div className="row" key={idx}>
+		  					<div className={cx("col-sm-12",{'reviewTable':isReviewTable})}>
+		  						{isReviewTable && <DbTable className="reviewDatatable" data={data[row]} /> }
+		  					</div>
+	  					</div>
+	  				);
+	  			})
+	  		}
+		</div>
+	);
 }
 
 export default ReviewContent;
