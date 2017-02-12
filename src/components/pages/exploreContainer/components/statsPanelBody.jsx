@@ -2,6 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import DbTable from 'src/components/dashboard/components/DbTable';
 import StatsPanelBodyHeading from './statsPanelBodyHeading';
+import StatsPanelMap from './statsPanelMap';
 
 const StatsPanelBody = ({ data }) => {
 
@@ -15,23 +16,30 @@ const StatsPanelBody = ({ data }) => {
 						<div className={cx(`col-md-${widthSize} nopad bottomPad15`, {'borderRight': !idx})} key={idx}>
 							{
 								rows.map((row, index) => {
-									const { widthSize, type } = data[column][row];
+									const { widthSize, type, heading } = data[column][row];
+
 									let ws = widthSize || 12;
+									let header = (heading && <StatsPanelBodyHeading heading={heading} />) || null;
+
 									switch(type) {
 
 										case 'table':
 										return (
 											<DbTable
 												widthSize={ws}
-												key={index}
+												header={header}
 												data={data[column][row]}
-												header={<StatsPanelBodyHeading heading={data[column][row].heading} />}
+												key={index}
 											/>
 										);
 
 										case 'map':
 										return (
-											<div className={`col-md-${widthSize}`} key={index}>{type}</div>
+											<StatsPanelMap
+												widthSize={ws}
+												header={header}
+												data={data[column][row]}
+												key={index} />
 										);
 
 										case 'item':

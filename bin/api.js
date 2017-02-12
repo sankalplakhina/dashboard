@@ -282,7 +282,7 @@ app.get('/api/explore', (req, res) => {
 									type: 'map',
 									widthSize: 6,
 									heading: {
-										class: 'billingShipping',
+										class: 'billShopping',
 										icon: 'billingShipping.png',
 										title: 'Billing and Shipping'
 									},
