@@ -10,7 +10,7 @@
     "webpack-dev-server": "better-npm-run webpack-dev-server",
     "start-api": "better-npm-run start-api",
     "start-server": "better-npm-run start-server",
-    "build": "webpack --colors --display-error-details --config webpack/prod.config.js",
+    "build": "better-npm-run build",
     "start": "npm run build && concurrently --kill-others \"better-npm-run start-server\" \"better-npm-run start-api\""
   },
   "betterScripts": {
@@ -47,6 +47,13 @@
       "env": {
         "NODE_PATH": "./",
         "NODE_ENV": "production"
+      }
+    },
+    "build": {
+      "command": "webpack --colors --display-error-details --config webpack/prod.config.js",
+      "env": {
+        "NODE_ENV": "production",
+        "NODE_PATH": "./"
       }
     }
   },

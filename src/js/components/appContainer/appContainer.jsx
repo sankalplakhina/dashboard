@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from 'src/components/common/navbar/containers/navbar';
-import Footer from 'src/components/common/footer/containers/footer';
+import Navbar from 'src/js/components/common/navbar/containers/navbar';
+import Footer from 'src/js/components/common/footer/containers/footer';
 
 class AppContainer extends React.Component {
 

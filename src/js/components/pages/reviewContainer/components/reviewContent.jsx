@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import DbTable from 'src/components/dashboard/components/DbTable';
+import DbTable from 'src/js/components/dashboard/components/DbTable';
 
 const ReviewContent = ({ data }) => {
 	console.log('data', data);

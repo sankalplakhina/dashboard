@@ -2,8 +2,8 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
 
-import DashboardSidenav from 'src/components/dashboardSidenav/dashboardSidenav';
-import DashboardContent from 'src/components/dashboardContent/dashboardContent';
+import DashboardSidenav from 'src/js/components/dashboardSidenav/dashboardSidenav';
+import DashboardContent from 'src/js/components/dashboardContent/dashboardContent';
 
 class AnalyzeContainer extends React.Component {
 	render() {

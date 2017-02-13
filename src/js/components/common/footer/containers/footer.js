@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { isLoginViewSelector } from 'src/components/appContainer/selectors/appContainerSelectors';
+import { isLoginViewSelector } from 'src/js/components/appContainer/selectors/appContainerSelectors';
 import Footer from '../components/footer';
 
 function mapStateToProps(state) {
