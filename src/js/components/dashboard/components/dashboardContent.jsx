@@ -5,8 +5,8 @@ import Helmet from 'react-helmet';
 
 import { Link } from 'react-router';
 
-import DashboardBreadcrumbs from 'src/js/components/dashboardBreadcrumbs/dashboardBreadcrumbs';
-import DashboardDatePicker from 'src/js/components/dashBoardDatePicker/containers/dashboardDatePicker';
+import DashboardBreadcrumbs from 'src/js/components/dashboard/components/dashboardBreadcrumbs';
+import DashboardDatePicker from 'src/js/components/dashboard/containers/dashboardDatePicker';
 import ExploreContent from 'src/js/components/pages/exploreContainer/containers/exploreContent';
 import ReviewContent from 'src/js/components/pages/reviewContainer/containers/reviewContent';
 import AnalyzeContent from 'src/js/components/pages/analyzeContainer/containers/analyzeContent';
