@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import DbTable from 'src/js/components/dashboard/components/DbTable';
+import ReviewTable from '../containers/reviewTable';
 
 const ReviewContent = ({ data }) => {
 	console.log('data', data);
@@ -13,10 +13,7 @@ const ReviewContent = ({ data }) => {
 	  				return (
 	  					<div className="row" key={idx}>
 		  					<div className={cx("col-sm-12",{'reviewTable':isReviewTable})}>
-		  						{isReviewTable && <DbTable className="reviewDatatable"
-		  													data={data[row]}
-		  													searchEnabled={true}
-		  													/> }
+		  						{isReviewTable && <ReviewTable data={data[row]} /> }
 		  					</div>
 	  					</div>
 	  				);

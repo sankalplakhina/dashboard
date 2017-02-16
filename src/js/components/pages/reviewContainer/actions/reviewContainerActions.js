@@ -14,7 +14,7 @@ export function loadSuccess(data) {
   };
 }
 
-export function load() {
+export function load(apiLink = '/api/review?count=5') {
     // returning a thunk as this is any async action
     // dispatch and getState and default params from
     // thunk library, client is an extra param required
@@ -27,7 +27,7 @@ export function load() {
           type: ACTIONS.LOAD
         });
 
-        return client.get('/api/review').then(data => {
+        return client.get(apiLink).then(data => {
             dispatch(loadSuccess(data.data));
         })
         .catch(error => {

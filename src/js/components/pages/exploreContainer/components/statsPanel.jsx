@@ -12,7 +12,7 @@ class StatsPanel extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			activeKey: 0
+			activeKey: -1
 		};
 	}
 
