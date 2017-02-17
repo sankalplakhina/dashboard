@@ -38,7 +38,7 @@ module.exports = {
                     options: {
                         cacheDirectory: true,
                         sourceMap: false, // disable babel sourcemaps to see the transpiled code when debugging
-                        plugins: ['lodash'],
+                        plugins: ['lodash', 'recharts'],
                     }
                 }],
             },

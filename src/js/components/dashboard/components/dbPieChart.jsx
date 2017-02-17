@@ -1,7 +1,4 @@
-import PieChart from 'recharts/lib/chart/PieChart';
-import Pie from 'recharts/lib/polar/Pie';
-import Tooltip from 'recharts/lib/component/Tooltip';
-import Cell from 'recharts/lib/component/Cell';
+import { PieChart, Pie, Tooltip, Cell} from 'recharts';
 import React from 'react';
 
 class DbPieChart extends React.Component {
