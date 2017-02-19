@@ -1,10 +1,11 @@
 import React from 'react';
 import cx from 'classnames';
 import DbTable from 'src/js/components/dashboard/components/DbTable';
+import StatsMapContainer from './statsMapContainer';
 import StatsPanelBodyHeading from './statsPanelBodyHeading';
 import StatsPanelBase from './statsPanelBase';
 
-const StatsPanelBody = ({ data }) => {
+const StatsPanelBody = ({ data, isActive }) => {
 
 	const { cols } = data;
 	return (
@@ -38,7 +39,7 @@ const StatsPanelBody = ({ data }) => {
 										);
 
 										case 'map':
-										body = "Map";
+										body = <StatsMapContainer data={data[column][row]} isActive={isActive} />;
 										return (
 											<StatsPanelBase
 												widthSize={ws}

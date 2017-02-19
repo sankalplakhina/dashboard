@@ -156,6 +156,21 @@ app.get('/api/explore', (req, res) => {
 										icon: 'billingShipping.png',
 										title: 'Billing and Shipping'
 									},
+									markers: ['billing', 'shipping'],
+									billing:{
+										icon: 'billing.png',
+										heading: 'John',
+										address: '403, Nirvana courtyard, Sector-48, Gurgaon, haryana- 122001',
+										lat: -25.363,
+										lang: 131.044,
+									},
+									shipping: {
+										icon: 'shipping.png',
+										heading: 'John',
+										address: ' 110, Nirvana Escape, Sector-48, Gurgaon, haryana- 122001',
+										lat: -20.363,
+										lang: 131.044,
+									}
 								},
 								itemOrdered: {
 									type: 'table',
@@ -287,6 +302,21 @@ app.get('/api/explore', (req, res) => {
 										icon: 'billingShipping.png',
 										title: 'Billing and Shipping'
 									},
+									markers: ['billing', 'shipping'],
+									billing:{
+										icon: 'billing.png',
+										heading: 'John',
+										address: '403, Nirvana courtyard, Sector-48, Gurgaon, haryana- 122001',
+										lat: -25.363,
+										lang: 131.044,
+									},
+									shipping: {
+										icon: 'shipping.png',
+										heading: 'John',
+										address: ' 110, Nirvana Escape, Sector-48, Gurgaon, haryana- 122001',
+										lat: -20.363,
+										lang: 131.044,
+									}
 								},
 								itemOrdered: {
 									type: 'table',
@@ -420,6 +450,21 @@ app.get('/api/explore', (req, res) => {
 										icon: 'billingShipping.png',
 										title: 'Billing and Shipping'
 									},
+									markers: ['billing', 'shipping'],
+									billing:{
+										icon: 'billing.png',
+										heading: 'John',
+										address: '403, Nirvana courtyard, Sector-48, Gurgaon, haryana- 122001',
+										lat: -25.363,
+										lang: 131.044,
+									},
+									shipping: {
+										icon: 'shipping.png',
+										heading: 'John',
+										address: ' 110, Nirvana Escape, Sector-48, Gurgaon, haryana- 122001',
+										lat: -20.363,
+										lang: 131.044,
+									}
 								},
 								itemOrdered: {
 									type: 'table',
@@ -553,6 +598,21 @@ app.get('/api/explore', (req, res) => {
 										icon: 'billingShipping.png',
 										title: 'Billing and Shipping'
 									},
+									markers: ['billing', 'shipping'],
+									billing:{
+										icon: 'billing.png',
+										heading: 'John',
+										address: '403, Nirvana courtyard, Sector-48, Gurgaon, haryana- 122001',
+										lat: -25.363,
+										lang: 131.044,
+									},
+									shipping: {
+										icon: 'shipping.png',
+										heading: 'John',
+										address: ' 110, Nirvana Escape, Sector-48, Gurgaon, haryana- 122001',
+										lat: -20.363,
+										lang: 131.044,
+									}
 								},
 								itemOrdered: {
 									type: 'table',

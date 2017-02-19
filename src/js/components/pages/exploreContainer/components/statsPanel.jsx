@@ -12,7 +12,7 @@ class StatsPanel extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			activeKey: -1
+			activeKey: 0
 		};
 	}
 
@@ -50,7 +50,10 @@ class StatsPanel extends React.Component {
 											key={idx}
 											eventKey={idx}
 										>
-											<StatsPanelBody data={data[row]._collapsedData} />
+											<StatsPanelBody
+												data={data[row]._collapsedData}
+												isActive={activeKey === idx}
+											/>
 										</Panel>
 									);
 								}
