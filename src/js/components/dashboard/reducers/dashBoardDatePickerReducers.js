@@ -1,11 +1,15 @@
 import _ from 'lodash';
+import moment from 'moment';
 import * as ACTIONS from '../actions/dashboardDatePickerActionTypes';
+
+const format = 'DD MMM YYYY';
 
 const initialState = {
     isDatePickerVisible: false,
+    format,
     dateRange: {
-        startDate: '',
-        endDate: ''
+        startDate: moment().format(format),
+        endDate: moment().format(format),
     }
 };
 

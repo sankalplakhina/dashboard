@@ -9,3 +9,7 @@ export const isDatePickerVisibleSelector = (state) => {
 export const dateRangeSelector = (state) => {
   return dashboardDataSelector(state).dateRange;
 };
+
+export const getDateFormat = (state) => {
+  return dashboardDataSelector(state).format;
+};

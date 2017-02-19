@@ -3,13 +3,15 @@ import DashboardDatePicker from '../components/dashboardDatePicker';
 import {
 	isDatePickerVisibleSelector,
 	dateRangeSelector,
+  getDateFormat,
 } from '../selectors/dashboardDatePickerSelectors';
 import { setIsDatePickerVisible, setDateRange } from '../actions/dashboardDatePickerActions';
 
 function mapStateToProps(state) {
   	return {
   		isDatePickerVisible: isDatePickerVisibleSelector(state),
-  		dateRange: dateRangeSelector(state)
+  		dateRange: dateRangeSelector(state),
+      format: getDateFormat(state)
   	};
 }
 

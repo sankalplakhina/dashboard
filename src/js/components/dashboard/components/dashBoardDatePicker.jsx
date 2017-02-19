@@ -1,6 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import moment from 'moment';
+import { bindHandlers } from 'react-bind-handlers';
 import defaultRanges from 'react-date-range/lib/defaultRanges';
 import Calendar from 'react-date-range/lib/Calendar';
 import DateRange from 'react-date-range/lib/DateRange';
@@ -9,9 +10,6 @@ class DashboardDatePicker extends React.Component {
 
 	constructor(props, context) {
 		super();
-		this.handleDatePickerClick = this.handleDatePickerClick.bind(this);
-		this.initDateRange = this.initDateRange.bind(this);
-		this.handleDateRangeSelection = this.handleDateRangeSelection.bind(this);
 	}
 
 	handleDatePickerClick() {
@@ -19,14 +17,12 @@ class DashboardDatePicker extends React.Component {
 		onDatePickerClick(isDatePickerVisible);
 	}
 
-	initDateRange(payload) {
-		const { dateRange, onDateRangeSelection } = this.props;
-		onDateRangeSelection(payload);
-	}
-
 	handleDateRangeSelection(payload) {
-		const { onDateRangeSelection } = this.props;
-		onDateRangeSelection(payload);
+		const { onDateRangeSelection, format } = this.props;
+		onDateRangeSelection({
+			startDate: payload.startDate.format(format),
+			endDate: payload.endDate.format(format),
+		});
 		this.handleDatePickerClick();
 	}
 
@@ -40,14 +36,16 @@ class DashboardDatePicker extends React.Component {
 					  type='text'
 					  readOnly
 					  onClick={this.handleDatePickerClick}
-					  value={ `${dateRange['startDate'] && dateRange['startDate'].format(format).toString()} - ${dateRange['endDate'] && dateRange['endDate'].format(format).toString()}` }
+					  value={ `${dateRange['startDate']} - ${dateRange['endDate']}` }
 					/>
 				</div>
 				<div className={cx("dateRange", {"show": isDatePickerVisible})}>
 					<DateRange
+						startDate={dateRange.startDate}
+						endDate={dateRange.endDate}
 						linkedCalendars={ true }
+						format={format}
 						ranges={ defaultRanges }
-						onInit={this.initDateRange}
 						onChange={this.handleDateRangeSelection}
 						twoStepChange={true}
 						theme={{
@@ -61,8 +59,4 @@ class DashboardDatePicker extends React.Component {
 	}
 }
 
-DashboardDatePicker.defaultProps = {
-	format: 'DD MMM YYYY'
-}
-
-export default DashboardDatePicker;
+export default bindHandlers(DashboardDatePicker);
