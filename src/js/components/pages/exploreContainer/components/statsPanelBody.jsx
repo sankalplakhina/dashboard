@@ -4,6 +4,7 @@ import DbTable from 'src/js/components/dashboard/components/DbTable';
 import StatsMapContainer from './statsMapContainer';
 import StatsPanelBodyHeading from './statsPanelBodyHeading';
 import StatsPanelBase from './statsPanelBase';
+import StatsNotification from './statsNotification';
 
 const StatsPanelBody = ({ data, isActive }) => {
 
@@ -50,9 +51,12 @@ const StatsPanelBody = ({ data, isActive }) => {
 												key={index} />
 										);
 
-										case 'item':
+										case 'notification':
+										console.log('data[column][row]', data[column][row]);
 										return (
-											<div className={`col-md-${widthSize}`} key={index}>{type}</div>
+											<div className={`col-md-${ws}`} key={index}>
+												<StatsNotification data={data[column][row]} />
+											</div>
 										);
 									}
 
