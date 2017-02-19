@@ -1,8 +1,10 @@
+import _ from 'lodash';
 import * as ACTIONS from '../actions/reviewContainerActionTypes';
 
 const initialState = {
   loaded: false,
-  loading: false
+  loading: false,
+  data: {}
 };
 
 export function reducer(state = initialState, action = {}) {
@@ -11,7 +13,7 @@ export function reducer(state = initialState, action = {}) {
       return {
         loaded: false,
         loading: true,
-        data: {}
+        data: _.defaults({}, state.data)
       };
     case ACTIONS.LOAD_SUCCESS:
       return {

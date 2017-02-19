@@ -3,7 +3,6 @@ import cx from 'classnames';
 import ReviewTable from '../containers/reviewTable';
 
 const ReviewContent = ({ data }) => {
-	console.log('data', data);
 	const { rows } = data;
 	return (
 		<div className="content">

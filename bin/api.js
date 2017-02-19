@@ -631,15 +631,16 @@ const reviewTablerows = [
 	{ score: {type: 'score', icon: 'score.png', text: '36'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'South India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
 	{ score: {type: 'score', icon: 'score.png', text: '37'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'North India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Approved', safe: true} },
 	{ score: {type: 'score', icon: 'score.png', text: '38'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'South India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
-	{ score: {type: 'score', icon: 'score.png', text: '39'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'South India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
+	{ score: {type: 'score', icon: 'score.png', text: '39'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'North India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
 	{ score: {type: 'score', icon: 'score.png', text: '40'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'South India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
-	{ score: {type: 'score', icon: 'score.png', text: '41'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'South India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
+	{ score: {type: 'score', icon: 'score.png', text: '41'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'North India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
 	{ score: {type: 'score', icon: 'score.png', text: '42'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'South India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
-	{ score: {type: 'score', icon: 'score.png', text: '43'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'South India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
+	{ score: {type: 'score', icon: 'score.png', text: '43'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'North India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
 	{ score: {type: 'score', icon: 'score.png', text: '44'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'South India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
 ];
 
 app.get('/api/review', (req, res) => {
+
 	const total = reviewTablerows.length;
 	let { offset = "0", count = total } = req.query;
 	offset = Number(offset);
