@@ -52,7 +52,6 @@ const StatsPanelBody = ({ data, isActive }) => {
 										);
 
 										case 'notification':
-										console.log('data[column][row]', data[column][row]);
 										return (
 											<div className={`col-md-${ws}`} key={index}>
 												<StatsNotification data={data[column][row]} />
