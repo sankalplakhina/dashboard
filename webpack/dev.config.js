@@ -184,8 +184,8 @@ module.exports = {
         new webpack.IgnorePlugin(/webpack-stats\.json$/),
         // for optimized loading of lodash modules
         new LodashModuleReplacementPlugin({
-            // collections: true,
-            // shorthands: true
+            collections: true,
+            shorthands: true
         }),
         new webpack.DefinePlugin({
             __CLIENT__: true,

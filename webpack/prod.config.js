@@ -191,8 +191,8 @@ module.exports = {
             __DEVTOOLS__: false,
         }),
         new LodashModuleReplacementPlugin({
-            // collections: true,
-            // shorthands: true
+            collections: true,
+            shorthands: true
         }),
 
         // ignore dev config

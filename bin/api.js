@@ -755,12 +755,15 @@ app.get('/api/review', (req, res) => {
 app.get('/api/analyze', (req, res) => {
 	res.json({
 		data: {
-			rows: ['info', 'pieGraphs'],
+			rows: ['info', 'biAxialChart','pieGraphs'],
 			info: {
 				heading: 'Score Threshold Tool',
 				paras: [
 					'Below is a graph of the number of Create Orders from users labeled "bad" in red and total Create Orders in blue. Click and drag the score bubble to explore your data.',
 				],
+			},
+			biAxialChart: {
+
 			},
 			pieGraphs: {
 				cols: [
