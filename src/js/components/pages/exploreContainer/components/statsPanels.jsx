@@ -5,6 +5,25 @@ import StatsPanel from './statsPanel';
 
 class StatsPanels extends React.Component {
 
+	constructor(){
+		super();
+		this.state = {
+			isSortDropdownOpen: false
+		};
+	}
+
+	handleSortButtonClick(){
+		this.setState({
+			isSortDropdownOpen: !this.state.isSortDropdownOpen
+		})
+	}
+
+	handleSortButtonBlur(){
+		if (this.state.isSortDropdownOpen) {
+			this.handleSortButtonClick();
+		}
+	}
+
 	handlePreviousClick() {
 		const { onPreviousButtonClick, data: { prev } } = this.props;
 		onPreviousButtonClick(prev);
@@ -21,6 +40,7 @@ class StatsPanels extends React.Component {
 
 		if (data) {
 			const { rows, total, count, offset } = data;
+			const { isSortDropdownOpen } = this.state;
 
 			const isOffsetZero = (offset === 0);
 			const start = isOffsetZero? 1 : offset;
@@ -39,7 +59,23 @@ class StatsPanels extends React.Component {
 							<strong>{`${start}-${end}`}</strong>{" of "}<strong>{total}</strong>
 						</div>
 					</div>
-					<div className="col-md-6 text-right nopad bottomPad15"></div>
+					<div className="col-md-6 text-right nopad bottomPad15 lh32">
+						<label className="mr5">Sort by</label>
+						<div
+							className={cx("dropdown pull-right", {"open": isSortDropdownOpen })}
+							tabIndex="-1"
+							onClick={this.handleSortButtonClick}
+							onBlur={this.handleSortButtonBlur}>
+							<button className="btn btn-default dropdown-toggle" type="button">
+						        <span className="value">Payment Abuse Score</span>
+						        <span className="caret"></span>
+						    </button>
+						    <ul className="dropdown-menu">
+						        <li><a href="javascript:void(0)">Action</a></li>
+						        <li><a href="javascript:void(0)">Another action</a></li>
+						    </ul>
+						</div>
+                    </div>
 					<StatsPanel data={data} />
 				</div>
 			);
