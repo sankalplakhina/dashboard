@@ -1,4 +1,5 @@
 import * as ACTIONS from './exploreContainerActionTypes';
+import { getAuthToken } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
 
 export function load() {
     // returning a thunk as this is any async action
@@ -20,7 +21,8 @@ export function loadExploreData(apiLink = '/api/explore') {
         dispatch({
           type: ACTIONS.LOAD
         });
-        return client.get(apiLink)
+        const token = getAuthToken(getState());
+        return client.get(apiLink, { headers: { Authorization: token } })
         .then(data => {
             // update new data
             dispatch({
@@ -44,7 +46,8 @@ export function loadStatsPanels(apiLink = '/api/explore/stats-panels?count=2') {
         dispatch({
             type: ACTIONS.LOAD_STATS_PANELS
         });
-        return client.get(apiLink)
+        const token = getAuthToken(getState());
+        return client.get(apiLink, { headers: { Authorization: token } })
         .then(data => {
             // update new data
             dispatch({

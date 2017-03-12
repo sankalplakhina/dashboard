@@ -1,18 +1,113 @@
 // Root directory(NODE_PATH) for this server is defined in package.json
 // "NODE_PATH": "./" from root folder
 require('server.babel'); // babel registration (runtime transpilation for node)
+const _ = require('lodash');
 const express = require('express');
-const bodyParser = require('body-parser');
 const compression = require('compression');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
+// authentication related dependencies
+const jwt = require('jsonwebtoken');
+const passport = require("passport");
+const passportJWT = require("passport-jwt");
+const ExtractJwt = passportJWT.ExtractJwt;
+const JwtStrategy = passportJWT.Strategy;
 
 const { apiPort } = require('config/env');
+
+const users = [
+  {
+	username: "sankalp@gmail.com",
+	firstName: "Sankalp",
+	lastName: "Lakhina",
+	password: "passwordtext",
+  },
+];
+
+// jwt passport strategy
+const jwtOptions = {}
+jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeader();
+jwtOptions.secretOrKey = 'neo-fp-dashboard';
+
+const strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
+	const { username } = jwt_payload;
+	const user = users[_.findIndex(users, {
+		username
+	})];
+	if (user) {
+		next(null, user);
+	} else {
+		next(null, false);
+	}
+});
+
+passport.use(strategy);
 
 const app = express();
 
 app.use(morgan('dev', {}));
 app.use(compression());
-app.use(bodyParser.json());
+// parse application/json
+app.use(bodyParser.json())
+// parse application/x-www-form-urlencoded
+// for easier testing with Postman or plain HTML forms
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+app.use(passport.initialize());
+
+app.post('/api/login', function(req, res, next) {
+
+	const { username, password } = req.body;
+	const user = users[_.findIndex(users, {
+		username
+	})];
+
+	if(!user){
+		return res.status(401).json({
+			data: {
+				message:"No such user found!"
+			}
+		});
+	}
+
+	if(user.password === password) {
+		// username is the only personalized value that goes into our token
+		const payload = {username: user.username};
+		const token = jwt.sign(payload, jwtOptions.secretOrKey);
+		return res.json({
+			data: {
+				user,
+				token,
+			}
+		});
+	} else {
+		return res.status(401).json({
+			data: {
+				message:"Wrong Password!"
+			}
+		});
+	}
+});
+
+app.get("/api/verify-token", passport.authenticate('jwt', { session: false }), function(req, res){
+	res.json({
+		data: {
+			valid: true
+		}
+	});
+})
+
+app.get("/api/secret", function(req, res){
+	const { username } = req.query;
+	const payload = { username };
+	const token = jwt.sign(payload, jwtOptions.secretOrKey);
+	res.json({
+		username,
+		token
+	});
+})
 
 app.get('/api/home', (req, res) => {
 	res.json({
@@ -23,7 +118,7 @@ app.get('/api/home', (req, res) => {
 	});
 });
 
-app.get('/api/explore', (req, res) => {
+app.get('/api/explore', passport.authenticate('jwt', { session: false }), (req, res) => {
 	res.json({
 		data: {
 			rows: ['quickInfo', 'avgStats'],
@@ -77,7 +172,7 @@ app.get('/api/explore', (req, res) => {
 
 const statsPanelsRows = ['row07SND73H', 'row08SND73H', 'row09SND73H', 'row10SND73H'];
 
-app.get('/api/explore/stats-panels', (req, res) => {
+app.get('/api/explore/stats-panels', passport.authenticate('jwt', { session: false }), (req, res) => {
 	const total = statsPanelsRows.length;
 	let { offset = "0", count = total } = req.query;
 	offset = Number(offset);
@@ -715,8 +810,7 @@ const reviewTablerows = [
 	{ score: {type: 'score', icon: 'score.png', text: '44'}, id: 'gmail/ht.com', timeLeft: '4mins', queue: 'South India', route: 'High Priority', latestPaymentAbuseStatus: {type: 'latestPaymentAbuseStatus', text: 'Declined', risky: true} },
 ];
 
-app.get('/api/review', (req, res) => {
-
+app.get('/api/review', passport.authenticate('jwt', { session: false }), (req, res) => {
 	const total = reviewTablerows.length;
 	let { offset = "0", count = total } = req.query;
 	offset = Number(offset);
@@ -752,7 +846,7 @@ app.get('/api/review', (req, res) => {
 	});
 });
 
-app.get('/api/analyze', (req, res) => {
+app.get('/api/analyze', passport.authenticate('jwt', { session: false }), (req, res) => {
 	res.json({
 		data: {
 			rows: ['info', 'biAxialChart','pieGraphs'],

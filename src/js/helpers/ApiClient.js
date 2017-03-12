@@ -1,6 +1,6 @@
 import { apiHost, port } from 'config/env';
-
 import fetch from 'isomorphic-fetch';
+
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
 function formatUrl(path) {

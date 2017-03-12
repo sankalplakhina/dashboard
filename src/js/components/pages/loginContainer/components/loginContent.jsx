@@ -1,4 +1,5 @@
 import React from 'react';
+import { bindHandlers } from 'react-bind-handlers';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
 
@@ -7,29 +8,26 @@ class LoginContent extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			email: '',
-			password: ''
+			username: 'sankalp@gmail.com',
+			password: 'passwordtext'
 		};
-		this.onSubmitClick = this.onSubmitClick.bind(this);
-		this.onChangeEmail = this.onChangeEmail.bind(this);
-		this.onChangePassword = this.onChangePassword.bind(this);
 	}
 
-	onSubmitClick(event) {
+	handleSubmitClick(event) {
 		event.preventDefault();
-		const { email, password } = this.state;
-		if (email && password) {
-			this.props.onLoginSuccess();
+		const { username, password } = this.state;
+		if (username && password) {
+			this.props.onLoginSubmit(username, password);
 		}
 	}
 
-	onChangeEmail(event) {
+	handleChangeUsername(event) {
 		this.setState({
-			email: event.target.value
+			username: event.target.value
 		});
 	}
 
-	onChangePassword(event) {
+	handleChangePassword(event) {
 		this.setState({
 			password: event.target.value
 		});
@@ -37,13 +35,13 @@ class LoginContent extends React.Component {
 
 	render() {
 
-		const { email, password } = this.state;
+		const { username, password } = this.state;
 
 		return (
 			<div className="content">
-			    <form onSubmit={this.onSubmitClick}>
-			        <input type="text" value={email} onChange={this.onChangeEmail} placeholder="E-mail or username" required />
-			        <input type="password" value={password} onChange={this.onChangePassword} placeholder="Password" required />
+			    <form onSubmit={this.handleSubmitClick}>
+			        <input type="text" value={username} onChange={this.handleChangeUsername} placeholder="E-mail or username" required />
+			        <input type="password" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
 			        <div className="rememberMe">
 			            <input type="checkbox" />
 			            <label>
@@ -60,4 +58,4 @@ class LoginContent extends React.Component {
 	}
 }
 
-export default LoginContent;
+export default bindHandlers(LoginContent);

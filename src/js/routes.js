@@ -1,5 +1,3 @@
-/* eslint react/jsx-filename-extension: 0 */
-
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import AppContainer from './components/appContainer/appContainer';
@@ -9,37 +7,44 @@ import ReviewContainer from './components/pages/reviewContainer/containers/revie
 import AnalyzeContainer from './components/pages/analyzeContainer/containers/analyzeContainer';
 import Home from './components/pages/home/containers/home';
 import NotFound from './components/pages/notFound/components/notFound';
+import { isAuthDataLoaded } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
+import { tryAuthentication } from 'src/js/components/pages/loginContainer/actions/loginContainerActions';
 
 export default (store) => {
 
-    // TODO:  Following approach to be used in case we need
-    // to handle routes requiring login
+    // Following middleware handles authenticated routes
 
-    // const requireLogin = (nextState, replace, cb) => {
-    //     function checkAuth() {
-    //       const { auth: { user }} = store.getState();
-    //       if (!user) {
-    //         // oops, not logged in, so can't be here!
-    //         replace('/');
-    //       }
-    //       cb();
-    //     }
+    const requireLogin = (nextState, replace, callback) => {
+        const { dispatch, getState } = store;
+        const state = getState();
+        if (!isAuthDataLoaded(state)) {
+            console.log('tryAuthentication');
+            dispatch(tryAuthentication()).then(checkAuthData);
+        } else {
+            console.log('Auth exists, do not tryAuthentication');
+            checkAuthData();
+        }
 
-    //     if (!isAuthLoaded(store.getState())) {
-    //       store.dispatch(loadAuth()).then(checkAuth);
-    //     } else {
-    //       checkAuth();
-    //     }
-    // };
+        function checkAuthData(){
+            // recheck with updated state
+            if (!isAuthDataLoaded(store.getState())) {
+                replace('/');
+            }
+            callback();
+        }
+    };
 
     return (
     <Route path="/" component={AppContainer}>
-      <IndexRoute component={LoginContainer} />
-      <Route path="login" component={LoginContainer}/>
-      <Route path="explore" component={ExploreContainer}/>
-      <Route path="review" component={ReviewContainer}/>
-      <Route path="analyze" component={AnalyzeContainer}/>
-      <Route path="*" component={NotFound} status={404} />
-    </Route>
+        <IndexRoute component={LoginContainer} />
+        <Route path="login" component={LoginContainer}/>
+        {/* Routes requiring login */}
+        <Route onEnter={requireLogin}>
+            <Route path="explore" component={ExploreContainer}/>
+            <Route path="review" component={ReviewContainer}/>
+            <Route path="analyze" component={AnalyzeContainer}/>
+        </Route>
+        <Route path="*" component={NotFound} status={404} />
+        </Route>
     );
 };

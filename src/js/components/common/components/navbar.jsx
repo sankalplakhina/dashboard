@@ -9,7 +9,7 @@ import twLogo from 'public/static/images/twLogo.png';
 class Navbar extends React.Component {
   render() {
 
-  	const { addFakeNavSpace } = this.props;
+  	const { addFakeNavSpace, userInfo } = this.props;
 
     return (
     	<nav className="navbar navbar-default navbar-fixed-top">
@@ -30,7 +30,15 @@ class Navbar extends React.Component {
     	        {/* <!-- Collect the nav links, forms, and other content for toggling --> */}
     	        <div className="collapse navbar-collapse nopad" id="bs-example-navbar-collapse-1">
     	            <ul className="nav navbar-nav navbar-right navPad">
-    	                <li><a href="javascript:void(0)">Hello! Shashank</a></li>
+                        {
+                            userInfo?
+                            <li><a href="javascript:void(0)">{`Hello! ${userInfo.firstName}`}</a></li>
+                            :
+                            [
+                                <li key="login"><Link to="/login" className="loginSap">Login</Link></li>,
+                                <li key="register"><Link to="/register">Signup</Link></li>
+                            ]
+                        }
     	            </ul>
     	            <div className="col-lg-12 menu navPad">
     	                <ul className="nav navbar-nav navbar-right">
