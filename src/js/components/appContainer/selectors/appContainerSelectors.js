@@ -1,6 +1,6 @@
-export const isLoginViewSelector = (state) => {
+export const isLoginOrRegisterViewSelector = (state) => {
 	const location = state.routing.locationBeforeTransitions.pathname;
-  	return location === '/login' || location === '/';
+  	return location === '/login' || location === '/register' || location === '/';
 };
 
 export const isExploreViewSelector = (state) => {

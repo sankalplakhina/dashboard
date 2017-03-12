@@ -21,9 +21,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch, ownProps) {
   	return {
   		onLoginSubmit(username, password) {
-  			dispatch(login(username, password)).then(function(){
-  				ownProps.router.replace('/review');
-  			});
+  			dispatch(login({ username, password }, ownProps.router));
   		},
   	};
 }

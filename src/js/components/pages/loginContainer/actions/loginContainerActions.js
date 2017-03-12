@@ -33,7 +33,7 @@ export function checkToken(token, apiLink = '/api/verify-token'){
 }
 
 
-export function login(username, password, apiLink = '/api/login'){
+export function login({ username, password }, router, apiLink = '/api/login'){
 	return (dispatch, getState, client) => {
 	    dispatch({
 	      type: ACTIONS.LOGIN
@@ -51,6 +51,38 @@ export function login(username, password, apiLink = '/api/login'){
 	            type: ACTIONS.LOGIN_SUCCESS,
 	            data: data.data
 	        });
+	        router.replace('/explore');
+	    })
+	    .catch(error => {
+	        dispatch({
+	            type: ACTIONS.LOGIN_FAILURE,
+	            error
+	        });
+	    });
+	};
+}
+
+export function register({ name, email, password, company }, router, apiLink = '/api/register'){
+	return (dispatch, getState, client) => {
+	    dispatch({
+	      type: ACTIONS.LOGIN
+	    });
+	    // post data should be a json object with data property
+	    // as per configured in client
+	    return client.post(apiLink, {
+	    	data: {
+	    		name,
+	    		email,
+	    		password,
+	    		company,
+	    	}
+	    })
+	    .then(data => {
+	        dispatch({
+	            type: ACTIONS.LOGIN_SUCCESS,
+	            data: data.data
+	        });
+	        router.replace('/explore');
 	    })
 	    .catch(error => {
 	        dispatch({

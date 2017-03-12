@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import { isLoginViewSelector } from 'src/js/components/appContainer/selectors/appContainerSelectors';
+import { isLoginOrRegisterViewSelector } from 'src/js/components/appContainer/selectors/appContainerSelectors';
 import Footer from '../components/footer';
 
 function mapStateToProps(state) {
   	return {
-  		hideFooter: isLoginViewSelector(state)
+  		hideFooter: isLoginOrRegisterViewSelector(state)
   	};
 }
 

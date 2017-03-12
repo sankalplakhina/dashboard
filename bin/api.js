@@ -91,6 +91,41 @@ app.post('/api/login', function(req, res, next) {
 	}
 });
 
+app.post('/api/register', function(req, res, next) {
+
+	const { name, email, password, company } = req.body;
+	const user = users[_.findIndex(users, {
+		username: email
+	})];
+
+	if(user){
+		return res.status(401).json({
+			data: {
+				message:"User with this email already exists!"
+			}
+		});
+	}
+
+	const nameArr = name.split(' ');
+	const newUser = {
+		username: email,
+		firstName: nameArr[0],
+		lastName: nameArr[1]? nameArr.slice(1).join(' '): null,
+		password,
+		company
+	};
+	users.push(newUser);
+	// username is the only personalized value that goes into our token
+	const payload = {username: newUser.username};
+	const token = jwt.sign(payload, jwtOptions.secretOrKey);
+	return res.json({
+		data: {
+			user: newUser,
+			token,
+		}
+	});
+});
+
 app.get("/api/verify-token", passport.authenticate('jwt', { session: false }), function(req, res){
 	res.json({
 		data: {
