@@ -1,31 +1,50 @@
+import _ from 'lodash';
 import * as ACTIONS from '../actions/loginContainerActionTypes';
 
 const initialState = {
-	loaded: false,
-	loading: false,
+	isLoginLoading: false,
+	isLogoutLoading: false,
 };
 
 export default function auth(state = initialState, action = {}){
 
 	switch (action.type) {
 		case ACTIONS.LOGIN:
-			return {
-				loaded: false,
-				loading: true,
-				data: {}
-			};
+			return _.defaults({
+				isLoginLoading: true,
+				data: {},
+			}, state);
+
 		case ACTIONS.LOGIN_SUCCESS:
-			return {
-				loaded: true,
-				loading: false,
+			return _.defaults({
+				isLoginLoading: false,
 				data: action.data
-			};
+			}, state);
+
 		case ACTIONS.LOGIN_FAILURE:
-			return {
-				loaded: false,
-				loading: false,
-				error: action.error
-			};
+			return _.defaults({
+				isLoginLoading: false,
+				data: action.error
+			}, state);
+
+		case ACTIONS.LOGOUT:
+			return _.defaults({
+				isLogoutLoading: true,
+				data: {},
+			}, state);
+
+		case ACTIONS.LOGOUT_SUCCESS:
+			return _.defaults({
+				isLogoutLoading: false,
+				data: action.data
+			}, state);
+
+		case ACTIONS.LOGOUT_FAILURE:
+			return _.defaults({
+				isLogoutLoading: false,
+				data: action.error
+			}, state);
+
 		default:
 			return state;
 	}
