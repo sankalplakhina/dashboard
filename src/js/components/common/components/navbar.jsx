@@ -9,7 +9,7 @@ import twLogo from 'public/static/images/twLogo.png';
 class Navbar extends React.Component {
   render() {
 
-  	const { addFakeNavSpace, userInfo } = this.props;
+  	const { addFakeNavSpace, userInfo, onLogoutClick } = this.props;
 
     return (
     	<nav className="navbar navbar-default navbar-fixed-top">
@@ -32,7 +32,7 @@ class Navbar extends React.Component {
     	            <ul className="nav navbar-nav navbar-right navPad">
                         {
                             userInfo?
-                            <li><a href="javascript:void(0)">{`Hello! ${userInfo.firstName}`}</a></li>
+                            <li><a onClick={onLogoutClick}>{`Hello! ${userInfo.firstName}`}</a></li>
                             :
                             [
                                 <li key="login"><Link to="/login" className="loginSap">Login</Link></li>,

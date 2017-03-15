@@ -126,10 +126,10 @@ app.post('/api/register', function(req, res, next) {
 	});
 });
 
-app.get("/api/verify-token", passport.authenticate('jwt', { session: false }), function(req, res){
+app.get("/api/logout", passport.authenticate('jwt', { session: false }), function(req, res){
 	res.json({
 		data: {
-			valid: true
+			message: "Logged out successfully!"
 		}
 	});
 })

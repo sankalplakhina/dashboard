@@ -9,7 +9,7 @@ export function initiateLogin(){
 }
 
 export function setLoginSuccess(data) {
-	cookie.save(COOKIE_KEY, data.data); // saving login info to cookies
+	cookie.save(COOKIE_KEY, JSON.stringify(data)); // saving login info to cookies
 	return {
 		type: ACTIONS.LOGIN_SUCCESS,
 		data
@@ -23,13 +23,33 @@ export function setLoginFailure(error){
 	};
 }
 
+export function initiateLogout(){
+	return {
+		type: ACTIONS.LOGOUT
+	};
+}
+
+export function setLogoutSuccess(data) {
+	cookie.remove(COOKIE_KEY, data); // remove login info from cookies
+	return {
+		type: ACTIONS.LOGOUT_SUCCESS,
+		data
+	};
+}
+
+export function setLogoutFailure(error){
+	return {
+		type: ACTIONS.LOGOUT_FAILURE,
+		error
+	};
+}
+
 export function tryAuthenticationWithCookies(){
 	return (dispatch, getState, client) => {
 		const data = cookie.load(COOKIE_KEY);
 		if (data && data.token) {
 	        dispatch(setLoginSuccess(data));
 		}
-		return Promise.resolve();
 	};
 }
 
@@ -74,3 +94,16 @@ export function register({ name, email, password, company }, router, apiLink = '
 	};
 }
 
+export function logout(router, apiLink = '/api/logout'){
+	return (dispatch, getState, client) => {
+	    initiateLogout();
+	    // post data should be a json object with data property
+	    // as per configured in client
+	    return client.get(apiLink)
+	    .then((data) => {
+	        dispatch(setLogoutSuccess(data.data));
+	        router.replace('/');
+	    })
+	    .catch((error) => dispatch(setLoginFailure(error)));
+	};
+}

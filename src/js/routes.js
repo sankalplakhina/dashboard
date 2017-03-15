@@ -21,7 +21,8 @@ export default (store) => {
         const state = getState();
         if (!isAuthDataLoaded(state)) {
             // if no auth data exists, check in cookies
-            dispatch(tryAuthenticationWithCookies()).then(checkAuthData);
+            dispatch(tryAuthenticationWithCookies());
+            checkAuthData();
         } else {
             // if auth exists, no need to replace; call callback to continue same route
             checkAuthData();
