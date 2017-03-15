@@ -9,25 +9,26 @@ import AnalyzeContainer from './components/pages/analyzeContainer/containers/ana
 import Home from './components/pages/home/containers/home';
 import NotFound from './components/pages/notFound/components/notFound';
 import { isAuthDataLoaded } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
-import { tryAuthentication } from 'src/js/components/pages/loginContainer/actions/loginContainerActions';
+import { tryAuthenticationWithCookies } from 'src/js/components/pages/loginContainer/actions/loginContainerActions';
 
 export default (store) => {
 
     // Following middleware handles authenticated routes
 
     const requireLogin = (nextState, replace, callback) => {
+
         const { dispatch, getState } = store;
         const state = getState();
         if (!isAuthDataLoaded(state)) {
-            console.log('tryAuthentication');
-            dispatch(tryAuthentication()).then(checkAuthData);
+            // if no auth data exists, check in cookies
+            dispatch(tryAuthenticationWithCookies()).then(checkAuthData);
         } else {
-            console.log('Auth exists, do not tryAuthentication');
+            // if auth exists, no need to replace; call callback to continue same route
             checkAuthData();
         }
 
         function checkAuthData(){
-            // recheck with updated state
+            // rechecking auth to verify if something was found in cookies
             if (!isAuthDataLoaded(store.getState())) {
                 replace('/');
             }

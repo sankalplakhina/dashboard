@@ -1,4 +1,5 @@
-import { apiHost, port } from 'config/env';
+import cookie from 'react-cookie';
+import { apiHost, port, cookieKey as COOKIE_KEY } from 'config/env';
 import fetch from 'isomorphic-fetch';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
@@ -29,6 +30,10 @@ function fetchCreator(method) {
     if (data) {
       fetchOptions.body = JSON.stringify(data);
       fetchOptions.headers['Content-Type'] = 'application/json';
+    }
+    // handles cookie based sessions in isomorphic cases
+    if (cookie && cookie.load(COOKIE_KEY)) {
+      fetchOptions.headers.Authorization = `JWT ${cookie.load(COOKIE_KEY).token}`;
     }
 
     fetchOptions.method = method;

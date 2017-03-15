@@ -1,43 +1,42 @@
+import cookie from 'react-cookie';
 import * as ACTIONS from './loginContainerActionTypes';
-const TOKEN_KEY = "neo_token";
+import { cookieKey as COOKIE_KEY } from 'config/env';
 
-export function tryAuthentication(){
-	return (dispatch, getState, client) => {
-		return Promise.resolve();
+export function initiateLogin(){
+	return {
+		type: ACTIONS.LOGIN
 	};
 }
 
-export function checkToken(token, apiLink = '/api/verify-token'){
+export function setLoginSuccess(data) {
+	cookie.save(COOKIE_KEY, data.data); // saving login info to cookies
+	return {
+		type: ACTIONS.LOGIN_SUCCESS,
+		data
+	};
+}
+
+export function setLoginFailure(error){
+	return {
+		type: ACTIONS.LOGIN_FAILURE,
+		error
+	};
+}
+
+export function tryAuthenticationWithCookies(){
 	return (dispatch, getState, client) => {
-	    dispatch({
-	      type: ACTIONS.LOGIN
-	    });
-	    return client.get(apiLink, { headers: { Authorization: token } })
-	    .then(data => {
-	        dispatch({
-	            type: ACTIONS.LOGIN_SUCCESS,
-	            data: {
-	            	data: {
-	            		token
-	            	}
-	            }
-	        });
-	    })
-	    .catch(error => {
-	        dispatch({
-	            type: ACTIONS.LOGIN_FAILURE,
-	            error
-	        });
-	    });
+		const data = cookie.load(COOKIE_KEY);
+		if (data && data.token) {
+	        dispatch(setLoginSuccess(data));
+		}
+		return Promise.resolve();
 	};
 }
 
 
 export function login({ username, password }, router, apiLink = '/api/login'){
 	return (dispatch, getState, client) => {
-	    dispatch({
-	      type: ACTIONS.LOGIN
-	    });
+	    initiateLogin();
 	    // post data should be a json object with data property
 	    // as per configured in client
 	    return client.post(apiLink, {
@@ -47,26 +46,16 @@ export function login({ username, password }, router, apiLink = '/api/login'){
 	    	}
 	    })
 	    .then(data => {
-	        dispatch({
-	            type: ACTIONS.LOGIN_SUCCESS,
-	            data: data.data
-	        });
-	        router.replace('/explore');
+	        dispatch(setLoginSuccess(data.data));
+	        router.replace('/analyze');
 	    })
-	    .catch(error => {
-	        dispatch({
-	            type: ACTIONS.LOGIN_FAILURE,
-	            error
-	        });
-	    });
+	    .catch(error => dispatch(setLoginFailure(error)));
 	};
 }
 
 export function register({ name, email, password, company }, router, apiLink = '/api/register'){
 	return (dispatch, getState, client) => {
-	    dispatch({
-	      type: ACTIONS.LOGIN
-	    });
+	    initiateLogin();
 	    // post data should be a json object with data property
 	    // as per configured in client
 	    return client.post(apiLink, {
@@ -77,18 +66,11 @@ export function register({ name, email, password, company }, router, apiLink = '
 	    		company,
 	    	}
 	    })
-	    .then(data => {
-	        dispatch({
-	            type: ACTIONS.LOGIN_SUCCESS,
-	            data: data.data
-	        });
-	        router.replace('/explore');
+	    .then((data) => {
+	        dispatch(setLoginSuccess(data.data));
+	        router.replace('/analyze');
 	    })
-	    .catch(error => {
-	        dispatch({
-	            type: ACTIONS.LOGIN_FAILURE,
-	            error
-	        });
-	    });
+	    .catch((error) => dispatch(setLoginFailure(error)));
 	};
 }
+

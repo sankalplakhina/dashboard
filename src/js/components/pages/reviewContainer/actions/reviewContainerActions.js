@@ -1,5 +1,4 @@
 import * as ACTIONS from './reviewContainerActionTypes';
-import { getAuthToken } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
 
 export function loadFail(error) {
   return {
@@ -27,8 +26,7 @@ export function load(apiLink = '/api/review?count=5') {
         dispatch({
           type: ACTIONS.LOAD
         });
-        const token = getAuthToken(getState());
-        return client.get(apiLink, { headers: { Authorization: token } }).then(data => {
+        return client.get(apiLink).then(data => {
             dispatch(loadSuccess(data.data));
         })
         .catch(error => {

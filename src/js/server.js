@@ -13,7 +13,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import { Provider } from 'react-redux';
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
-
+import cookie from 'react-cookie';
 import { createStore } from './store/createStore';
 import ApiClient from './helpers/ApiClient';
 
@@ -72,7 +72,7 @@ app.use((req, res) => {
     const memoryHistory = createHistory(req.originalUrl);
     const store = createStore(client, memoryHistory);
     const history = syncHistoryWithStore(memoryHistory, store);
-
+    cookie.plugToRequest(req, res);
     match({
         history,
         routes: getRoutes(store),

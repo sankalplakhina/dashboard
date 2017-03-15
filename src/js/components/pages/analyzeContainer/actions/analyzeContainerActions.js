@@ -1,5 +1,4 @@
 import * as ACTIONS from './analyzeContainerActionTypes';
-import { getAuthToken } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
 import { dateRangeSelector } from 'src/js/components/dashboard/selectors/dashboardDatePickerSelectors';
 
 export function loadFail(error) {
@@ -30,13 +29,12 @@ export function load() {
         });
 
         const state = getState();
-        const token = getAuthToken(state);
         const dateRange = dateRangeSelector(state);
         let apiLink = '/api/analyze';
         if (dateRange.startDate && dateRange.endDate) {
             apiLink += `?start-date=${dateRange.startDate}&end-date=${dateRange.endDate}`;
         }
-        return client.get(apiLink, { headers: { Authorization: token } }).then(data => {
+        return client.get(apiLink).then(data => {
             dispatch(loadSuccess(data.data));
         })
         .catch(error => {
