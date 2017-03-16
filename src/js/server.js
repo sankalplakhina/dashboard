@@ -39,6 +39,11 @@ app.use('/api', (req, res) => {
     proxy.web(req, res, { target: `${targetUrl}/api` });
 });
 
+// Proxy to Frontend API server
+app.use('/fapi', (req, res) => {
+    proxy.web(req, res, { target: `${targetUrl}/fapi` });
+});
+
 server.on('upgrade', (req, socket, head) => {
     proxy.ws(req, socket, head);
 });
