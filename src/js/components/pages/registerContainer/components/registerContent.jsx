@@ -7,31 +7,53 @@ class RegisterContent extends React.Component {
 
 	constructor(props) {
 		super(props);
+		// this.state = this.getInitState();
 		this.state = {
-			name: 'Test',
-			email: 'sankalp@gmail.com',
+			username: 'test@gmail.com',
 			password: 'hellopassword',
-			company: 'ABC',
+			website: 'ABC',
 		};
+	}
+
+	componentWillReceiveProps(nextProps) {
+		const {
+			isRegisterationLoading,
+			isRegisterationSuccess,
+			responseMessage,
+		} = nextProps;
+
+		const hasRegistrationLoaded = !isRegisterationLoading && isRegisterationLoading !== this.props.isRegisterationLoading;
+		if (hasRegistrationLoaded && responseMessage) {
+			alert(responseMessage);
+			if (isRegisterationSuccess) {
+				this.initState();
+			}
+		}
+	}
+
+	getInitState(){
+		return {
+			username: '',
+			password: '',
+			website: '',
+		};
+	}
+
+	initState(){
+		this.setState(this.getInitState());
 	}
 
 	handleSubmitClick(event) {
 		event.preventDefault();
-		const { name, email, password, company } = this.state;
-		if (name && email && password && company) {
+		const { username, password, website } = this.state;
+		if (username && password && website) {
 			this.props.onRegisterSubmit(this.state);
 		}
 	}
 
-	handleChangeName(event) {
+	handleChangeUserName(event) {
 		this.setState({
-			name: event.target.value
-		});
-	}
-
-	handleChangeEmail(event) {
-		this.setState({
-			email: event.target.value
+			username: event.target.value
 		});
 	}
 
@@ -41,23 +63,22 @@ class RegisterContent extends React.Component {
 		});
 	}
 
-	handleChangeCompanyName(event) {
+	handleChangeWebsite(event) {
 		this.setState({
-			company: event.target.value
+			website: event.target.value
 		});
 	}
 
 	render() {
 
-		const { name, email, password, company } = this.state;
+		const { username, password, website } = this.state;
 
 		return (
 			<div className="content">
 			    <form onSubmit={this.handleSubmitClick}>
-			        <input type="text" value={name} onChange={this.handleChangeName} placeholder="Name" required />
-			        <input type="email" value={email} onChange={this.handleChangeEmail} placeholder="E-mail" required />
+			        <input type="email" value={username} onChange={this.handleChangeUserName} placeholder="Username" required />
 			        <input type="password" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
-			        <input type="text" value={company} onChange={this.handleChangeCompanyName} placeholder="Company Name" required />
+			        <input type="text" value={website} onChange={this.handleChangeWebsite} placeholder="Website" required />
 			        <div className="rememberMe">
 			            <input type="checkbox" />
 			            <label>

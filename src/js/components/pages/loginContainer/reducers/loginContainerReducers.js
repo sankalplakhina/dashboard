@@ -3,6 +3,7 @@ import * as ACTIONS from '../actions/loginContainerActionTypes';
 
 const initialState = {
 	isLoginLoading: false,
+	isRegisterLoading: false,
 	isLogoutLoading: false,
 };
 
@@ -24,6 +25,24 @@ export default function auth(state = initialState, action = {}){
 		case ACTIONS.LOGIN_FAILURE:
 			return _.defaults({
 				isLoginLoading: false,
+				data: action.error
+			}, state);
+
+		case ACTIONS.REGISTER:
+			return _.defaults({
+				isRegisterLoading: true,
+				data: {},
+			}, state);
+
+		case ACTIONS.REGISTER_SUCCESS:
+			return _.defaults({
+				isRegisterLoading: false,
+				data: action.data
+			}, state);
+
+		case ACTIONS.REGISTER_FAILURE:
+			return _.defaults({
+				isRegisterLoading: false,
 				data: action.error
 			}, state);
 

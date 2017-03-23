@@ -4,3 +4,6 @@ export const LOGIN_FAILURE = "app/auth/login-failure";
 export const LOGOUT = "app/auth/logout";
 export const LOGOUT_SUCCESS = "app/auth/logout-success";
 export const LOGOUT_FAILURE = "app/auth/logout-failure";
+export const REGISTER = "app/auth/register";
+export const REGISTER_SUCCESS = "app/auth/register-success";
+export const REGISTER_FAILURE = "app/auth/register-failure";

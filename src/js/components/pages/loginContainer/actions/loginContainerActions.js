@@ -23,6 +23,27 @@ export function setLoginFailure(error){
 	};
 }
 
+export function initiateRegister(){
+	return {
+		type: ACTIONS.REGISTER
+	};
+}
+
+export function setRegisterSuccess(data) {
+	cookie.save(COOKIE_KEY, JSON.stringify(data)); // saving login info to cookies
+	return {
+		type: ACTIONS.REGISTER_SUCCESS,
+		data
+	};
+}
+
+export function setRegisterFailure(error){
+	return {
+		type: ACTIONS.REGISTER_FAILURE,
+		error
+	};
+}
+
 export function initiateLogout(){
 	return {
 		type: ACTIONS.LOGOUT
@@ -55,8 +76,8 @@ export function tryAuthenticationWithCookies(){
 
 
 export function login({ username, password }, router, apiLink = '/api/login'){
-	return (dispatch, getState, client) => {
-	    initiateLogin();
+	return (dispatch, gπetState, client) => {
+	    dispatch(initiateLogin());
 	    // post data should be a json object with data property
 	    // as per configured in client
 	    return client.post(apiLink, {
@@ -69,28 +90,26 @@ export function login({ username, password }, router, apiLink = '/api/login'){
 	        dispatch(setLoginSuccess(data.data));
 	        router.replace('/analyze');
 	    })
-	    .catch(error => dispatch(setLoginFailure(error)));
+	    .catch(error => dispatch(setLoginFailure(error.data)));
 	};
 }
 
-export function register({ name, email, password, company }, router, apiLink = '/api/register'){
+export function register({ username, password, website }, apiLink = '/api/register'){
 	return (dispatch, getState, client) => {
-	    initiateLogin();
+	    dispatch(initiateRegister());
 	    // post data should be a json object with data property
 	    // as per configured in client
 	    return client.post(apiLink, {
 	    	data: {
-	    		name,
-	    		email,
+	    		username,
 	    		password,
-	    		company,
+	    		website,
 	    	}
 	    })
 	    .then((data) => {
-	        dispatch(setLoginSuccess(data.data));
-	        router.replace('/analyze');
+	        dispatch(setRegisterSuccess(data.data));
 	    })
-	    .catch((error) => dispatch(setLoginFailure(error)));
+	    .catch((error) => dispatch(setRegisterFailure(error.data)));
 	};
 }
 

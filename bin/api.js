@@ -18,10 +18,9 @@ const { apiPort } = require('config/env');
 
 const users = [
   {
-	username: "sankalp@gmail.com",
-	firstName: "Sankalp",
-	lastName: "Lakhina",
+	name: "sankalp@gmail.com",
 	password: "passwordtext",
+	secret: "21359e4a71"
   },
 ];
 
@@ -33,7 +32,7 @@ jwtOptions.secretOrKey = 'neo-fp-dashboard';
 const strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
 	const { username } = jwt_payload;
 	const user = users[_.findIndex(users, {
-		username
+		name: username
 	})];
 	if (user) {
 		next(null, user);
@@ -62,23 +61,29 @@ app.post('/api/login', function(req, res, next) {
 
 	const { username, password } = req.body;
 	const user = users[_.findIndex(users, {
-		username
+		name: username
 	})];
 
 	if(!user){
 		return res.status(401).json({
 			data: {
-				message:"No such user found!"
+				success: false,
+				message: 'Could not process the form.',
+				errors: {
+					username: 'email not valid.'
+				}
 			}
 		});
 	}
 
 	if(user.password === password) {
 		// username is the only personalized value that goes into our token
-		const payload = {username: user.username};
+		const payload = {username: user.name};
 		const token = jwt.sign(payload, jwtOptions.secretOrKey);
 		return res.json({
 			data: {
+				success: true,
+				message: "You have successfully logged in!",
 				user,
 				token,
 			}
@@ -86,7 +91,11 @@ app.post('/api/login', function(req, res, next) {
 	} else {
 		return res.status(401).json({
 			data: {
-				message:"Wrong Password!"
+				success: false,
+				message: 'Could not process the form.',
+				errors: {
+					password: 'Wrong Password!'
+				}
 			}
 		});
 	}
@@ -94,35 +103,36 @@ app.post('/api/login', function(req, res, next) {
 
 app.post('/api/register', function(req, res, next) {
 
-	const { name, email, password, company } = req.body;
+	const { username, password, website } = req.body;
 	const user = users[_.findIndex(users, {
-		username: email
+		name: username
 	})];
 
 	if(user){
 		return res.status(401).json({
 			data: {
-				message:"User with this email already exists!"
+				success: false,
+				message: 'Check the form for errors.',
+				errors: {
+					username: 'This email is already taken.'
+				}
 			}
 		});
 	}
 
-	const nameArr = name.split(' ');
 	const newUser = {
-		username: email,
-		firstName: nameArr[0],
-		lastName: nameArr[1]? nameArr.slice(1).join(' '): null,
+		name: username,
 		password,
-		company
+		website
 	};
 	users.push(newUser);
 	// username is the only personalized value that goes into our token
-	const payload = {username: newUser.username};
+	const payload = {username: newUser.name};
 	const token = jwt.sign(payload, jwtOptions.secretOrKey);
 	return res.json({
 		data: {
-			user: newUser,
-			token,
+			success: true,
+			message: "You have successfully signed up! Verification link sent on your email address."
 		}
 	});
 });

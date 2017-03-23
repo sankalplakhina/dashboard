@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const getAuth = (state) => {
 	return state.auth;
 };
@@ -13,4 +15,24 @@ export const isAuthDataLoaded = (state) => {
 
 export const getUserData = (state) => {
 	return getAuthData(state).user;
+};
+
+export const getIsRegisterationLoading = (state) => {
+	return getAuth(state).isRegisterLoading;
+};
+
+export const getIsRegisterationSuccess = (state) => {
+	return Boolean(getAuthData(state).success);
+};
+
+export const getIsRegisterationLoadedWithSuccess = (state) => {
+	return getIsRegisterationLoaded(state) && getIsRegisterationSuccess(state);
+};
+
+export const getResponseMessage = (state) => {
+	return getAuthData(state).message;
+};
+
+export const getResponseErrors = (state) => {
+	return getAuthData(state).errors;
 };

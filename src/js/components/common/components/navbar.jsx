@@ -32,7 +32,7 @@ class Navbar extends React.Component {
     	            <ul className="nav navbar-nav navbar-right navPad">
                         {
                             userInfo?
-                            <li><a onClick={onLogoutClick}>{`Hello! ${userInfo.firstName}`}</a></li>
+                            <li><a onClick={onLogoutClick}>{`Hello! ${userInfo.name}`}</a></li>
                             :
                             [
                                 <li key="login"><Link to="/login" className="loginSap">Login</Link></li>,
