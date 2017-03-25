@@ -10,3 +10,6 @@ export const REGISTER_FAILURE = "app/auth/register-failure";
 export const FORGOT_PASSWORD = "app/auth/forgot-password";
 export const FORGOT_PASSWORD_SUCCESS = "app/auth/forgot-password-success";
 export const FORGOT_PASSWORD_FAILURE = "app/auth/forgot-password-failure";
+export const RESET_PASSWORD = "app/auth/reset-password";
+export const RESET_PASSWORD_SUCCESS = "app/auth/reset-password-success";
+export const RESET_PASSWORD_FAILURE = "app/auth/reset-password-failure";

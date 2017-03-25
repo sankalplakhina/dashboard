@@ -125,6 +125,27 @@ app.post('/api/forgot', function(req, res, next) {
 	});
 });
 
+app.post('/api/reset-password', function(req, res, next) {
+
+	const { resettoken, password } = req.body;
+
+	if(resettoken === 'sometoken'){
+		return res.status(401).json({
+			data: {
+				success: false,
+				message: 'An error has occured',
+			}
+		});
+	}
+
+	return res.json({
+		data: {
+			success: true,
+			message: "Password has been reset. You will be redirected to login page.",
+		}
+	});
+});
+
 app.post('/api/register', function(req, res, next) {
 
 	const { username, password, website } = req.body;

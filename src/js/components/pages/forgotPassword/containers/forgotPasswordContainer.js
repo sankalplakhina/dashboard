@@ -5,7 +5,7 @@ import {
 	getIsResponseSuccess,
 	getResponseMessage,
 } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
-import { resetPassword } from 'src/js/components/pages/loginContainer/actions/loginContainerActions';
+import { forgotPassword } from 'src/js/components/pages/loginContainer/actions/loginContainerActions';
 import ForgotPasswordContainer from '../components/forgotPasswordContainer';
 
 function mapStateToProps(state) {
@@ -19,7 +19,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch, ownProps) {
   	return {
   		onSubmit({ username }) {
-  			dispatch(resetPassword({ username }))
+  			dispatch(forgotPassword({ username }))
   		},
   	};
 }

@@ -29,6 +29,10 @@ export const getIsForgotPasswordLoading = (state) => {
 	return getAuth(state).isForgotPasswordLoading;
 };
 
+export const getIsResetPasswordLoading = (state) => {
+	return getAuth(state).isResetPasswordLoading;
+};
+
 export const getIsResponseSuccess = (state) => {
 	return Boolean(getAuthData(state).success);
 };

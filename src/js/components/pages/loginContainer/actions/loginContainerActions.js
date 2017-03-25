@@ -63,6 +63,27 @@ export function setForgotPasswordFailure(error){
 	};
 }
 
+export function initiateResetPassword(){
+	return {
+		type: ACTIONS.RESET_PASSWORD
+	};
+}
+
+export function setResetPasswordSuccess(data) {
+	return {
+		type: ACTIONS.RESET_PASSWORD_SUCCESS,
+		data
+	};
+}
+
+export function setResetPasswordFailure(error){
+	return {
+		type: ACTIONS.RESET_PASSWORD_FAILURE,
+		error
+	};
+}
+
+
 export function initiateLogout(){
 	return {
 		type: ACTIONS.LOGOUT
@@ -132,7 +153,7 @@ export function register({ username, password, website }, apiLink = '/api/regist
 	};
 }
 
-export function resetPassword({ username }, apiLink = '/api/forgot'){
+export function forgotPassword({ username }, apiLink = '/api/forgot'){
 	return (dispatch, getState, client) => {
 	    dispatch(initiateForgotPassword());
 	    // post data should be a json object with data property
@@ -146,6 +167,24 @@ export function resetPassword({ username }, apiLink = '/api/forgot'){
 	        dispatch(setForgotPasswordSuccess(data.data));
 	    })
 	    .catch((error) => dispatch(setForgotPasswordFailure(error.data)));
+	};
+}
+
+export function resetPassword({ password, resetToken }, apiLink = '/api/reset-password'){
+	return (dispatch, getState, client) => {
+	    dispatch(initiateResetPassword());
+	    // post data should be a json object with data property
+	    // as per configured in client
+	    return client.post(apiLink, {
+	    	data: {
+	    		resettoken: resetToken,
+	    		password,
+	    	}
+	    })
+	    .then((data) => {
+	        dispatch(setResetPasswordSuccess(data.data));
+	    })
+	    .catch((error) => dispatch(setResetPasswordFailure(error.data)));
 	};
 }
 

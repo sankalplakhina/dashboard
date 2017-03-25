@@ -5,6 +5,7 @@ const initialState = {
 	isLoginLoading: false,
 	isRegisterLoading: false,
 	isForgotPasswordLoading: false,
+	isResetPasswordLoading: false,
 	isLogoutLoading: false,
 };
 
@@ -62,6 +63,24 @@ export default function auth(state = initialState, action = {}){
 		case ACTIONS.FORGOT_PASSWORD_FAILURE:
 			return _.defaults({
 				isForgotPasswordLoading: false,
+				data: action.error
+			}, state);
+
+		case ACTIONS.RESET_PASSWORD:
+			return _.defaults({
+				isResetPasswordLoading: true,
+				data: {},
+			}, state);
+
+		case ACTIONS.RESET_PASSWORD_SUCCESS:
+			return _.defaults({
+				isResetPasswordLoading: false,
+				data: action.data
+			}, state);
+
+		case ACTIONS.RESET_PASSWORD_FAILURE:
+			return _.defaults({
+				isResetPasswordLoading: false,
 				data: action.error
 			}, state);
 
