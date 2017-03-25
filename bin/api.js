@@ -131,18 +131,14 @@ app.post('/api/reset-password', function(req, res, next) {
 
 	if(resettoken === 'sometoken'){
 		return res.status(401).json({
-			data: {
-				success: false,
-				message: 'An error has occured',
-			}
+			success: false,
+			message: 'An error has occured',
 		});
 	}
 
 	return res.json({
-		data: {
-			success: true,
-			message: "Password has been reset. You will be redirected to login page.",
-		}
+		success: true,
+		message: "Password has been reset. You will be redirected to login page.",
 	});
 });
 

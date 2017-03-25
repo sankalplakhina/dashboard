@@ -76,10 +76,10 @@ export function setResetPasswordSuccess(data) {
 	};
 }
 
-export function setResetPasswordFailure(error){
+export function setResetPasswordFailure(data){
 	return {
 		type: ACTIONS.RESET_PASSWORD_FAILURE,
-		error
+		data
 	};
 }
 
@@ -182,9 +182,9 @@ export function resetPassword({ password, resetToken }, apiLink = '/api/reset-pa
 	    	}
 	    })
 	    .then((data) => {
-	        dispatch(setResetPasswordSuccess(data.data));
+	        dispatch(setResetPasswordSuccess(data));
 	    })
-	    .catch((error) => dispatch(setResetPasswordFailure(error.data)));
+	    .catch((data) => dispatch(setResetPasswordFailure(data)));
 	};
 }
 
