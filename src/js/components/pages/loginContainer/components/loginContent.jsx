@@ -9,8 +9,35 @@ class LoginContent extends React.Component {
 		super(props);
 		this.state = {
 			username: 'sankalp@gmail.com',
-			password: 'passwordtext'
+			password: 'passwordtext',
+			errors: {},
 		};
+	}
+
+	componentWillReceiveProps(nextProps) {
+		const {
+			isLoginLoading,
+			isResponseSuccess,
+			responseMessage,
+			responseErrors,
+			router,
+		} = nextProps;
+
+		const hasLoginLoaded = !isLoginLoading && isLoginLoading !== this.props.isLoginLoading;
+		if (hasLoginLoaded && responseMessage) {
+			alert(responseMessage);
+			if (isResponseSuccess) {
+	        	router.replace('/analyze');
+			} else {
+				this.updateFormWithErrors(responseErrors)
+			}
+		}
+	}
+
+	updateFormWithErrors(errors) {
+		this.setState({
+			errors
+		})
 	}
 
 	handleSubmitClick(event) {
@@ -35,13 +62,15 @@ class LoginContent extends React.Component {
 
 	render() {
 
-		const { username, password } = this.state;
+		const { username, password, errors } = this.state;
 
 		return (
 			<div className="content">
 			    <form onSubmit={this.handleSubmitClick}>
 			        <input type="text" value={username} onChange={this.handleChangeUsername} placeholder="E-mail or username" required />
+			        {errors['username'] && <div className="error-msg">{errors['username']}</div>}
 			        <input type="password" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
+			        {errors['password'] && <div className="error-msg">{errors['password']}</div>}
 			        <div className="rememberMe">
 			            <input type="checkbox" />
 			            <label>

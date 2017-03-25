@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import Helmet from 'react-helmet';
 import { bindHandlers } from 'react-bind-handlers';
@@ -13,6 +12,7 @@ class RegisterContent extends React.Component {
 			username: 'test@gmail.com',
 			password: 'hellopassword',
 			website: 'ABC',
+			errors: {},
 		};
 	}
 
@@ -35,20 +35,18 @@ class RegisterContent extends React.Component {
 		}
 	}
 
-	updateFormWithErrors(responseErrors){
-		const nextState = {};
-		_.forEach(responseErrors, (errorMessage, errorField) => {
-			nextState[`${errorField}ErrorMsg`] = errorMessage;
-		});
-		this.setState(nextState);
+	updateFormWithErrors(errors) {
+		this.setState({
+			errors
+		})
 	}
 
 	getInitState(){
 		return {
 			username: '',
-			usernameErrorMsg: '',
 			password: '',
 			website: '',
+			errors: {},
 		};
 	}
 
@@ -90,18 +88,20 @@ class RegisterContent extends React.Component {
 
 		const {
 			username,
-			usernameErrorMsg,
 			password,
-			website
+			website,
+			errors,
 		} = this.state;
 
 		return (
 			<div className="content">
 			    <form onSubmit={this.handleSubmitClick}>
 			        <input type="email" value={username} onChange={this.handleChangeUserName} placeholder="Username" required />
-			        {usernameErrorMsg && <div className="error-msg">{usernameErrorMsg}</div>}
+			        {errors['username'] && <div className="error-msg">{errors['username']}</div>}
 			        <input type="password" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
+			        {errors['password'] && <div className="error-msg">{errors['password']}</div>}
 			        <input type="text" value={website} onChange={this.handleChangeWebsite} placeholder="Website" required />
+			        {errors['website'] && <div className="error-msg">{errors['website']}</div>}
 			        <div className="rememberMe">
 			            <input type="checkbox" />
 			            <label>

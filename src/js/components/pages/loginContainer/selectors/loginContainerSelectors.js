@@ -33,6 +33,10 @@ export const getIsResetPasswordLoading = (state) => {
 	return getAuth(state).isResetPasswordLoading;
 };
 
+export const getIsLoginLoading = (state) => {
+	return getAuth(state).isLoginLoading;
+};
+
 export const getIsResponseSuccess = (state) => {
 	return Boolean(getAuthData(state).success);
 };

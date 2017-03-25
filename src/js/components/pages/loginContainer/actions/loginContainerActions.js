@@ -115,7 +115,7 @@ export function tryAuthenticationWithCookies(){
 }
 
 
-export function login({ username, password }, router, apiLink = '/api/login'){
+export function login({ username, password }, apiLink = '/api/login'){
 	return (dispatch, gπetState, client) => {
 	    dispatch(initiateLogin());
 	    // post data should be a json object with data property
@@ -128,7 +128,6 @@ export function login({ username, password }, router, apiLink = '/api/login'){
 	    })
 	    .then(data => {
 	        dispatch(setLoginSuccess(data));
-	        router.replace('/analyze');
 	    })
 	    .catch(data => dispatch(setLoginFailure(data)));
 	};
