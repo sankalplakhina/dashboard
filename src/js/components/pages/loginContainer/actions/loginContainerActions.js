@@ -56,10 +56,10 @@ export function setForgotPasswordSuccess(data) {
 	};
 }
 
-export function setForgotPasswordFailure(error){
+export function setForgotPasswordFailure(data){
 	return {
 		type: ACTIONS.FORGOT_PASSWORD_FAILURE,
-		error
+		data
 	};
 }
 
@@ -164,9 +164,9 @@ export function forgotPassword({ username }, apiLink = '/api/forgot'){
 	    	}
 	    })
 	    .then((data) => {
-	        dispatch(setForgotPasswordSuccess(data.data));
+	        dispatch(setForgotPasswordSuccess(data));
 	    })
-	    .catch((error) => dispatch(setForgotPasswordFailure(error.data)));
+	    .catch((data) => dispatch(setForgotPasswordFailure(data)));
 	};
 }
 

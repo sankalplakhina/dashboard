@@ -63,7 +63,7 @@ export default function auth(state = initialState, action = {}){
 		case ACTIONS.FORGOT_PASSWORD_FAILURE:
 			return _.defaults({
 				isForgotPasswordLoading: false,
-				data: action.error
+				data: action.data
 			}, state);
 
 		case ACTIONS.RESET_PASSWORD:

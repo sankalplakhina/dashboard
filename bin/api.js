@@ -110,18 +110,14 @@ app.post('/api/forgot', function(req, res, next) {
 
 	if(!user){
 		return res.status(401).json({
-			data: {
-				success: false,
-				message: 'This Email is not registered',
-			}
+			success: false,
+			message: 'This Email is not registered',
 		});
 	}
 
 	return res.json({
-		data: {
-			success: true,
-			message: "Password reset Link sent on mail",
-		}
+		success: true,
+		message: "Password reset Link sent on mail",
 	});
 });
 
