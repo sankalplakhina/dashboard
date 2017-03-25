@@ -1,6 +1,7 @@
+import _ from 'lodash';
 import React from 'react';
-import { bindHandlers } from 'react-bind-handlers';
 import Helmet from 'react-helmet';
+import { bindHandlers } from 'react-bind-handlers';
 import { Link } from 'react-router';
 
 class RegisterContent extends React.Component {
@@ -20,6 +21,7 @@ class RegisterContent extends React.Component {
 			isRegisterationLoading,
 			isResponseSuccess,
 			responseMessage,
+			responseErrors,
 		} = nextProps;
 
 		const hasRegistrationLoaded = !isRegisterationLoading && isRegisterationLoading !== this.props.isRegisterationLoading;
@@ -27,13 +29,24 @@ class RegisterContent extends React.Component {
 			alert(responseMessage);
 			if (isResponseSuccess) {
 				this.initState();
+			} else {
+				this.updateFormWithErrors(responseErrors)
 			}
 		}
+	}
+
+	updateFormWithErrors(responseErrors){
+		const nextState = {};
+		_.forEach(responseErrors, (errorMessage, errorField) => {
+			nextState[`${errorField}ErrorMsg`] = errorMessage;
+		});
+		this.setState(nextState);
 	}
 
 	getInitState(){
 		return {
 			username: '',
+			usernameErrorMsg: '',
 			password: '',
 			website: '',
 		};
@@ -52,9 +65,13 @@ class RegisterContent extends React.Component {
 	}
 
 	handleChangeUserName(event) {
-		this.setState({
+		const nextState = {
 			username: event.target.value
-		});
+		};
+		if (this.state.usernameErrorMsg) {
+			nextState.usernameErrorMsg = '';
+		}
+		this.setState(nextState);
 	}
 
 	handleChangePassword(event) {
@@ -71,12 +88,18 @@ class RegisterContent extends React.Component {
 
 	render() {
 
-		const { username, password, website } = this.state;
+		const {
+			username,
+			usernameErrorMsg,
+			password,
+			website
+		} = this.state;
 
 		return (
 			<div className="content">
 			    <form onSubmit={this.handleSubmitClick}>
 			        <input type="email" value={username} onChange={this.handleChangeUserName} placeholder="Username" required />
+			        {usernameErrorMsg && <div className="error-msg">{usernameErrorMsg}</div>}
 			        <input type="password" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
 			        <input type="text" value={website} onChange={this.handleChangeWebsite} placeholder="Website" required />
 			        <div className="rememberMe">
