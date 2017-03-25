@@ -16,10 +16,10 @@ export function setLoginSuccess(data) {
 	};
 }
 
-export function setLoginFailure(error){
+export function setLoginFailure(data){
 	return {
 		type: ACTIONS.LOGIN_FAILURE,
-		error
+		data
 	};
 }
 
@@ -127,10 +127,10 @@ export function login({ username, password }, router, apiLink = '/api/login'){
 	    	}
 	    })
 	    .then(data => {
-	        dispatch(setLoginSuccess(data.data));
+	        dispatch(setLoginSuccess(data));
 	        router.replace('/analyze');
 	    })
-	    .catch(error => dispatch(setLoginFailure(error.data)));
+	    .catch(data => dispatch(setLoginFailure(data)));
 	};
 }
 

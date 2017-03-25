@@ -27,7 +27,7 @@ export default function auth(state = initialState, action = {}){
 		case ACTIONS.LOGIN_FAILURE:
 			return _.defaults({
 				isLoginLoading: false,
-				data: action.error
+				data: action.data
 			}, state);
 
 		case ACTIONS.REGISTER:

@@ -66,12 +66,10 @@ app.post('/api/login', function(req, res, next) {
 
 	if(!user){
 		return res.status(401).json({
-			data: {
-				success: false,
-				message: 'Could not process the form.',
-				errors: {
-					username: 'email not valid.'
-				}
+			success: false,
+			message: 'Could not process the form.',
+			errors: {
+				username: 'email not valid.'
 			}
 		});
 	}
@@ -81,21 +79,17 @@ app.post('/api/login', function(req, res, next) {
 		const payload = {username: user.name};
 		const token = jwt.sign(payload, jwtOptions.secretOrKey);
 		return res.json({
-			data: {
-				success: true,
-				message: "You have successfully logged in!",
-				user,
-				token,
-			}
+			success: true,
+			message: "You have successfully logged in!",
+			user,
+			token,
 		});
 	} else {
 		return res.status(401).json({
-			data: {
-				success: false,
-				message: 'Could not process the form.',
-				errors: {
-					password: 'Wrong Password!'
-				}
+			success: false,
+			message: 'Could not process the form.',
+			errors: {
+				password: 'Wrong Password!'
 			}
 		});
 	}
