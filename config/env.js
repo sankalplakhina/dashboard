@@ -1,5 +1,8 @@
 // server configs
 export const port = process.env.PORT || 3000;
+// auth configs
+export const authHost = 'localhost';
+export const authPort = 3001;
 // api configs
 export const apiHost = 'localhost';
 export const apiPort = 3001;

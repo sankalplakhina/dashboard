@@ -115,7 +115,7 @@ export function tryAuthenticationWithCookies(){
 }
 
 
-export function login({ username, password }, apiLink = '/api/login'){
+export function login({ username, password }, apiLink = '/auth/login'){
 	return (dispatch, gπetState, client) => {
 	    dispatch(initiateLogin());
 	    // post data should be a json object with data property
@@ -133,7 +133,7 @@ export function login({ username, password }, apiLink = '/api/login'){
 	};
 }
 
-export function register({ username, password, website }, apiLink = '/api/register'){
+export function register({ username, password, website }, apiLink = '/auth/register'){
 	return (dispatch, getState, client) => {
 	    dispatch(initiateRegister());
 	    // post data should be a json object with data property
@@ -152,7 +152,7 @@ export function register({ username, password, website }, apiLink = '/api/regist
 	};
 }
 
-export function forgotPassword({ username }, apiLink = '/api/forgot'){
+export function forgotPassword({ username }, apiLink = '/auth/forgot'){
 	return (dispatch, getState, client) => {
 	    dispatch(initiateForgotPassword());
 	    // post data should be a json object with data property
@@ -169,7 +169,7 @@ export function forgotPassword({ username }, apiLink = '/api/forgot'){
 	};
 }
 
-export function resetPassword({ password, resetToken }, apiLink = '/api/reset-password'){
+export function resetPassword({ password, resetToken }, apiLink = '/auth/reset-password'){
 	return (dispatch, getState, client) => {
 	    dispatch(initiateResetPassword());
 	    // post data should be a json object with data property
@@ -187,7 +187,7 @@ export function resetPassword({ password, resetToken }, apiLink = '/api/reset-pa
 	};
 }
 
-export function logout(router, apiLink = '/api/logout'){
+export function logout(router, apiLink = '/auth/logout'){
 	return (dispatch, getState, client) => {
 	    initiateLogout();
 	    // post data should be a json object with data property

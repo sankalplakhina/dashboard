@@ -57,7 +57,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(passport.initialize());
 
-app.post('/api/login', function(req, res, next) {
+app.post('/auth/login', function(req, res, next) {
 
 	const { username, password } = req.body;
 	const user = users[_.findIndex(users, {
@@ -95,7 +95,7 @@ app.post('/api/login', function(req, res, next) {
 	}
 });
 
-app.post('/api/forgot', function(req, res, next) {
+app.post('/auth/forgot', function(req, res, next) {
 
 	const { username } = req.body;
 	const user = users[_.findIndex(users, {
@@ -115,7 +115,7 @@ app.post('/api/forgot', function(req, res, next) {
 	});
 });
 
-app.post('/api/reset-password', function(req, res, next) {
+app.post('/auth/reset-password', function(req, res, next) {
 
 	const { resettoken, password } = req.body;
 
@@ -132,7 +132,7 @@ app.post('/api/reset-password', function(req, res, next) {
 	});
 });
 
-app.post('/api/register', function(req, res, next) {
+app.post('/auth/register', function(req, res, next) {
 
 	const { username, password, website } = req.body;
 	const user = users[_.findIndex(users, {
@@ -164,7 +164,7 @@ app.post('/api/register', function(req, res, next) {
 	});
 });
 
-app.get("/api/logout", passport.authenticate('jwt', { session: false }), function(req, res){
+app.get("/auth/logout", passport.authenticate('jwt', { session: false }), function(req, res){
 	res.json({
 		data: {
 			message: "Logged out successfully!"

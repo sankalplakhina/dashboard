@@ -19,9 +19,10 @@ import ApiClient from './helpers/ApiClient';
 
 import getRoutes from './routes';
 import Html from './components/html/html';
-import { port, apiHost, apiPort } from 'config/env';
+import { port, apiHost, apiPort, authHost, authPort } from 'config/env';
 
 const targetUrl = `http://${apiHost}:${apiPort}`;
+const authUrl = `http://${authHost}:${authPort}`;
 const pretty = new PrettyError();
 const app = express();
 const server = new http.Server(app);
@@ -33,6 +34,11 @@ const proxy = httpProxy.createProxyServer({
 global.__CLIENT__ = false; // eslint-disable-line
 
 app.use(compression());
+
+// Proxy to Auth server
+app.use('/auth', (req, res) => {
+    proxy.web(req, res, { target: `${authUrl}/auth` });
+});
 
 // Proxy to API server
 app.use('/api', (req, res) => {
