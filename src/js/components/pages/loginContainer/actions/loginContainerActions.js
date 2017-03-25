@@ -36,10 +36,10 @@ export function setRegisterSuccess(data) {
 	};
 }
 
-export function setRegisterFailure(error){
+export function setRegisterFailure(data){
 	return {
 		type: ACTIONS.REGISTER_FAILURE,
-		error
+		data
 	};
 }
 
@@ -147,9 +147,9 @@ export function register({ username, password, website }, apiLink = '/api/regist
 	    	}
 	    })
 	    .then((data) => {
-	        dispatch(setRegisterSuccess(data.data));
+	        dispatch(setRegisterSuccess(data));
 	    })
-	    .catch((error) => dispatch(setRegisterFailure(error.data)));
+	    .catch((data) => dispatch(setRegisterFailure(data)));
 	};
 }
 

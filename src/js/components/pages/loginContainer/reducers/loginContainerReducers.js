@@ -45,7 +45,7 @@ export default function auth(state = initialState, action = {}){
 		case ACTIONS.REGISTER_FAILURE:
 			return _.defaults({
 				isRegisterLoading: false,
-				data: action.error
+				data: action.data
 			}, state);
 
 		case ACTIONS.FORGOT_PASSWORD:

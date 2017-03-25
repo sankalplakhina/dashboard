@@ -141,12 +141,10 @@ app.post('/api/register', function(req, res, next) {
 
 	if(user){
 		return res.status(401).json({
-			data: {
-				success: false,
-				message: 'Check the form for errors.',
-				errors: {
-					username: 'This email is already taken.'
-				}
+			success: false,
+			message: 'Check the form for errors.',
+			errors: {
+				username: 'This email is already taken.'
 			}
 		});
 	}
@@ -161,10 +159,8 @@ app.post('/api/register', function(req, res, next) {
 	const payload = {username: newUser.name};
 	const token = jwt.sign(payload, jwtOptions.secretOrKey);
 	return res.json({
-		data: {
-			success: true,
-			message: "You have successfully signed up! Verification link sent on your email address."
-		}
+		success: true,
+		message: "You have successfully signed up! Verification link sent on your email address."
 	});
 });
 
