@@ -4,6 +4,7 @@ import * as ACTIONS from '../actions/loginContainerActionTypes';
 const initialState = {
 	isLoginLoading: false,
 	isRegisterLoading: false,
+	isForgotPasswordLoading: false,
 	isLogoutLoading: false,
 };
 
@@ -43,6 +44,24 @@ export default function auth(state = initialState, action = {}){
 		case ACTIONS.REGISTER_FAILURE:
 			return _.defaults({
 				isRegisterLoading: false,
+				data: action.error
+			}, state);
+
+		case ACTIONS.FORGOT_PASSWORD:
+			return _.defaults({
+				isForgotPasswordLoading: true,
+				data: {},
+			}, state);
+
+		case ACTIONS.FORGOT_PASSWORD_SUCCESS:
+			return _.defaults({
+				isForgotPasswordLoading: false,
+				data: action.data
+			}, state);
+
+		case ACTIONS.FORGOT_PASSWORD_FAILURE:
+			return _.defaults({
+				isForgotPasswordLoading: false,
 				data: action.error
 			}, state);
 

@@ -21,12 +21,16 @@ export const getIsRegisterationLoading = (state) => {
 	return getAuth(state).isRegisterLoading;
 };
 
-export const getIsRegisterationSuccess = (state) => {
-	return Boolean(getAuthData(state).success);
-};
-
 export const getIsRegisterationLoadedWithSuccess = (state) => {
 	return getIsRegisterationLoaded(state) && getIsRegisterationSuccess(state);
+};
+
+export const getIsForgotPasswordLoading = (state) => {
+	return getAuth(state).isForgotPasswordLoading;
+};
+
+export const getIsResponseSuccess = (state) => {
+	return Boolean(getAuthData(state).success);
 };
 
 export const getResponseMessage = (state) => {

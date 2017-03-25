@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router'
 import {
 	getIsRegisterationLoading,
-	getIsRegisterationSuccess,
+	getIsResponseSuccess,
 	getResponseMessage,
 } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
 import { register } from 'src/js/components/pages/loginContainer/actions/loginContainerActions';
@@ -11,7 +11,7 @@ import RegisterContainer from '../components/registerContainer';
 function mapStateToProps(state) {
   	return {
   		isRegisterationLoading: getIsRegisterationLoading(state),
-  		isRegisterationSuccess: getIsRegisterationSuccess(state),
+  		isResponseSuccess: getIsResponseSuccess(state),
   		responseMessage: getResponseMessage(state),
   	};
 }

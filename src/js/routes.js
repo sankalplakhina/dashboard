@@ -3,6 +3,7 @@ import { IndexRoute, Route } from 'react-router';
 import AppContainer from './components/appContainer/appContainer';
 import LoginContainer from './components/pages/loginContainer/containers/loginContainer';
 import RegisterContainer from './components/pages/registerContainer/containers/registerContainer';
+import ForgotPasswordContainer from './components/pages/forgotPassword/containers/forgotPasswordContainer';
 import ExploreContainer from './components/pages/exploreContainer/containers/exploreContainer';
 import ReviewContainer from './components/pages/reviewContainer/containers/reviewContainer';
 import AnalyzeContainer from './components/pages/analyzeContainer/containers/analyzeContainer';
@@ -42,6 +43,7 @@ export default (store) => {
         <IndexRoute component={LoginContainer} />
         <Route path="login" component={LoginContainer}/>
         <Route path="register" component={RegisterContainer}/>
+        <Route path="forgot-password" component={ForgotPasswordContainer}/>
         {/* Routes requiring login */}
         <Route onEnter={requireLogin}>
             <Route path="explore" component={ExploreContainer}/>

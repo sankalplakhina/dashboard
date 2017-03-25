@@ -30,7 +30,6 @@ export function initiateRegister(){
 }
 
 export function setRegisterSuccess(data) {
-	cookie.save(COOKIE_KEY, JSON.stringify(data)); // saving login info to cookies
 	return {
 		type: ACTIONS.REGISTER_SUCCESS,
 		data
@@ -40,6 +39,26 @@ export function setRegisterSuccess(data) {
 export function setRegisterFailure(error){
 	return {
 		type: ACTIONS.REGISTER_FAILURE,
+		error
+	};
+}
+
+export function initiateForgotPassword(){
+	return {
+		type: ACTIONS.FORGOT_PASSWORD
+	};
+}
+
+export function setForgotPasswordSuccess(data) {
+	return {
+		type: ACTIONS.FORGOT_PASSWORD_SUCCESS,
+		data
+	};
+}
+
+export function setForgotPasswordFailure(error){
+	return {
+		type: ACTIONS.FORGOT_PASSWORD_FAILURE,
 		error
 	};
 }
@@ -110,6 +129,23 @@ export function register({ username, password, website }, apiLink = '/api/regist
 	        dispatch(setRegisterSuccess(data.data));
 	    })
 	    .catch((error) => dispatch(setRegisterFailure(error.data)));
+	};
+}
+
+export function resetPassword({ username }, apiLink = '/api/forgot'){
+	return (dispatch, getState, client) => {
+	    dispatch(initiateForgotPassword());
+	    // post data should be a json object with data property
+	    // as per configured in client
+	    return client.post(apiLink, {
+	    	data: {
+	    		username,
+	    	}
+	    })
+	    .then((data) => {
+	        dispatch(setForgotPasswordSuccess(data.data));
+	    })
+	    .catch((error) => dispatch(setForgotPasswordFailure(error.data)));
 	};
 }
 

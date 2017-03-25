@@ -50,7 +50,7 @@ class LoginContent extends React.Component {
 			        </div>
 			        <input type="submit" value="LOGIN" />
 			        <div className="text-left">
-			        	<a href="#">Forgot your password?</a>
+			        	<Link to="/forgot-password">Forgot your password?</Link>
 			        </div>
 			    </form>
 			</div>

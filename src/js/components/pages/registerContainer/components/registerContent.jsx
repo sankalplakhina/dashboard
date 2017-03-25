@@ -18,14 +18,14 @@ class RegisterContent extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		const {
 			isRegisterationLoading,
-			isRegisterationSuccess,
+			isResponseSuccess,
 			responseMessage,
 		} = nextProps;
 
 		const hasRegistrationLoaded = !isRegisterationLoading && isRegisterationLoading !== this.props.isRegisterationLoading;
 		if (hasRegistrationLoaded && responseMessage) {
 			alert(responseMessage);
-			if (isRegisterationSuccess) {
+			if (isResponseSuccess) {
 				this.initState();
 			}
 		}
@@ -88,7 +88,7 @@ class RegisterContent extends React.Component {
 			        </div>
 			        <input type="submit" value="REGISTER" />
 			        <div className="text-left">
-			        	<a href="#">Forgot your password?</a>
+			        	<Link href="/forgot-password">Forgot your password?</Link>
 			        </div>
 			    </form>
 			</div>

@@ -7,3 +7,6 @@ export const LOGOUT_FAILURE = "app/auth/logout-failure";
 export const REGISTER = "app/auth/register";
 export const REGISTER_SUCCESS = "app/auth/register-success";
 export const REGISTER_FAILURE = "app/auth/register-failure";
+export const FORGOT_PASSWORD = "app/auth/forgot-password";
+export const FORGOT_PASSWORD_SUCCESS = "app/auth/forgot-password-success";
+export const FORGOT_PASSWORD_FAILURE = "app/auth/forgot-password-failure";

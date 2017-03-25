@@ -101,6 +101,30 @@ app.post('/api/login', function(req, res, next) {
 	}
 });
 
+app.post('/api/forgot', function(req, res, next) {
+
+	const { username } = req.body;
+	const user = users[_.findIndex(users, {
+		name: username
+	})];
+
+	if(!user){
+		return res.status(401).json({
+			data: {
+				success: false,
+				message: 'This Email is not registered',
+			}
+		});
+	}
+
+	return res.json({
+		data: {
+			success: true,
+			message: "Password reset Link sent on mail",
+		}
+	});
+});
+
 app.post('/api/register', function(req, res, next) {
 
 	const { username, password, website } = req.body;
