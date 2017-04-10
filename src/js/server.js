@@ -19,10 +19,19 @@ import ApiClient from './helpers/ApiClient';
 
 import getRoutes from './routes';
 import Html from './components/html/html';
-import { port, apiHost, apiPort, authHost, authPort } from 'config/env';
+import {
+    port,
+    apiHost,
+    apiPort,
+    authHost,
+    authPort,
+    twHost,
+    twPort,
+} from 'config/env';
 
 const targetUrl = `http://${apiHost}:${apiPort}`;
 const authUrl = `http://${authHost}:${authPort}`;
+const twUrl = `http://${twHost}:${twPort}`;
 const pretty = new PrettyError();
 const app = express();
 const server = new http.Server(app);
@@ -41,13 +50,18 @@ app.use('/auth', (req, res) => {
 });
 
 // Proxy to API server
-app.use('/api', (req, res) => {
-    proxy.web(req, res, { target: `${targetUrl}/api` });
+app.use('/twapi', (req, res) => {
+    proxy.web(req, res, { target: `${twUrl}/twapi` });
 });
 
 // Proxy to Frontend API server
 app.use('/fapi', (req, res) => {
     proxy.web(req, res, { target: `${targetUrl}/fapi` });
+});
+
+// Proxy to API server
+app.use('/api', (req, res) => {
+    proxy.web(req, res, { target: `${targetUrl}/api` });
 });
 
 server.on('upgrade', (req, socket, head) => {

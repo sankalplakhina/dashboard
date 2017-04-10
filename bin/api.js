@@ -14,6 +14,8 @@ const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
 const frontendApiRouter = require('api/frontend');
 const dummyApiRouter = require('api/dummy');
+const twApiRouter = require('api/tw');
+
 const { apiPort } = require('config/env');
 
 const users = [
@@ -172,8 +174,10 @@ app.get("/auth/logout", passport.authenticate('jwt', { session: false }), functi
 	});
 })
 
+app.use('/twapi', twApiRouter);
 app.use('/fapi', frontendApiRouter);
 app.use('/api', dummyApiRouter);
+
 
 app.listen(apiPort, (err) => {
 	if (err) {
