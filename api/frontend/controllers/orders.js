@@ -1,24 +1,5 @@
 import _ from 'lodash';
-import { twHost, twPort } from 'config/env';
-import fetch from 'isomorphic-fetch';
-
-function formatUrl(baseUrl, path) {
-  const adjustedPath = path[0] !== '/' ? '/' + path : path;
-  return 'http://' + twHost + ':' + twPort + adjustedPath.replace(baseUrl, '/twapi');
-}
-
-const baseFetchOptions = {
-	headers: {
-		Accept: 'application/json',
-	},
-	method: 'GET',
-};
-
-const orders = (req, res) => {
-	return fetch(formatUrl(req.baseUrl, req.originalUrl), _.defaultsDeep({}, baseFetchOptions))
-	      .then(response => response.json())
-	      .then(data => processResponse(req, res, data))
-}
+import proxyFetch from '../proxyFetch';
 
 // data slice functions
 function getScore(value) {
@@ -299,4 +280,4 @@ function processResponse(req, res, data) {
 	);
 }
 
-export default orders;
+export default (req, res) => proxyFetch(req, res, processResponse);
