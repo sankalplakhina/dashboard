@@ -2,9 +2,9 @@ import _ from 'lodash';
 import { twHost, twPort } from 'config/env';
 import fetch from 'isomorphic-fetch';
 
-function formatUrl(path) {
+function formatUrl(baseUrl, path) {
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
-  return 'http://' + twHost + ':' + twPort + adjustedPath;
+  return 'http://' + twHost + ':' + twPort + adjustedPath.replace(baseUrl, '/twapi');
 }
 
 const baseFetchOptions = {
@@ -13,6 +13,12 @@ const baseFetchOptions = {
 	},
 	method: 'GET',
 };
+
+const orders = (req, res) => {
+	return fetch(formatUrl(req.baseUrl, req.originalUrl), _.defaultsDeep({}, baseFetchOptions))
+	      .then(response => response.json())
+	      .then(data => processResponse(req, res, data))
+}
 
 // data slice functions
 function getScore(value) {
@@ -77,7 +83,7 @@ function getCollapsedDataLeftRowOrdersData(value){
 	const rows = [];
 	rows.push({
 		orderId: value.transaction.id,
-		amount: `${value.transaction.currency_code} ${value.transaction.order_amount}`,
+		amount: `${value.transaction.currency_code} ${value.transaction.amount}`,
 		date: value.transaction.timestamp,
 		payment: getPaymentTypeText(value.payment_method.payment_type),
 		status: getStatusTypeText(value.transaction.status),
@@ -144,26 +150,108 @@ function getCollapsedDataLeftRowPaymentData(value){
 	}
 }
 
+function getAddressText(address){
+	return `${address.address1}, ${address.address2}, ${address.city}, ${address.region} - ${address.zipcode}`;
+}
+
+function getCollapsedDataLeftRowBillingShippingData(value){
+	return {
+		type: 'map',
+		widthSize: 6,
+		heading: {
+			class: 'billShopping',
+			icon: 'billingShipping.png',
+			title: 'Billing and Shipping'
+		},
+		markers: ['billing', 'shipping'],
+		billing:{
+			icon: 'billing.png',
+			heading: value.billing_address.name,
+			address: getAddressText(value.billing_address),
+			lat: -25.363,
+			lang: 131.044,
+		},
+		shipping: {
+			icon: 'shipping.png',
+			heading: value.shipping_address.name,
+			address: getAddressText(value.shipping_address),
+			lat: -20.363,
+			lang: 131.044,
+		}
+	};
+}
+
+function getCollapsedDataLeftRowItemOrderedData(value){
+	const rows = _.map(value.items, (item) => {
+		return {
+			item: item.product_title,
+			quantity: item.quantity,
+			price: item.price,
+		};
+	});
+	return {
+		type: 'table',
+		widthSize: 6,
+		heading: {
+			class: 'itemOrdered',
+			icon: 'orders.png',
+			title: 'Item Ordered'
+		},
+		rows,
+		columns: [
+			{ key: 'item', label: 'Item' },
+			{ key: 'quantity', label: 'Quantity' },
+			{ key: 'price', label: 'Price' },
+		],
+	};
+}
 
 function getCollapsedDataLeftData(value){
 	const rows = ['orders', 'payment', 'billingShipping', 'itemOrdered'];
-	const rowData = {
+	const rowsData = {
 		orders: getCollapsedDataLeftRowOrdersData(value),
 		payment: getCollapsedDataLeftRowPaymentData(value),
-		billingShipping: {},
-		itemOrdered: {},
+		billingShipping: getCollapsedDataLeftRowBillingShippingData(value),
+		itemOrdered: getCollapsedDataLeftRowItemOrderedData(value),
 	};
 	return _.defaults({
 		rows,
 		widthSize: 8,
-	}, rowData);
+	}, rowsData);
+}
+
+function getReasonStatusIconByType(flag) {
+	switch(flag){
+		case 'red':
+		return 'statusTooFast.png';
+
+		case 'green':
+		return 'statusReliable.png';
+
+		case 'grey':
+		return 'statusNone.png';
+
+		default:
+		return '';
+	}
 }
 
 function getCollapsedDataRightData(value){
-	return {
-		rows: [],
+	const rowsData = {};
+	const rows = _.map(value.reasons, (reason) => {
+		const itemID = reason.name;
+		rowsData[itemID] = {
+			type: 'notification',
+			icon: getReasonStatusIconByType(reason.flag),
+			text: reason.display_name,
+			postText: reason.value,
+		};
+		return itemID;
+	})
+	return _.defaults({
+		rows,
 		widthSize: 4,
-	};
+	}, rowsData);
 }
 
 function getCollapsedData(value) {
@@ -185,27 +273,30 @@ function getRowData(value) {
 }
 
 function processResponse(req, res, data) {
-	// set schema
-	const processedData = {
-		rows: [],
-		panelTitle: {
-			cols: [],
-		},
-		next: data.next
-	};
-	// create rows and data
-	_.each(data.values, function(value){
-		processedData.rows.push(value.order_id);
-		processedData[value.order_id] = getRowData(value);
-	})
-	// create next
-	res.json(processedData);
-}
-
-const orders = (req, res) => {
-	return fetch(formatUrl('/twapi/orders'), _.defaultsDeep({}, baseFetchOptions))
-	      .then(response => response.json())
-	      .then(data => processResponse(req, res, data))
+	const rowsData = {}
+	const rows = _.map(data.values, (value) => {
+		const id = value.order_id;
+		rowsData[id] = getRowData(value);
+		return id;
+	});
+	res.json(
+		_.defaults({
+			rows,
+			panelTitle: {
+				cols: ['score', 'order', 'lastPaymentAbuseStatus'],
+				score: {
+					title : 'SCORE',
+				},
+				order: {
+					title: 'ORDER',
+				},
+				lastPaymentAbuseStatus: {
+					title: 'LAST PAYMENT ABUSE STATUS',
+				},
+			},
+			next: data.next || null,
+		}, rowsData)
+	);
 }
 
 export default orders;

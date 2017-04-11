@@ -10,6 +10,10 @@ export const getExploreData = (state) => {
   return getExplore(state).data;
 };
 
+export const getStatsPanelAPI = () => {
+	return '/fapi/orders'
+};
+
 export const getIsStatsPanelsLoading = (state) => {
   return getExplore(state).isStatsPanelsLoading;
 };

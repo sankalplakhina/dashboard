@@ -1,4 +1,5 @@
 import * as ACTIONS from './exploreContainerActionTypes';
+import { getStatsPanelAPI } from '../selectors/exploreContainerSelectors';
 
 export function load() {
     // returning a thunk as this is any async action
@@ -38,7 +39,7 @@ export function loadExploreData(apiLink = '/api/explore') {
     };
 }
 
-export function loadStatsPanels(apiLink = '/api/explore/stats-panels?count=2') {
+export function loadStatsPanels(apiLink = `${getStatsPanelAPI()}?rows=5`) {
     return (dispatch, getState, client) => {
         // initiate loader
         dispatch({
@@ -49,7 +50,7 @@ export function loadStatsPanels(apiLink = '/api/explore/stats-panels?count=2') {
             // update new data
             dispatch({
                 type: ACTIONS.LOAD_STATS_PANELS_SUCCESS,
-                data: data.data
+                data: data
             });
         })
         .catch(error => {
