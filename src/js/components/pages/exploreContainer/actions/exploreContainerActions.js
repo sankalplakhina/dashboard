@@ -16,7 +16,7 @@ export function load() {
     };
 }
 
-export function loadExploreData(apiLink = '/api/explore') {
+export function loadExploreData(apiLink = '/fapi/overview') {
     return (dispatch, getState, client) => {
         dispatch({
           type: ACTIONS.LOAD
@@ -26,7 +26,7 @@ export function loadExploreData(apiLink = '/api/explore') {
             // update new data
             dispatch({
                 type: ACTIONS.LOAD_SUCCESS,
-                data: data.data
+                data: data
             });
         })
         .catch(error => {
