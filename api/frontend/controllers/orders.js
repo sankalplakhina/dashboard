@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import proxyFetch from '../proxyFetch';
+import proxyFetch from '../core/proxyFetch';
 
 // data slice functions
 function getScore(value) {

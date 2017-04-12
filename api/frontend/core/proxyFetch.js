@@ -15,7 +15,6 @@ const baseFetchOptions = {
 };
 
 const proxyFetch = (req, res, processCallback, options = {}) => {
-	console.log('via proxyFetch');
 	return fetch(formatUrl(req.baseUrl, req.originalUrl), _.defaultsDeep(options, baseFetchOptions))
 	      .then(response => response.json())
 	      .then(data => processCallback(req, res, data))
