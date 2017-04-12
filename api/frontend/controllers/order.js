@@ -3,15 +3,12 @@ import proxyFetch from '../core/proxyFetch';
 import getOrderData from '../core/getOrderData';
 
 function processResponse(req, res, data) {
-	const rowsData = {}
-	const rows = _.map(data.values, (value) => {
-		const id = value.order_id;
-		rowsData[id] = getOrderData(value);
-		return id;
-	});
+	const rowsData = {
+		[data.order_id]: getOrderData(data)
+	};
 	res.json(
 		_.defaults({
-			rows,
+			rows: [data.order_id],
 			panelTitle: {
 				cols: ['score', 'order', 'lastPaymentAbuseStatus'],
 				score: {
