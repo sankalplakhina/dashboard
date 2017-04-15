@@ -62,6 +62,7 @@ export default (store) => {
             // doing getState again to get fresh store instance
             if (!isAuthDataLoaded(store.getState())) {
                 replace('/login');
+                return callback();
             }
         }
         replace('/explore');
