@@ -1,5 +1,4 @@
 import * as ACTIONS from './analyzeContainerActionTypes';
-import { dateRangeSelector } from 'src/js/components/dashboard/selectors/dashboardDatePickerSelectors';
 
 export function loadFail(error) {
   return {
@@ -29,11 +28,7 @@ export function load() {
         });
 
         const state = getState();
-        const dateRange = dateRangeSelector(state);
         let apiLink = '/api/analyze';
-        if (dateRange.startDate && dateRange.endDate) {
-            apiLink += `?start-date=${dateRange.startDate}&end-date=${dateRange.endDate}`;
-        }
         return client.get(apiLink).then(data => {
             dispatch(loadSuccess(data.data));
         })

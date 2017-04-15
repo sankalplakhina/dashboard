@@ -1,15 +1,8 @@
 import * as ACTIONS from './dashboardDatePickerActionTypes';
 
-export function setIsDatePickerVisible(isDatePickerVisible) {
+export function setDayBucket(dayBucket) {
     return {
-        type: ACTIONS.SET_IS_DATE_PICKER_VISIBLE,
-        isDatePickerVisible
-    };
-}
-
-export function setDateRange(dateRange) {
-    return {
-        type: ACTIONS.SET_DATE_RANGE,
-        dateRange
+        type: ACTIONS.SET_DATE_BUCKET,
+        dayBucket
     };
 }
