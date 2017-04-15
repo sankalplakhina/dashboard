@@ -1,4 +1,6 @@
 import * as ACTIONS from './exploreContainerActionTypes';
+import { getDayBucket } from 'src/js/components/dashboard/selectors/dashboardDatePickerSelectors';
+import { getUserSecretKey } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
 import { getStatsPanelAPI } from '../selectors/exploreContainerSelectors';
 
 export function load() {
@@ -45,7 +47,10 @@ export function loadStatsPanels(apiLink = `${getStatsPanelAPI()}?rows=5`) {
         dispatch({
             type: ACTIONS.LOAD_STATS_PANELS
         });
-        return client.get(apiLink)
+        const state = getState();
+        const secret = getUserSecretKey(state);
+        const dayBucket = getDayBucket(state);
+        return client.get(`${apiLink}&secret=${secret}&days=${dayBucket}`)
         .then(data => {
             // update new data
             dispatch({

@@ -1,5 +1,5 @@
 import * as ACTIONS from './orderContainerActionTypes';
-
+import { getUserSecretKey } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
 export function load(orderId) {
     // returning a thunk as this is any async action
     // dispatch and getState and default params from
@@ -18,7 +18,8 @@ export function loadOrderData(orderId, apiLink = '/fapi/order') {
           type: ACTIONS.LOAD,
           orderId
         });
-        return client.get(`${apiLink}?order_id=${orderId}`)
+        const secret = getUserSecretKey(getState());
+        return client.get(`${apiLink}?secret=${secret}&order_id=${orderId}`)
         .then(data => {
             // update new data
             dispatch({

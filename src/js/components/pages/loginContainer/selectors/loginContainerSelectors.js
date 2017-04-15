@@ -16,6 +16,10 @@ export const getUserData = (state) => {
 	return _.get(getAuthData(state), ['user']);
 };
 
+export const getUserSecretKey = (state) => {
+	return _.get(getUserData(state), ['secret']);
+};
+
 export const isAuthDataLoaded = (state) => {
 	return getAuthToken(state) && getUserData(state);
 };
