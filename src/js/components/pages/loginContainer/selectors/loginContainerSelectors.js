@@ -5,16 +5,19 @@ const getAuth = (state) => {
 };
 
 export const getAuthData = (state) => {
-	return getAuth(state).data || {};
+	return getAuth(state).data;
 };
 
-export const isAuthDataLoaded = (state) => {
-	const data = getAuthData(state);
-	return (data.token && data.user);
+export const getAuthToken = (state) => {
+	return _.get(getAuthData(state), ['token']);
 };
 
 export const getUserData = (state) => {
-	return getAuthData(state).user;
+	return _.get(getAuthData(state), ['user']);
+};
+
+export const isAuthDataLoaded = (state) => {
+	return getAuthToken(state) && getUserData(state);
 };
 
 export const getIsRegisterationLoading = (state) => {

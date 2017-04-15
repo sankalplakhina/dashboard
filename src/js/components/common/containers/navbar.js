@@ -9,7 +9,7 @@ import Navbar from '../components/navbar';
 function mapStateToProps(state) {
   	return {
   		addFakeNavSpace: !isAuthViewSelector(state),
-  		userInfo: isAuthDataLoaded(state) && getUserData(state),
+  		userInfo: getUserData(state),
   	};
 }
 
