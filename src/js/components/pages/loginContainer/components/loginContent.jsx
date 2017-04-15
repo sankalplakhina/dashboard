@@ -27,7 +27,7 @@ class LoginContent extends React.Component {
 		if (hasLoginLoaded && responseMessage) {
 			alert(responseMessage);
 			if (isResponseSuccess) {
-	        	router.replace('/analyze');
+	        	router.replace('/');
 			} else {
 				this.updateFormWithErrors(responseErrors)
 			}

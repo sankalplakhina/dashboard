@@ -22,7 +22,7 @@ class Navbar extends React.Component {
     	                <span className="icon-bar"></span>
     	                <span className="icon-bar"></span>
     	            </button>
-    	            <Link className="navbar-brand navPad" to="/explore">
+    	            <Link className="navbar-brand navPad" to="/">
     	            	<img src={twLogo} />
     	            </Link>
     	        </div>

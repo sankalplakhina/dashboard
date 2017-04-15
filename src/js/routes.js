@@ -9,7 +9,6 @@ import OrderContainer from './components/pages/order/containers/orderContainer';
 import ExploreContainer from './components/pages/exploreContainer/containers/exploreContainer';
 import ReviewContainer from './components/pages/reviewContainer/containers/reviewContainer';
 import AnalyzeContainer from './components/pages/analyzeContainer/containers/analyzeContainer';
-import Home from './components/pages/home/containers/home';
 import NotFound from './components/pages/notFound/components/notFound';
 import { isAuthDataLoaded } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
 import { tryAuthenticationWithCookies } from 'src/js/components/pages/loginContainer/actions/loginContainerActions';
@@ -17,7 +16,6 @@ import { tryAuthenticationWithCookies } from 'src/js/components/pages/loginConta
 export default (store) => {
 
     // Following middleware handles authenticated routes
-
     const requireLogin = (nextState, replace, callback) => {
 
         const { dispatch, getState } = store;
@@ -25,28 +23,61 @@ export default (store) => {
         if (!isAuthDataLoaded(state)) {
             // if no auth data exists, check in cookies
             dispatch(tryAuthenticationWithCookies());
-            checkAuthData();
-        } else {
-            // if auth exists, no need to replace; call callback to continue same route
-            checkAuthData();
-        }
 
-        function checkAuthData(){
             // rechecking auth to verify if something was found in cookies
+            // doing getState again to get fresh store instance
             if (!isAuthDataLoaded(store.getState())) {
-                replace('/');
+                replace('/login');
             }
-            callback();
         }
+        callback();
     };
+
+    const requireLogout = (nextState, replace, callback) => {
+
+        const { dispatch, getState } = store;
+        const state = getState();
+        if (!isAuthDataLoaded(state)) {
+            // if no auth data exists, check in cookies
+            dispatch(tryAuthenticationWithCookies());
+
+            // rechecking auth to verify if something was found in cookies
+            // doing getState again to get fresh store instance
+            if (!isAuthDataLoaded(store.getState())) {
+                return callback();
+            }
+        }
+        replace('/explore');
+        callback();
+    };
+
+    const redirectFromIndex = (nextState, replace, callback) => {
+
+        const { dispatch, getState } = store;
+        const state = getState();
+        if (!isAuthDataLoaded(state)) {
+            // if no auth data exists, check in cookies
+            dispatch(tryAuthenticationWithCookies());
+            // rechecking auth to verify if something was found in cookies
+            // doing getState again to get fresh store instance
+            if (!isAuthDataLoaded(store.getState())) {
+                replace('/login');
+            }
+        }
+        replace('/explore');
+        callback();
+    };
+
 
     return (
         <Route path="/" component={AppContainer}>
-            <IndexRoute component={LoginContainer} />
-            <Route path="login" component={LoginContainer}/>
-            <Route path="register" component={RegisterContainer}/>
-            <Route path="forgot-password" component={ForgotPasswordContainer}/>
-            <Route path="reset-password" component={ResetPasswordContainer}/>
+            <IndexRoute onEnter={redirectFromIndex} />
+            <Route onEnter={requireLogout}>
+                <Route path="login" component={LoginContainer}/>
+                <Route path="register" component={RegisterContainer}/>
+                <Route path="forgot-password" component={ForgotPasswordContainer}/>
+                <Route path="reset-password" component={ResetPasswordContainer}/>
+            </Route>
             {/* Routes requiring login */}
             <Route onEnter={requireLogin}>
                 <Route path="explore" component={ExploreContainer}/>

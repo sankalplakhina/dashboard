@@ -195,7 +195,7 @@ export function logout(router, apiLink = '/auth/logout'){
 	    return client.get(apiLink)
 	    .then((data) => {
 	        dispatch(setLogoutSuccess(data.data));
-	        router.replace('/');
+	        router.replace('/login');
 	    })
 	    .catch((error) => dispatch(setLoginFailure(error)));
 	};
