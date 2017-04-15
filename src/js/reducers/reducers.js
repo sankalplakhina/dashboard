@@ -7,6 +7,7 @@ import { dashboard } from '../components/dashboard/reducers/dashBoardDatePickerR
 import { reducer as explore } from '../components/pages/exploreContainer/reducers/exploreContainerReducers';
 import { reducer as review } from '../components/pages/reviewContainer/reducers/reviewContainerReducers';
 import { reducer as analyze } from '../components/pages/analyzeContainer/reducers/analyzeContainerReducers';
+import order from 'src/js/components/pages/order/reducers/orderContainerReducers';
 
 // root reducer
 const reducers = combineReducers({
@@ -16,6 +17,7 @@ const reducers = combineReducers({
   dashboard,
   home,
   explore,
+  order,
   review,
   analyze,
 });

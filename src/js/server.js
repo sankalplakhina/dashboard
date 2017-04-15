@@ -14,6 +14,7 @@ import createHistory from 'react-router/lib/createMemoryHistory';
 import { Provider } from 'react-redux';
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
 import cookie from 'react-cookie';
+import _ from 'lodash';
 import { createStore } from './store/createStore';
 import ApiClient from './helpers/ApiClient';
 
@@ -134,12 +135,13 @@ function renderPage({ renderProps, store, res, client }) {
 
     loadOnServer({ ...renderProps, store, helpers: { client } })
     .then(() => {
+        const responseStatus = _.chain(renderProps.routes).find('status').get('status').value();
         const component = (
             <Provider store={store} key="provider">
               <ReduxAsyncConnect {...renderProps} />
             </Provider>
         );
-        res.status(200);
+        res.status(responseStatus || 200);
         res.send(`<!doctype html>${
             ReactDOM.renderToStaticMarkup(
                 <Html assets={webpackIsomorphicTools.assets()}

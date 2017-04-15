@@ -1,9 +1,10 @@
 export const isAuthViewSelector = (state) => {
 	const location = state.routing.locationBeforeTransitions.pathname;
   	return location === '/login' ||
-  		   location === '/register' ||
+           location === '/register' ||
   		   location === '/forgot-password' ||
-  		   location === '/reset-password' ||
+           location === '/reset-password' ||
+  		   location === '/404' ||
   		   location === '/';
 };
 

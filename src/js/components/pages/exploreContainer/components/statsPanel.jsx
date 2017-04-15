@@ -9,10 +9,11 @@ import StatsPanelBody from './statsPanelBody';
 
 class StatsPanel extends React.Component {
 
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
+		const { isFirstExpanded } = props;
 		this.state = {
-			activeKey: -1 // make value zero to make first panel expanded on load
+			activeKey: isFirstExpanded? 0 : -1
 		};
 	}
 
@@ -27,9 +28,10 @@ class StatsPanel extends React.Component {
 	}
 
 	render() {
-		const { data } = this.props;
+		const { data, isFixedExpanded } = this.props;
 		const { panelTitle, rows } = data;
 		const { activeKey } = this.state;
+		const isSingleRow = (rows.length === 1);
 		return (
 			<div className="clearfix">
 				<AvgStats data={panelTitle} />
@@ -38,9 +40,11 @@ class StatsPanel extends React.Component {
 						{
 							rows.map(
 								(row, idx) => {
+									const isActive = (activeKey === idx);
 									const header = <StatsPanelHeader
 															onSelect={this.handleSelect}
-															isExpanded={activeKey === idx}
+															isExpanded={isActive}
+															disableCollapse={isFixedExpanded && isSingleRow}
 															idx={idx}
 															data={data[row]}
 															cols={panelTitle.cols} />
@@ -52,7 +56,7 @@ class StatsPanel extends React.Component {
 										>
 											<StatsPanelBody
 												data={data[row]._collapsedData}
-												isActive={activeKey === idx}
+												isActive={isActive}
 											/>
 										</Panel>
 									);
@@ -64,6 +68,11 @@ class StatsPanel extends React.Component {
 			</div>
 		);
 	}
+}
+
+StatsPanel.defaultProps = {
+	isFirstExpanded: false,
+	isFixedExpanded: false, // if there's only one panel, fix it to stay expanded always
 }
 
 export default bindHandlers(StatsPanel);

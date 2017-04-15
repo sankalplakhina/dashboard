@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import cx from 'classnames';
 import { bindHandlers } from 'react-bind-handlers';
 
@@ -27,7 +28,7 @@ class StatsPanelHeader extends React.Component {
 	}
 
 	render() {
-		const { data, cols, idx, onSelect, isExpanded } = this.props;
+		const { data, cols, idx, onSelect, isExpanded, disableCollapse } = this.props;
 		const { isDecisionOptionsOpen } = this.state;
 		return (
 			<div className="row">
@@ -46,7 +47,9 @@ class StatsPanelHeader extends React.Component {
 							case 'order':
 								return (
 									<div className="col-sm-4" key={idx}>
-										<strong className={cx({"colorRed": data[column].risky})}>{data[column].title}</strong>
+										<Link to={`/order/${data[column].title}`}>
+											<strong className={cx({"colorRed": data[column].risky})}>{data[column].title}</strong>
+										</Link>
 										{data[column].paras.map((para, idx)=> <p className="para" key={idx}>{para}</p>)}
 									</div>
 								);
@@ -72,9 +75,12 @@ class StatsPanelHeader extends React.Component {
 						</ul>
 					</div>
 				</div>
-				<div className="col-sm-1 text-right" onClick={this.handleCollapsedButtonClick}>
-					<a role="button" className={cx({"collapsed": !isExpanded})} />
-				</div>
+				{
+					!disableCollapse &&
+					<div className="col-sm-1 text-right" onClick={this.handleCollapsedButtonClick}>
+						<a role="button" className={cx({"collapsed": !isExpanded})} />
+					</div>
+				}
 			</div>
 		);
 	}

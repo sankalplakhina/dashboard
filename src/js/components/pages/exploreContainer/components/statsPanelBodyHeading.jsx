@@ -4,7 +4,7 @@ const StatsPanelBodyHeading = ({ heading }) => {
 
 	return (
 		<div className={`heading ${heading.class}`}>
-			<img src={`public/static/images/${heading.icon}`} />
+			<img src={`/public/static/images/${heading.icon}`} />
 			{heading.title}
 		</div>
 	);

@@ -1,10 +1,11 @@
 import React from 'react';
-import { IndexRoute, Route } from 'react-router';
+import { IndexRoute, Route, Redirect } from 'react-router';
 import AppContainer from './components/appContainer/appContainer';
 import LoginContainer from './components/pages/loginContainer/containers/loginContainer';
 import RegisterContainer from './components/pages/registerContainer/containers/registerContainer';
 import ForgotPasswordContainer from './components/pages/forgotPassword/containers/forgotPasswordContainer';
 import ResetPasswordContainer from './components/pages/resetPassword/containers/resetPasswordContainer';
+import OrderContainer from './components/pages/order/containers/orderContainer';
 import ExploreContainer from './components/pages/exploreContainer/containers/exploreContainer';
 import ReviewContainer from './components/pages/reviewContainer/containers/reviewContainer';
 import AnalyzeContainer from './components/pages/analyzeContainer/containers/analyzeContainer';
@@ -40,19 +41,21 @@ export default (store) => {
     };
 
     return (
-    <Route path="/" component={AppContainer}>
-        <IndexRoute component={LoginContainer} />
-        <Route path="login" component={LoginContainer}/>
-        <Route path="register" component={RegisterContainer}/>
-        <Route path="forgot-password" component={ForgotPasswordContainer}/>
-        <Route path="reset-password" component={ResetPasswordContainer}/>
-        {/* Routes requiring login */}
-        <Route onEnter={requireLogin}>
-            <Route path="explore" component={ExploreContainer}/>
-            <Route path="review" component={ReviewContainer}/>
-            <Route path="analyze" component={AnalyzeContainer}/>
-        </Route>
-        <Route path="*" component={NotFound} status={404} />
+        <Route path="/" component={AppContainer}>
+            <IndexRoute component={LoginContainer} />
+            <Route path="login" component={LoginContainer}/>
+            <Route path="register" component={RegisterContainer}/>
+            <Route path="forgot-password" component={ForgotPasswordContainer}/>
+            <Route path="reset-password" component={ResetPasswordContainer}/>
+            {/* Routes requiring login */}
+            <Route onEnter={requireLogin}>
+                <Route path="explore" component={ExploreContainer}/>
+                <Route path="order/:orderId" component={OrderContainer}/>
+                <Route path="review" component={ReviewContainer}/>
+                <Route path="analyze" component={AnalyzeContainer}/>
+            </Route>
+            <Route path="404" component={NotFound} status={404} />
+            <Redirect path="*" to={'/404'} />
         </Route>
     );
 };

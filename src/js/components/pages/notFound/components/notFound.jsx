@@ -4,9 +4,11 @@ import { Link } from 'react-router';
 class NotFound extends React.Component {
   render() {
     return (
-    	<div>
-    		404 Not Found
-    		<Link to="/">Go Home</Link>
+		<div className="container-fluid text-center">
+	    	<div className="error-404">
+	    		Ooops! You have reached a 404 Not Found situation.
+	    		Let's get you home?	<Link to="/">Go Home</Link>
+	    	</div>
     	</div>
     );
   }
