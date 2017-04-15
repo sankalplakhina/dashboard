@@ -1,4 +1,6 @@
 import * as ACTIONS from './reviewContainerActionTypes';
+import { getDayBucket } from 'src/js/components/dashboard/selectors/dashboardDatePickerSelectors';
+import { getUserSecretKey } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
 
 export function loadFail(error) {
   return {
@@ -26,7 +28,11 @@ export function load(apiLink = '/fapi/review?row=5') {
         dispatch({
           type: ACTIONS.LOAD
         });
-        return client.get(apiLink).then(data => {
+        const state = getState();
+        const secret = getUserSecretKey(state);
+        const dayBucket = getDayBucket(state);
+        const apiUrl = `${apiLink}&secret=${secret}&days=${dayBucket}`;
+        return client.get(apiUrl).then(data => {
             dispatch(loadSuccess(data));
         })
         .catch(error => {
