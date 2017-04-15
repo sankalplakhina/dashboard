@@ -17,3 +17,7 @@ export const getDashboardData = (state) => {
 export const getDayBucket = (state) => {
   return getDashboardData(state).dayBucket || getDefaultDayBucket();
 };
+
+export const getDayBucketValue = (state) => {
+  return getDayBucket(state).value;
+};

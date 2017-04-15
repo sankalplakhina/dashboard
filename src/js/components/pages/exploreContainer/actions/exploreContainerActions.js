@@ -1,5 +1,5 @@
 import * as ACTIONS from './exploreContainerActionTypes';
-import { getDayBucket } from 'src/js/components/dashboard/selectors/dashboardDatePickerSelectors';
+import { getDayBucketValue } from 'src/js/components/dashboard/selectors/dashboardDatePickerSelectors';
 import { getUserSecretKey } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
 import { getStatsPanelAPI } from '../selectors/exploreContainerSelectors';
 
@@ -23,7 +23,11 @@ export function loadExploreData(apiLink = '/fapi/overview') {
         dispatch({
           type: ACTIONS.LOAD
         });
-        return client.get(apiLink)
+        const state = getState();
+        const secret = getUserSecretKey(state);
+        const dayBucket = getDayBucketValue(state);
+        const apiUrl = `${apiLink}?secret=${secret}&days=${dayBucket}`;
+        return client.get(apiUrl)
         .then(data => {
             // update new data
             dispatch({
@@ -49,7 +53,7 @@ export function loadStatsPanels(apiLink = `${getStatsPanelAPI()}?rows=5`) {
         });
         const state = getState();
         const secret = getUserSecretKey(state);
-        const dayBucket = getDayBucket(state);
+        const dayBucket = getDayBucketValue(state);
         return client.get(`${apiLink}&secret=${secret}&days=${dayBucket}`)
         .then(data => {
             // update new data
