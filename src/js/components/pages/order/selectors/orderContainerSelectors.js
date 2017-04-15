@@ -1,11 +1,19 @@
+import _ from 'lodash';
+
 export const getOrder = (state) => {
   return state.order;
 };
 
-export const isOrderDataLoaded = (state) => {
-  return getOrder(state).loaded;
+export const getOrderByOrderId = (state, orderId) => {
+  return _.get(getOrder(state), orderId);
 };
 
-export const getOrderData = (state) => {
-  return getOrder(state).data;
+
+export const isOrderDataLoaded = (state, orderId) => {
+	const order = getOrderByOrderId(state, orderId);
+	return order && order.loaded;
+};
+
+export const getOrderData = (state, orderId) => {
+  return getOrderByOrderId(state, orderId).data;
 };

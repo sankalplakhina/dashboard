@@ -6,17 +6,23 @@ const initialState = {
   loading: false,
 };
 
-export default function order(state = initialState, action = {}) {
+export default function order(state = {}, action = {}) {
   switch (action.type) {
 
     case ACTIONS.LOAD:
-    return _.defaults({ loaded: false, loading: true }, state);
+    return _.defaults({
+        [action.orderId]: { loaded: false, loading: true }
+    }, state);
 
     case ACTIONS.LOAD_SUCCESS:
-    return _.defaults({ loaded: true, loading: false, data: action.data }, state);
+    return _.defaults({
+        [action.orderId]: { loaded: true, loading: false, data: action.data }
+    }, state);
 
     case ACTIONS.LOAD_FAIL:
-    return _.defaults({ loaded: true, loading: false, data: action.error }, state);
+    return _.defaults({
+        [action.orderId]: { loaded: true, loading: false, data: action.error }
+    }, state);
 
     default:
       return state;

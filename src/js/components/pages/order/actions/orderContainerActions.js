@@ -15,13 +15,15 @@ export function load(orderId) {
 export function loadOrderData(orderId, apiLink = '/fapi/order') {
     return (dispatch, getState, client) => {
         dispatch({
-          type: ACTIONS.LOAD
+          type: ACTIONS.LOAD,
+          orderId
         });
         return client.get(`${apiLink}?order_id=${orderId}`)
         .then(data => {
             // update new data
             dispatch({
                 type: ACTIONS.LOAD_SUCCESS,
+                orderId,
                 data: data
             });
         })
@@ -29,6 +31,7 @@ export function loadOrderData(orderId, apiLink = '/fapi/order') {
             // update error data
             dispatch({
                 type: ACTIONS.LOAD_FAIL,
+                orderId,
                 error
             });
         });
