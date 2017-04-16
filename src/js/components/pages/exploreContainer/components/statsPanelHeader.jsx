@@ -8,7 +8,6 @@ class StatsPanelHeader extends React.Component {
 		super();
 		this.state = {
 			isDecisionOptionsOpen: false,
-			isDecisionTaken: false,
 
 		};
 	}
@@ -22,9 +21,6 @@ class StatsPanelHeader extends React.Component {
 		const hasDecisionLoaded = !isDecisionLoading && isDecisionLoading !== this.props.isDecisionLoading;
 		if (hasDecisionLoaded && decisionMsg) {
 			alert(decisionMsg);
-			this.setState({
-				isDecisionTaken: true
-			});
 		}
 	}
 
@@ -55,9 +51,10 @@ class StatsPanelHeader extends React.Component {
 			disableCollapse,
 			decisionOptions,
 			isDecisionButtonsHidden,
+			decisionMsg,
 		} = this.props;
 
-		const { isDecisionOptionsOpen, isDecisionTaken } = this.state;
+		const { isDecisionOptionsOpen } = this.state;
 		return (
 			<div className="row">
 				{
@@ -90,7 +87,7 @@ class StatsPanelHeader extends React.Component {
 						<div
 							className={cx("dropdown makeDecisions pull-right", {
 								"open": isDecisionOptionsOpen,
-								"disable": isDecisionTaken,
+								"disable": decisionMsg,
 							})}
 							onClick={this.handleDecisionButtonClick}
 							>
