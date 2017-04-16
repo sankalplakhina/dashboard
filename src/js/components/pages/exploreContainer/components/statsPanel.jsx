@@ -4,7 +4,7 @@ import { bindHandlers } from 'react-bind-handlers';
 import PanelGroup from 'react-bootstrap/lib/PanelGroup';
 import Panel from 'react-bootstrap/lib/Panel';
 import AvgStats from './avgStats';
-import StatsPanelHeader from './statsPanelHeader';
+import StatsPanelHeader from '../containers/statsPanelHeader';
 import StatsPanelBody from './statsPanelBody';
 
 class StatsPanel extends React.Component {

@@ -1,23 +1,27 @@
-export const getExplore = (state) => {
-  return state.explore;
-};
+import _ from 'lodash';
+
+const DECESION_OPTIONS = [
+    { label: 'Approve', value: 'approved'},
+    { label: 'Reject', value: 'declined'},
+];
+
+export const getStatsPanelAPI = () => '/fapi/orders';
+export const getStatsPanelDecisionOptions = () => DECESION_OPTIONS;
+
+export const getExplore = (state) => state.explore;
 
 export const isExploreDataLoaded = (state) => {
-  return getExplore(state).loaded;
+	return _.get(getExplore(state), 'loaded');
 };
 
 export const getExploreData = (state) => {
-  return getExplore(state).data;
-};
-
-export const getStatsPanelAPI = () => {
-	return '/fapi/orders'
+	return _.get(getExplore(state), 'data');
 };
 
 export const getIsStatsPanelsLoading = (state) => {
-  return getExplore(state).isStatsPanelsLoading;
+	return getExplore(state).isStatsPanelsLoading;
 };
 
 export const getExploreStatsPanelsData = (state) => {
-  return getExplore(state).statsPanels;
+	return _.get(getExplore(state), 'statsPanels');
 };

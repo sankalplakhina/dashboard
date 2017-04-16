@@ -4,6 +4,8 @@ function getOrderData(value) {
 	return {
 		score: getScore(value),
 		order: getOrder(value),
+		orderId: value.order_id,
+		orderTimestamp: value.order_timestamp,
 		_collapsedData: getCollapsedData(value),
 	};
 }

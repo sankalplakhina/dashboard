@@ -21,14 +21,22 @@ class StatsPanelHeader extends React.Component {
 		})
 	}
 
-	handleDecisionButtonBlur(){
-		if (this.state.isDecisionOptionsOpen) {
-			this.handleDecisionButtonClick();
-		}
+	handleDecisionOptionClick(action, orderId, orderTimestamp){
+		const { onDecisionClick } = this.props;
+		onDecisionClick(action, orderId, orderTimestamp);
 	}
 
 	render() {
-		const { data, cols, idx, onSelect, isExpanded, disableCollapse } = this.props;
+		const {
+			data,
+			cols,
+			idx,
+			onSelect,
+			isExpanded,
+			disableCollapse,
+			decisionOptions,
+		} = this.props;
+
 		const { isDecisionOptionsOpen } = this.state;
 		return (
 			<div className="row">
@@ -61,17 +69,24 @@ class StatsPanelHeader extends React.Component {
 						className={cx("dropdown makeDecisions pull-right", {
 							"open": isDecisionOptionsOpen
 						})}
-						tabIndex="-1"
 						onClick={this.handleDecisionButtonClick}
-						onBlur={this.handleDecisionButtonBlur}
 						>
 						<button className="btn btn-default dropdown-toggle" type="button">
 							<span className="value">Make a descison</span>
 							<span className="caret"></span>
 						</button>
 						<ul className="dropdown-menu">
-							<li><a href="javascript:void(0)">Approve</a></li>
-							<li><a href="javascript:void(0)">Reject</a></li>
+							{
+								decisionOptions.map((action, index) => {
+									return (
+										<li key={index}>
+											<a onClick={(event) => this.handleDecisionOptionClick(action, data.orderId, data.orderTimestamp, event)}>
+												{action.label}
+											</a>
+										</li>
+									);
+								})
+							}
 						</ul>
 					</div>
 				</div>

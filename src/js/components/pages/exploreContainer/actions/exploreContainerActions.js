@@ -71,3 +71,33 @@ export function loadStatsPanels(apiLink = `${getStatsPanelAPI()}?rows=5`) {
         });
     };
 }
+
+export function setDecision(decision, orderId, orderTimestamp, apiLink = '/twapi/action') {
+    return (dispatch, getState, client) => {
+        dispatch({
+            type: ACTIONS.SET_DECISION_PENDING,
+            orderId
+        });
+        const state = getState();
+        const secret = getUserSecretKey(state);
+        return client
+        .post(`${apiLink}?secret=${secret}&order_id=${orderId}&action_type=${decision.value}&order_timestamp=${orderTimestamp}`)
+        .then(data => {
+            // update new data
+            dispatch({
+                type: ACTIONS.SET_DECISION_SUCCESS,
+                orderId,
+                decision,
+                data
+            });
+        })
+        .catch(error => {
+            // update error data
+            dispatch({
+                type: ACTIONS.SET_DECISION_FAIL,
+                orderId,
+                error
+            });
+        });
+    };
+}

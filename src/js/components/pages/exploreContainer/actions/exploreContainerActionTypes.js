@@ -4,3 +4,6 @@ export const LOAD_FAIL = 'app/explore-data/LOAD_FAIL';
 export const LOAD_STATS_PANELS = 'app/explore-data/LOAD_STATS_PANELS';
 export const LOAD_STATS_PANELS_SUCCESS = 'app/explore-data/LOAD_STATS_PANELS_SUCCESS';
 export const LOAD_STATS_PANELS_FAIL = 'app/explore-data/LOAD_STATS_PANELS_FAIL';
+export const SET_DECISION_PENDING = 'app/explore-data/set-decision-pending';
+export const SET_DECISION_SUCCESS = 'app/explore-data/set-decision-success';
+export const SET_DECISION_FAIL = 'app/explore-data/set-decision-fail';
