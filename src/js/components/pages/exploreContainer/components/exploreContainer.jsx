@@ -7,19 +7,18 @@ import DashboardContent from 'src/js/components/dashboard/components/dashboardCo
 
 class ExploreContainer extends React.Component {
 	render() {
-		const { isExploreView } = this.props;
 		return (
 			<div className="wrapper">
 				<Helmet title="Explore - Thirdwatch - Mobile Data Management Platform" />
-		  		<DashboardSidenav isExploreView />
-		  		<DashboardContent isExploreView />
+		  		<DashboardSidenav {...this.props} />
+		  		<DashboardContent {...this.props} />
 			</div>
 		);
 	}
 }
 
 ExploreContainer.defaultProps = {
-  isExploreView: true
+  isExploreView: true // sets context of explore page across child components
 };
 
 export default ExploreContainer;

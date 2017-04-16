@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import * as ACTIONS from '../actions/exploreContainerActionTypes';
+import * as datePickerActions from 'src/js/components/dashboard/actions/dashboardDatePickerActionTypes';
 
 const initialState = {
   loaded: false,
@@ -18,6 +19,9 @@ export function reducer(state = initialState, action = {}) {
 
     case ACTIONS.LOAD_FAIL:
     return _.defaults({ loaded: true, loading: false, data: action.error }, state);
+
+    case datePickerActions.SET_DATE_BUCKET:
+    return _.defaults({ loaded: false }, state);
 
     case ACTIONS.LOAD_STATS_PANELS:
     return _.defaults({ isStatsPanelsLoading: true }, state);
