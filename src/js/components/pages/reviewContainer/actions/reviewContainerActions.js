@@ -32,7 +32,7 @@ export function load(apiLink = `${getReviewApiPath()}`) {
         const state = getState();
         const secret = getUserSecretKey(state);
         const dayBucket = getDayBucketValue(state);
-        const apiUrl = `${apiLink}?row=${getReviewApiRowsCount()}&secret=${secret}&days=${dayBucket}`;
+        const apiUrl = `${apiLink}?secret=${secret}&rows=${getReviewApiRowsCount()}&days=${dayBucket}`;
         return client.get(apiUrl).then(data => {
             dispatch(loadSuccess(data));
         })

@@ -1,5 +1,7 @@
+export const getLocationPathName = (state) => state.routing.locationBeforeTransitions.pathname;
+
 export const isAuthViewSelector = (state) => {
-	const location = state.routing.locationBeforeTransitions.pathname;
+	const location = getLocationPathName(state);
   	return location === '/login' ||
            location === '/register' ||
   		   location === '/forgot-password' ||
@@ -8,16 +10,16 @@ export const isAuthViewSelector = (state) => {
   		   location === '/';
 };
 
-export const isExploreViewSelector = (state) => {
-  return state.routing.locationBeforeTransitions.pathname === "/explore";
+export const getIsExploreView = (state) => {
+  return getLocationPathName(state) === "/explore";
 };
 
-export const isReviewViewSelector = (state) => {
-  return state.routing.locationBeforeTransitions.pathname === "/review";
+export const getIsReviewView = (state) => {
+  return getLocationPathName(state) === "/review";
 };
 
-export const isAnalyzeViewSelector = (state) => {
-  return state.routing.locationBeforeTransitions.pathname === "/analyze";
+export const getIsAnalyzeView = (state) => {
+  return getLocationPathName(state) === "/analyze";
 };
 
 export const getRouteQueryParams = (state) => {
