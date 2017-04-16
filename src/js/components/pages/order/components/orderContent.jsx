@@ -8,7 +8,11 @@ class OrderContent extends React.Component {
 			<div className="content">
 	  			<div className="row">
 	  				<div className="col-sm-12">
-						<StatsPanel data={data} isFirstExpanded isFixedExpanded />
+						<StatsPanel
+							data={data}
+							isDecisionButtonsHidden
+							isFirstExpanded
+							isFixedExpanded />
 	  				</div>
 	  			</div>
 			</div>

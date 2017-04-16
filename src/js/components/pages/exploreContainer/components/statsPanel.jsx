@@ -28,7 +28,7 @@ class StatsPanel extends React.Component {
 	}
 
 	render() {
-		const { data, isFixedExpanded } = this.props;
+		const { data, isFixedExpanded, isDecisionButtonsHidden } = this.props;
 		const { panelTitle, rows } = data;
 		const { activeKey } = this.state;
 		const isSingleRow = (rows.length === 1);
@@ -45,6 +45,7 @@ class StatsPanel extends React.Component {
 															onSelect={this.handleSelect}
 															isExpanded={isActive}
 															disableCollapse={isFixedExpanded && isSingleRow}
+															isDecisionButtonsHidden={isDecisionButtonsHidden}
 															idx={idx}
 															data={data[row]}
 															cols={panelTitle.cols} />
@@ -71,6 +72,7 @@ class StatsPanel extends React.Component {
 }
 
 StatsPanel.defaultProps = {
+	isDecisionButtonsHidden: false,
 	isFirstExpanded: false,
 	isFixedExpanded: false, // if there's only one panel, fix it to stay expanded always
 }

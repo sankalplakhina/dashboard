@@ -35,6 +35,7 @@ class StatsPanelHeader extends React.Component {
 			isExpanded,
 			disableCollapse,
 			decisionOptions,
+			isDecisionButtonsHidden,
 		} = this.props;
 
 		const { isDecisionOptionsOpen } = this.state;
@@ -64,32 +65,35 @@ class StatsPanelHeader extends React.Component {
 						}
 					})
 				}
-				<div className="col-sm-5">
-					<div
-						className={cx("dropdown makeDecisions pull-right", {
-							"open": isDecisionOptionsOpen
-						})}
-						onClick={this.handleDecisionButtonClick}
-						>
-						<button className="btn btn-default dropdown-toggle" type="button">
-							<span className="value">Make a descison</span>
-							<span className="caret"></span>
-						</button>
-						<ul className="dropdown-menu">
-							{
-								decisionOptions.map((action, index) => {
-									return (
-										<li key={index}>
-											<a onClick={(event) => this.handleDecisionOptionClick(action, data.orderId, data.orderTimestamp, event)}>
-												{action.label}
-											</a>
-										</li>
-									);
-								})
-							}
-						</ul>
+				{
+					!isDecisionButtonsHidden &&
+					<div className="col-sm-5">
+						<div
+							className={cx("dropdown makeDecisions pull-right", {
+								"open": isDecisionOptionsOpen
+							})}
+							onClick={this.handleDecisionButtonClick}
+							>
+							<button className="btn btn-default dropdown-toggle" type="button">
+								<span className="value">Make a descison</span>
+								<span className="caret"></span>
+							</button>
+							<ul className="dropdown-menu">
+								{
+									decisionOptions.map((action, index) => {
+										return (
+											<li key={index}>
+												<a onClick={(event) => this.handleDecisionOptionClick(action, data.orderId, data.orderTimestamp, event)}>
+													{action.label}
+												</a>
+											</li>
+										);
+									})
+								}
+							</ul>
+						</div>
 					</div>
-				</div>
+				}
 				{
 					!disableCollapse &&
 					<div className="col-sm-1 text-right" onClick={this.handleCollapsedButtonClick}>
