@@ -7,19 +7,18 @@ import DashboardContent from 'src/js/components/dashboard/components/dashboardCo
 
 class AnalyzeContainer extends React.Component {
 	render() {
-		const { isAnalyzeView } = this.props;
 		return (
 			<div className="wrapper">
 				<Helmet title="Analyze - Thirdwatch - Mobile Data Management Platform" />
-		  		<DashboardSidenav isAnalyzeView />
-		  		<DashboardContent isAnalyzeView />
+		  		<DashboardSidenav {...this.props} />
+		  		<DashboardContent {...this.props} />
 			</div>
 		);
 	}
 }
 
 AnalyzeContainer.defaultProps = {
-  isAnalyzeView: true
+  isAnalyzeView: true // sets context of analyze page across child components
 };
 
 export default AnalyzeContainer;

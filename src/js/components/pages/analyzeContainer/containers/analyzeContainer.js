@@ -18,7 +18,11 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  	return {};
+  	return {
+  		onUpdateView(){
+  			dispatch(load())
+  		}
+  	};
 }
 
 export default asyncConnect([asyncProps], mapStateToProps, mapDispatchToProps)(AnalyzeContainer);

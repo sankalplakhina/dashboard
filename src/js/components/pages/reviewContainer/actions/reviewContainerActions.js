@@ -17,7 +17,7 @@ export function loadSuccess(data) {
   };
 }
 
-export function load(apiLink = `${getReviewApiPath()}`) {
+export function load(apiLink = getReviewApiPath()) {
     // returning a thunk as this is any async action
     // dispatch and getState and default params from
     // thunk library, client is an extra param required

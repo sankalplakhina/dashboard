@@ -1,4 +1,7 @@
 import * as ACTIONS from './analyzeContainerActionTypes';
+import { getDayBucketValue } from 'src/js/components/dashboard/selectors/dashboardDatePickerSelectors';
+import { getUserSecretKey } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
+import { getAnalyzeApiPath, getAnalyzeApiRowsCount } from '../selectors/analyzeContainerSelectors';
 
 export function loadFail(error) {
   return {
@@ -14,7 +17,7 @@ export function loadSuccess(data) {
   };
 }
 
-export function load() {
+export function load(apiLink = getAnalyzeApiPath()) {
     // returning a thunk as this is any async action
     // dispatch and getState and default params from
     // thunk library, client is an extra param required
@@ -26,10 +29,11 @@ export function load() {
         dispatch({
           type: ACTIONS.LOAD
         });
-
         const state = getState();
-        let apiLink = '/api/analyze';
-        return client.get(apiLink).then(data => {
+        const secret = getUserSecretKey(state);
+        const dayBucket = getDayBucketValue(state);
+        const apiUrl = `${apiLink}?secret=${secret}&rows=${getAnalyzeApiRowsCount()}&days=${dayBucket}`;
+        return client.get(apiUrl).then(data => {
             dispatch(loadSuccess(data.data));
         })
         .catch(error => {
