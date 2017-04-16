@@ -1,16 +1,15 @@
 import { connect } from 'react-redux';
 import StatsPanels from '../components/statsPanels';
 import {
-  getExploreStatsPanelsData,
-  getStatsPanelAPI,
-  getIsStatsPanelsLoading
+  getExploreOrdersData,
+  getIsExploreOrdersLoading
 } from '../selectors/exploreContainerSelectors';
 import { loadStatsPanels } from '../actions/exploreContainerActions';
 
 function mapStateToProps(state) {
   	return {
-  		data: getExploreStatsPanelsData(state),
-        isLoaded: !getIsStatsPanelsLoading(state)
+  		data: getExploreOrdersData(state),
+        isLoaded: !getIsExploreOrdersLoading(state)
   	};
 }
 

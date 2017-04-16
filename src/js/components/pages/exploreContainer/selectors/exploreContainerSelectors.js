@@ -9,19 +9,29 @@ export const getStatsPanelAPI = () => '/fapi/orders';
 export const getStatsPanelDecisionOptions = () => DECESION_OPTIONS;
 
 export const getExplore = (state) => state.explore;
+export const getExploreOverview = (state) => getExplore(state).overview;
+export const getExploreOrders = (state) => getExplore(state).orders;
 
-export const isExploreDataLoaded = (state) => {
-	return _.get(getExplore(state), 'loaded');
+export const getIsExploreOverviewLoaded = (state) => {
+	return _.get(getExploreOverview(state), 'loaded');
 };
 
-export const getExploreData = (state) => {
-	return _.get(getExplore(state), 'data');
+export const getIsExploreOrdersLoaded = (state) => {
+	return _.get(getExploreOrders(state), 'loaded');
 };
 
-export const getIsStatsPanelsLoading = (state) => {
-	return getExplore(state).isStatsPanelsLoading;
+export const getIsExploreDataLoaded = (state) => {
+	return getIsExploreOverviewLoaded(state) && getIsExploreOrdersLoaded(state);
 };
 
-export const getExploreStatsPanelsData = (state) => {
-	return _.get(getExplore(state), 'statsPanels');
+export const getExploreOverviewData = (state) => {
+	return _.get(getExploreOverview(state), 'data');
+};
+
+export const getIsExploreOrdersLoading = (state) => {
+	return _.get(getExploreOrders(state), 'loading');
+};
+
+export const getExploreOrdersData = (state) => {
+	return _.get(getExploreOrders(state), 'data');
 };

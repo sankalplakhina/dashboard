@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import ExploreContent from '../components/exploreContent';
-import { getExploreData } from '../selectors/exploreContainerSelectors';
+import { getExploreOverviewData } from '../selectors/exploreContainerSelectors';
 
 function mapStateToProps(state) {
   	return {
-  		data: getExploreData(state)
+  		data: getExploreOverviewData(state)
   	};
 }
 
