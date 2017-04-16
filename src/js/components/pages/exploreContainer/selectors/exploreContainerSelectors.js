@@ -6,7 +6,7 @@ const DECESION_OPTIONS = [
 ];
 
 export const getStatsPanelAPI = () => '/fapi/orders';
-export const getStatsPanelDecisionOptions = () => DECESION_OPTIONS;
+export const getExploreOrdersDecisionOptions = () => DECESION_OPTIONS;
 
 export const getExplore = (state) => state.explore;
 export const getExploreOverview = (state) => getExplore(state).overview;
@@ -34,4 +34,20 @@ export const getIsExploreOrdersLoading = (state) => {
 
 export const getExploreOrdersData = (state) => {
 	return _.get(getExploreOrders(state), 'data');
+};
+
+export const getExploreOrder = (state, orderId) => {
+	return _.get(getExploreOrdersData(state), orderId);
+};
+
+export const getExploreOrderDecision = (state, orderId) => {
+	return _.get(getExploreOrder(state, orderId), 'decision');
+};
+
+export const getExploreOrderIsDecisionLoading = (state, orderId) => {
+	return _.get(getExploreOrderDecision(state, orderId), 'loading');
+};
+
+export const getExploreOrderDecisionMsg = (state, orderId) => {
+	return _.get(getExploreOrderDecision(state, orderId), 'msg');
 };

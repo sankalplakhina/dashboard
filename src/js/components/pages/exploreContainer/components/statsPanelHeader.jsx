@@ -7,8 +7,25 @@ class StatsPanelHeader extends React.Component {
 	constructor(){
 		super();
 		this.state = {
-			isDecisionOptionsOpen: false
+			isDecisionOptionsOpen: false,
+			isDecisionTaken: false,
+
 		};
+	}
+
+	componentWillReceiveProps(nextProps) {
+		const {
+			isDecisionLoading,
+			decisionMsg,
+		} = nextProps;
+
+		const hasDecisionLoaded = !isDecisionLoading && isDecisionLoading !== this.props.isDecisionLoading;
+		if (hasDecisionLoaded && decisionMsg) {
+			alert(decisionMsg);
+			this.setState({
+				isDecisionTaken: true
+			});
+		}
 	}
 
 	handleCollapsedButtonClick(){
@@ -16,9 +33,11 @@ class StatsPanelHeader extends React.Component {
 	}
 
 	handleDecisionButtonClick(){
-		this.setState({
-			isDecisionOptionsOpen: !this.state.isDecisionOptionsOpen
-		})
+		if (!this.state.isDecisionTaken) {
+			this.setState({
+				isDecisionOptionsOpen: !this.state.isDecisionOptionsOpen
+			})
+		}
 	}
 
 	handleDecisionOptionClick(action, orderId, orderTimestamp){
@@ -38,7 +57,7 @@ class StatsPanelHeader extends React.Component {
 			isDecisionButtonsHidden,
 		} = this.props;
 
-		const { isDecisionOptionsOpen } = this.state;
+		const { isDecisionOptionsOpen, isDecisionTaken } = this.state;
 		return (
 			<div className="row">
 				{
@@ -70,7 +89,8 @@ class StatsPanelHeader extends React.Component {
 					<div className="col-sm-5">
 						<div
 							className={cx("dropdown makeDecisions pull-right", {
-								"open": isDecisionOptionsOpen
+								"open": isDecisionOptionsOpen,
+								"disable": isDecisionTaken,
 							})}
 							onClick={this.handleDecisionButtonClick}
 							>

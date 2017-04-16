@@ -1,11 +1,18 @@
 import { connect } from 'react-redux';
 import StatsPanelHeader from '../components/statsPanelHeader';
-import { getStatsPanelDecisionOptions } from '../selectors/exploreContainerSelectors';
+import {
+	getExploreOrdersDecisionOptions,
+	getExploreOrderIsDecisionLoading,
+	getExploreOrderDecisionMsg,
+} from '../selectors/exploreContainerSelectors';
 import { setDecision } from '../actions/exploreContainerActions';
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
+	const { data: { orderId } } = ownProps;
   	return {
-  		decisionOptions: getStatsPanelDecisionOptions(state),
+  		decisionOptions: getExploreOrdersDecisionOptions(state),
+  		isDecisionLoading: getExploreOrderIsDecisionLoading(state, orderId),
+  		decisionMsg: getExploreOrderDecisionMsg(state, orderId),
   	};
 }
 

@@ -40,6 +40,15 @@ function orders(state = {}, action) {
         case ACTIONS.LOAD_STATS_PANELS_FAIL:
             return updateFail(state, action);
 
+        case ACTIONS.SET_DECISION_PENDING:
+            return updateOrderDecisionLoading(state, action);
+
+        case ACTIONS.SET_DECISION_SUCCESS:
+            return updateOrderDecisionSuccess(state, action);
+
+        case ACTIONS.SET_DECISION_FAIL:
+            return updateOrderDecisionFail(state, action);
+
         case datePickerActions.SET_DATE_BUCKET:
             return updateLoadedOnDateSelection(state);
 
@@ -75,6 +84,44 @@ function updateLoadedOnDateSelection(state) {
     return _.defaults({
         loaded: false
     }, state)
+}
+
+function updateOrderDecisionLoading(state, action) {
+    return _.defaults({
+        data: _.defaults({
+            [action.orderId]: _.defaults({
+                decision: {
+                    loading: true
+                }
+            }, state.data[action.orderId])
+        }, state.data)
+    }, state);
+}
+
+function updateOrderDecisionSuccess(state, action) {
+    return _.defaults({
+        data: _.defaults({
+            [action.orderId]: _.defaults({
+                decision: _.defaults({
+                    loading: false,
+                    loaded: true,
+                }, action.decision, action.data)
+            }, state.data[action.orderId])
+        }, state.data)
+    }, state);
+}
+
+function updateOrderDecisionFail(state, action) {
+    return _.defaults({
+        data: _.defaults({
+            [action.orderId]: _.defaults({
+                decision: _.defaults({
+                    loading: false,
+                    loaded: true,
+                }, action.decision, action.error)
+            }, state.data[action.orderId])
+        }, state.data)
+    }, state);
 }
 
 export default explore;
