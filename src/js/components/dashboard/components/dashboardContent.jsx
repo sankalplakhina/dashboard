@@ -1,5 +1,4 @@
-/* eslint react/prefer-stateless-function: 0 */
-
+import _ from 'lodash';
 import React from 'react';
 import Helmet from 'react-helmet';
 
@@ -14,7 +13,13 @@ import AnalyzeContent from 'src/js/components/pages/analyzeContainer/containers/
 
 class DashboardContent extends React.Component {
     render() {
-        const { isExploreView, isOrderView, isReviewView, isAnalyzeView } = this.props;
+        const {
+            isExploreView,
+            isOrderView,
+            isReviewView,
+            isAnalyzeView,
+            onUpdateView,
+        } = this.props;
         return (
         	<div className="scrollaleContent">
                 <div className="scrollFix">
@@ -23,7 +28,7 @@ class DashboardContent extends React.Component {
                         {isOrderView && <DashboardBreadcrumbs isOrderView />}
                         {isReviewView && <DashboardBreadcrumbs isReviewView />}
                         {isAnalyzeView && <DashboardBreadcrumbs isAnalyzeView />}
-                        <DashboardDatePicker />
+                        {!isOrderView && <DashboardDatePicker onUpdateView={onUpdateView} />}
                     </div>
                 </div>
                 {isExploreView && <ExploreContent />}
@@ -33,6 +38,10 @@ class DashboardContent extends React.Component {
             </div>
         );
     }
+}
+
+DashboardContent.defaultProps = {
+    onUpdateView: _.noop,
 }
 
 export default DashboardContent;

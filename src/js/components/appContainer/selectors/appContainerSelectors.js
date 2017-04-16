@@ -1,13 +1,14 @@
-export const getLocationPathName = (state) => state.routing.locationBeforeTransitions.pathname;
+export const getLocation = (state) => state.routing.locationBeforeTransitions;
+export const getLocationPathName = (state) => getLocation(state).pathname;
+export const getRouteQueryParams = (state) => getLocation(state).query;
 
 export const isAuthViewSelector = (state) => {
-	const location = getLocationPathName(state);
-  	return location === '/login' ||
-           location === '/register' ||
-  		   location === '/forgot-password' ||
-           location === '/reset-password' ||
-  		   location === '/404' ||
-  		   location === '/';
+	const pathname = getLocationPathName(state);
+  	return pathname === '/login' ||
+           pathname === '/register' ||
+  		   pathname === '/forgot-password' ||
+           pathname === '/reset-password' ||
+  		   pathname === '/404';
 };
 
 export const getIsExploreView = (state) => {
@@ -20,10 +21,6 @@ export const getIsReviewView = (state) => {
 
 export const getIsAnalyzeView = (state) => {
   return getLocationPathName(state) === "/analyze";
-};
-
-export const getRouteQueryParams = (state) => {
-  return state.routing.locationBeforeTransitions.query;
 };
 
 export const getResetTokenParam = (state) => {

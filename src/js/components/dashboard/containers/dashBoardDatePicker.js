@@ -10,10 +10,12 @@ function mapStateToProps(state) {
   	};
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
+    const { onUpdateView } = ownProps;
   	return {
   		onDayBucketSelection(dayBucket) {
-  			dispatch(setDayBucket(dayBucket));
+            dispatch(setDayBucket(dayBucket)); // updates store with state and loaded flag of all views
+            onUpdateView(); // triggers update on current view
   		}
   	};
 }

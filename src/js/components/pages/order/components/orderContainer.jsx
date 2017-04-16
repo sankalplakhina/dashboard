@@ -10,7 +10,7 @@ class OrderContainer extends React.Component {
 		const { isOrderView } = this.props;
 		return (
 			<div className="wrapper">
-				<Helmet title="Explore - Thirdwatch - Mobile Data Management Platform" />
+				<Helmet title="Order - Thirdwatch - Mobile Data Management Platform" />
 		  		<DashboardSidenav isOrderView />
 		  		<DashboardContent isOrderView />
 			</div>
