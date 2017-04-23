@@ -1,7 +1,11 @@
 import * as ACTIONS from './exploreContainerActionTypes';
 import { getDayBucketValue } from 'src/js/components/dashboard/selectors/dashboardDatePickerSelectors';
 import { getUserSecretKey } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
-import { getStatsPanelAPI } from '../selectors/exploreContainerSelectors';
+import {
+    getOrdersApiPath,
+    getOrdersApiRowsCount,
+    getExploreOrdersApiUrl,
+} from '../selectors/exploreContainerSelectors';
 
 export function load() {
     // returning a thunk as this is any async action
@@ -13,7 +17,7 @@ export function load() {
     return (dispatch, getState, client) => {
         return Promise.all([
             dispatch(loadExploreData()),
-            dispatch(loadStatsPanels())
+            dispatch(loadStatsPanelsWithQuery())
         ])
     };
 }
@@ -45,16 +49,14 @@ export function loadExploreData(apiLink = '/fapi/overview') {
     };
 }
 
-export function loadStatsPanels(apiLink = `${getStatsPanelAPI()}?rows=5`) {
+function loadStatsPanels(apiUrl) {
     return (dispatch, getState, client) => {
         // initiate loader
         dispatch({
-            type: ACTIONS.LOAD_STATS_PANELS
+            type: ACTIONS.LOAD_STATS_PANELS,
+            apiUrl,
         });
-        const state = getState();
-        const secret = getUserSecretKey(state);
-        const dayBucket = getDayBucketValue(state);
-        return client.get(`${apiLink}&secret=${secret}&days=${dayBucket}`)
+        return client.get(apiUrl)
         .then(data => {
             // update new data
             dispatch({
@@ -70,6 +72,45 @@ export function loadStatsPanels(apiLink = `${getStatsPanelAPI()}?rows=5`) {
             });
         });
     };
+}
+
+export function loadStatsPanelsWithQuery(nextQuery) {
+    return (dispatch, getState, client) => {
+        const state = getState();
+        const secret = getUserSecretKey(state);
+        const dayBucket = getDayBucketValue(state);
+        let apiUrl = `${getOrdersApiPath()}?rows=${getOrdersApiRowsCount()}&secret=${secret}&days=${dayBucket}`;
+        if (nextQuery) {
+            apiUrl += `&next=${nextQuery}`;
+        }
+        return dispatch(loadStatsPanels(apiUrl));
+    };
+}
+
+export function loadStatsPanelsWithNextQuery(nextQuery) {
+    return (dispatch, getState) => {
+        // storing current api url in a stack to handle
+        // previous button click. Every previous button click
+        // would pop this stack and get previous api link
+        const prevApiUrl = getExploreOrdersApiUrl(getState());
+        dispatch({
+            type: ACTIONS.SET_ORDERS_PREV_API_URL,
+            prevApiUrl,
+        });
+        dispatch(loadStatsPanelsWithQuery(nextQuery));
+    }
+}
+
+export function loadStatsPanelsWithPrevLink(prevApiUrl) {
+    return (dispatch) => {
+        // when the previous button is clicked, we pop
+        // out the last api link added to the stack
+        dispatch({
+            type: ACTIONS.REMOVE_ORDERS_PREV_API_URL,
+            prevApiUrl,
+        });
+        dispatch(loadStatsPanels(prevApiUrl));
+    }
 }
 
 export function setDecision(decision, orderId, orderTimestamp, apiLink = '/twapi/action') {

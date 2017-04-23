@@ -5,7 +5,9 @@ const DECESION_OPTIONS = [
     { label: 'Reject', value: 'declined'},
 ];
 
-export const getStatsPanelAPI = () => '/fapi/orders';
+export const getOrdersApiPath = () => '/fapi/orders';
+export const getOrdersApiRowsCount = () => '5';
+
 export const getExploreOrdersDecisionOptions = () => DECESION_OPTIONS;
 
 export const getExplore = (state) => state.explore;
@@ -34,6 +36,14 @@ export const getIsExploreOrdersLoading = (state) => {
 
 export const getExploreOrdersData = (state) => {
 	return _.get(getExploreOrders(state), 'data');
+};
+
+export const getExploreOrdersApiUrl = (state) => {
+	return _.get(getExploreOrders(state), 'apiUrl');
+};
+
+export const getExploreOrdersPrevApiUrl = (state) => {
+	return _.last(_.get(getExploreOrders(state), 'prevApiUrls'));
 };
 
 export const getExploreOrder = (state, orderId) => {

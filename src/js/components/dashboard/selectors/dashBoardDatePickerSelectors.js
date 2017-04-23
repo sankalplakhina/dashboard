@@ -8,7 +8,7 @@ const OPTIONS = [
 
 export const getDayBucketsList = () => OPTIONS;
 
-export const getDefaultDayBucket = () => getDayBucketsList()[0]
+export const getDefaultDayBucket = () => getDayBucketsList()[1]; // defaults to 7 days
 
 export const getDashboardData = (state) => {
   return state.dashboard;

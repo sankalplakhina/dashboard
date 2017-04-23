@@ -2,24 +2,29 @@ import { connect } from 'react-redux';
 import StatsPanels from '../components/statsPanels';
 import {
   getExploreOrdersData,
-  getIsExploreOrdersLoading
+  getIsExploreOrdersLoading,
+  getExploreOrdersPrevApiUrl,
 } from '../selectors/exploreContainerSelectors';
-import { loadStatsPanels } from '../actions/exploreContainerActions';
+import {
+    loadStatsPanelsWithNextQuery,
+    loadStatsPanelsWithPrevLink,
+} from '../actions/exploreContainerActions';
 
 function mapStateToProps(state) {
   	return {
   		data: getExploreOrdersData(state),
-        isLoaded: !getIsExploreOrdersLoading(state)
+        prevApiLink: getExploreOrdersPrevApiUrl(state),
+        isLoaded: !getIsExploreOrdersLoading(state),
   	};
 }
 
 function mapDispatchToProps(dispatch) {
   	return {
-  		onNextButtonClick(nextApiLink) {
-  			dispatch(loadStatsPanels(nextApiLink));
+  		onNextButtonClick(nextQuery) {
+  			dispatch(loadStatsPanelsWithNextQuery(nextQuery));
   		},
   		onPreviousButtonClick(prevApiLink) {
-  			dispatch(loadStatsPanels(prevApiLink));
+  			dispatch(loadStatsPanelsWithPrevLink(prevApiLink));
   		}
   	};
 }

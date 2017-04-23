@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import cx from 'classnames';
 import { bindHandlers } from 'react-bind-handlers';
@@ -25,8 +26,8 @@ class StatsPanels extends React.Component {
 	}
 
 	handlePreviousClick() {
-		const { onPreviousButtonClick, data: { prev } } = this.props;
-		onPreviousButtonClick(prev);
+		const { onPreviousButtonClick, prevApiLink } = this.props;
+		onPreviousButtonClick(prevApiLink);
 	}
 
 	handleNextClick() {
@@ -36,28 +37,25 @@ class StatsPanels extends React.Component {
 
 	render(){
 
-		const { data } = this.props;
+		const { data, prevApiLink } = this.props;
 
 		if (data) {
-			const { rows, total, count, offset } = data;
+			const { rows, next } = data;
 			const { isSortDropdownOpen } = this.state;
 
-			const isOffsetZero = (offset === 0);
-			const start = isOffsetZero? 1 : offset;
-			const end = offset + count;
 			return (
 				<div className="expPaginate">
 					<div className="col-md-6 nopad bottomPad15 lh32">
 						<div className="dataTables_paginate paging_simple_numbers pull-left">
-							<a className={cx("paginate_button previous", {'disabled': isOffsetZero})}
-								onClick={this.handlePreviousClick}
+							<a className={cx("paginate_button previous", {'disabled': !prevApiLink})}
+								onClick={prevApiLink? this.handlePreviousClick: _.noop}
 							/>
-							<a className={cx("paginate_button next", {'disabled': (end === total)})}
-								onClick={this.handleNextClick} />
+							<a className={cx("paginate_button next", {'disabled': !next})}
+								onClick={next? this.handleNextClick: _.noop} />
 						</div>
-						<div className="dataTables_info pull-left">
-							<strong>{`${start}-${end}`}</strong>{" of "}<strong>{total}</strong>
-						</div>
+						{/*<div className="dataTables_info pull-left">
+													<strong>{`${start}-${end}`}</strong>{" of "}<strong>{total}</strong>
+												</div>*/}
 					</div>
 					<div className="col-md-6 text-right nopad bottomPad15 lh32">
 						<label className="mr5">Sort by</label>

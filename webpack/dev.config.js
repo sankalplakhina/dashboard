@@ -185,7 +185,8 @@ module.exports = {
         // for optimized loading of lodash modules
         new LodashModuleReplacementPlugin({
             collections: true,
-            shorthands: true
+            paths: true,
+            shorthands: true,
         }),
         new webpack.DefinePlugin({
             __CLIENT__: true,
