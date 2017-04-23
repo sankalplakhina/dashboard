@@ -5,7 +5,7 @@ const getAuth = (state) => {
 };
 
 export const getAuthData = (state) => {
-	return getAuth(state).data;
+	return _.get(getAuth(state), 'data');
 };
 
 export const getAuthToken = (state) => {
@@ -25,7 +25,7 @@ export const isAuthDataLoaded = (state) => {
 };
 
 export const getIsRegisterationLoading = (state) => {
-	return getAuth(state).isRegisterLoading;
+	return Boolean(getAuth(state).isRegisterLoading);
 };
 
 export const getIsRegisterationLoadedWithSuccess = (state) => {
@@ -33,25 +33,25 @@ export const getIsRegisterationLoadedWithSuccess = (state) => {
 };
 
 export const getIsForgotPasswordLoading = (state) => {
-	return getAuth(state).isForgotPasswordLoading;
+	return Boolean(getAuth(state).isForgotPasswordLoading);
 };
 
 export const getIsResetPasswordLoading = (state) => {
-	return getAuth(state).isResetPasswordLoading;
+	return Boolean(getAuth(state).isResetPasswordLoading);
 };
 
 export const getIsLoginLoading = (state) => {
-	return getAuth(state).isLoginLoading;
+	return Boolean(getAuth(state).isLoginLoading);
 };
 
 export const getIsResponseSuccess = (state) => {
-	return Boolean(getAuthData(state).success);
+	return _.get(getAuthData(state), 'success');
 };
 
 export const getResponseMessage = (state) => {
-	return getAuthData(state).message;
+	return _.get(getAuthData(state), 'message');
 };
 
 export const getResponseErrors = (state) => {
-	return getAuthData(state).errors;
+	return _.get(getAuthData(state), 'errors');
 };
