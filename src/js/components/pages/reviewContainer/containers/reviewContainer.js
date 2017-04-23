@@ -1,5 +1,5 @@
 import { asyncConnect } from 'redux-connect';
-import { load } from '../actions/reviewContainerActions';
+import { loadReviewWithQuery } from '../actions/reviewContainerActions';
 import { reviewDataLoaded } from '../selectors/reviewContainerSelectors';
 import ReviewContainer from '../components/reviewContainer';
 
@@ -7,7 +7,7 @@ const asyncProps = {
     promise: ({ store: { dispatch, getState } }) => {
     	const state = getState();
     	if (!reviewDataLoaded(state)) {
-    		return dispatch(load());
+    		return dispatch(loadReviewWithQuery());
     	}
     	return null;
     }
@@ -20,7 +20,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   	return {
   		onUpdateView(){
-  			dispatch(load())
+  			dispatch(loadReviewWithQuery())
   		}
   	};
 }

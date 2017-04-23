@@ -1,17 +1,32 @@
 import { connect } from 'react-redux';
 import ReviewTable from '../components/reviewTable';
-import { load } from '../actions/reviewContainerActions';
-// import { getReviewData } from '../selectors/reviewContainerSelectors';
+import {
+	getReviewPrevApiUrl,
+	getReviewPaginationData,
+	getReviewNextQuery,
+} from '../selectors/reviewContainerSelectors';
+import {
+	loadReviewWithNextQuery,
+	loadReviewWithPrevLink,
+} from '../actions/reviewContainerActions';
 
-function mapDispatchToProps(dispatch, ownProps) {
-  	return {
-  		onNextButtonClick(nextApiLink) {
-  			dispatch(load(nextApiLink));
-  		},
-  		onPreviousButtonClick(prevApiLink) {
-  			dispatch(load(prevApiLink));
-  		}
-  	};
+function mapStateToProps(state) {
+	return {
+		paginationData: getReviewPaginationData(state),
+		prevApiLink: getReviewPrevApiUrl(state),
+		nextQuery: getReviewNextQuery(state),
+	};
 }
 
-export default connect(null, mapDispatchToProps)(ReviewTable);
+function mapDispatchToProps(dispatch, ownProps) {
+	return {
+		onNextButtonClick(nextQuery) {
+			dispatch(loadReviewWithNextQuery(nextQuery));
+		},
+		onPreviousButtonClick(prevApiLink) {
+			dispatch(loadReviewWithPrevLink(prevApiLink));
+		}
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewTable);

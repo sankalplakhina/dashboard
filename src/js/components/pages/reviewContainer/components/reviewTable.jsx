@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import { bindHandlers } from 'react-bind-handlers';
 import cx from 'classnames';
@@ -10,37 +11,33 @@ class ReviewTable extends React.Component {
 	}
 
 	handlePreviousClick() {
-		const { onPreviousButtonClick, data: { prev } } = this.props;
-		onPreviousButtonClick(prev);
+		const { onPreviousButtonClick, prevApiLink } = this.props;
+		onPreviousButtonClick(prevApiLink);
 	}
 
 	handleNextClick() {
-		const { onNextButtonClick, data: { next } } = this.props;
-		onNextButtonClick(next);
+		const { onNextButtonClick, nextQuery } = this.props;
+		onNextButtonClick(nextQuery);
 	}
 
 	render () {
 
-		const { data } = this.props;
-		const { total, count, offset } = data;
-
-		const isOffsetZero = (offset === 0);
-		const start = isOffsetZero? 1 : offset;
-		const end = offset + count;
+		const { data, prevApiLink, paginationData, nextQuery } = this.props;
+		const { start, end } = paginationData;
 
 		return (
 			<div>
 				<div className="reviewDatatable_wrapper dataTables_wrapper no-footer">
 					<div className="top">
 						<div className="dataTables_info">
-							<strong>{`${start}-${end}`}</strong>{" of "}<strong>{total}</strong>
+							<strong>{`Showing ${start} to ${end} orders`}</strong>
 						</div>
 						<div className="dataTables_paginate paging_simple_numbers pull-left">
-							<a className={cx("paginate_button previous", {'disabled': isOffsetZero})}
-								onClick={this.handlePreviousClick}
+							<a className={cx("paginate_button previous", {'disabled': !prevApiLink})}
+								onClick={prevApiLink? this.handlePreviousClick: _.noop}
 							/>
-							<a className={cx("paginate_button next", {'disabled': (end === total)})}
-								onClick={this.handleNextClick} />
+							<a className={cx("paginate_button next", {'disabled': !nextQuery})}
+								onClick={nextQuery? this.handleNextClick: _.noop} />
 						</div>
 					</div>
 				</div>

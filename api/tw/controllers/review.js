@@ -62,7 +62,7 @@ const review = (req, res) => {
 		  "status": "Approved"
 		}
 		],
-		"next": null
+		"next": "next"
 	});
 }
 export default review;
