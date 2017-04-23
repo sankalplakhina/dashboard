@@ -42,8 +42,26 @@ export const getExploreOrdersApiUrl = (state) => {
 	return _.get(getExploreOrders(state), 'apiUrl');
 };
 
+export const getExploreOrdersPrevApiUrlsStack = (state) => {
+	return _.get(getExploreOrders(state), 'prevApiUrls');
+};
+
 export const getExploreOrdersPrevApiUrl = (state) => {
-	return _.last(_.get(getExploreOrders(state), 'prevApiUrls'));
+	return _.last(getExploreOrdersPrevApiUrlsStack(state));
+};
+
+export const getExploreOrdersPaginationData = (state) => {
+	const pages = getExploreOrdersPrevApiUrlsStack(state) || [];
+	const perPageRowCount = getOrdersApiRowsCount();
+	const { rows } = getExploreOrdersData(state);
+	const total = ((pages.length + 1) * perPageRowCount) - (perPageRowCount - rows.length);
+	const start = (pages.length * perPageRowCount) + 1;
+	const end = total;
+	return {
+		start,
+		end,
+		total,
+	};
 };
 
 export const getExploreOrder = (state, orderId) => {

@@ -37,10 +37,11 @@ class StatsPanels extends React.Component {
 
 	render(){
 
-		const { data, prevApiLink } = this.props;
+		const { data, prevApiLink, paginationData } = this.props;
 
 		if (data) {
 			const { rows, next } = data;
+			const { start, end, total } = paginationData;
 			const { isSortDropdownOpen } = this.state;
 
 			return (
@@ -53,9 +54,9 @@ class StatsPanels extends React.Component {
 							<a className={cx("paginate_button next", {'disabled': !next})}
 								onClick={next? this.handleNextClick: _.noop} />
 						</div>
-						{/*<div className="dataTables_info pull-left">
-													<strong>{`${start}-${end}`}</strong>{" of "}<strong>{total}</strong>
-												</div>*/}
+						<div className="dataTables_info pull-left">
+							<strong>{`Showing ${start} to ${end} orders`}</strong>
+						</div>
 					</div>
 					<div className="col-md-6 text-right nopad bottomPad15 lh32">
 						<label className="mr5">Sort by</label>

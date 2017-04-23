@@ -4,6 +4,7 @@ import {
   getExploreOrdersData,
   getIsExploreOrdersLoading,
   getExploreOrdersPrevApiUrl,
+  getExploreOrdersPaginationData,
 } from '../selectors/exploreContainerSelectors';
 import {
     loadStatsPanelsWithNextQuery,
@@ -13,6 +14,7 @@ import {
 function mapStateToProps(state) {
   	return {
   		data: getExploreOrdersData(state),
+        paginationData: getExploreOrdersPaginationData(state),
         prevApiLink: getExploreOrdersPrevApiUrl(state),
         isLoaded: !getIsExploreOrdersLoading(state),
   	};
