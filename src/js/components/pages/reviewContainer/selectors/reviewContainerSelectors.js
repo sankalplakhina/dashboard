@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 export const getReviewApiPath = () => '/fapi/review';
-export const getReviewApiRowsCount = () => '5';
+export const getReviewApiRowsCount = () => '6';
 
 export const getReview = (state) => {
 	return state.review;
