@@ -7,12 +7,12 @@ class AvgStats extends React.Component {
 
 	render() {
 
-		const { data } = this.props;
+		const { data = {} } = this.props;
 		const { cols } = data;
 		return (
 			<div className="avgStats">
 		  		{
-		  			cols.map((column, idx) => {
+		  			cols && cols.map((column, idx) => {
 
 		  				let Content = null;
 		  				switch(data[column].type) {

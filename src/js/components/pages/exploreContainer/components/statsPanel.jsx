@@ -31,14 +31,14 @@ class StatsPanel extends React.Component {
 		const { data, isFixedExpanded, isDecisionButtonsHidden } = this.props;
 		const { panelTitle, rows } = data;
 		const { activeKey } = this.state;
-		const isSingleRow = (rows.length === 1);
+		const isSingleRow = (rows && rows.length === 1);
 		return (
 			<div className="clearfix">
 				<AvgStats data={panelTitle} />
 				<div className="statsPanel">
 					<PanelGroup activeKey={activeKey} accordion>
 						{
-							rows.map(
+							rows && rows.map(
 								(row, idx) => {
 									const isActive = (activeKey === idx);
 									const header = <StatsPanelHeader

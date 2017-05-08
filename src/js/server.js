@@ -27,13 +27,14 @@ import {
     authProtocol,
     authHost,
     authPort,
+    twProtocol,
     twHost,
     twPort,
 } from 'config/env';
 
 const targetUrl = `http://${apiHost}:${apiPort}`;
 const authUrl = `${authProtocol}://${authHost}:${authPort}/neo/v1`;
-const twUrl = `http://${twHost}:${twPort}`;
+const twUrl = `${twProtocol}://${twHost}:${twPort}/neo/v1`;
 const pretty = new PrettyError();
 const app = express();
 const server = new http.Server(app);
@@ -58,7 +59,9 @@ app.use('/twapi', (req, res) => {
 
 // Proxy to Frontend API server
 app.use('/fapi', (req, res) => {
-    proxy.web(req, res, { target: `${targetUrl}/fapi` });
+    // proxy.web(req, res, { target: `${targetUrl}/fapi` }); // uncomment this and comment bellow to bring in dummy data
+    delete req.headers.host; // hack to allow localhost
+    proxy.web(req, res, { target: `${twUrl}` });
 });
 
 // Proxy to API server

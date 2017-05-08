@@ -7,7 +7,7 @@ const ReviewContent = ({ data }) => {
 	return (
 		<div className="content">
 	  		{
-	  			rows.map((row, idx) => {
+	  			rows && rows.map((row, idx) => {
 	  				const isReviewTable = (row === 'reviewTable');
 	  				return (
 	  					<div className="row" key={idx}>

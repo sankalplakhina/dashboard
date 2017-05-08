@@ -10,7 +10,7 @@ class ExploreContent extends React.Component {
 		return (
 			<div className="content">
 		  		{
-		  			rows.map((row, idx) => {
+		  			rows && rows.map((row, idx) => {
 		  				return (
 		  					<div className="row" key={idx}>
 		  						<div className="col-sm-12">

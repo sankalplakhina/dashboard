@@ -6,12 +6,12 @@ import BiAxialChart from './biAxialChart';
 class AnalyzeContent extends React.Component {
 
 	render() {
-		const { data } = this.props;
+		const { data = {} } = this.props;
 		const { rows } = data;
 		return (
 			<div className="content">
 		  		{
-		  			rows.map((row, idx) => {
+		  			rows && rows.map((row, idx) => {
 		  				return (
 		  					<div className="row" key={idx}>
 		  						<div className="col-sm-12">
