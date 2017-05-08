@@ -133,7 +133,7 @@ export function login({ username, password }, apiLink = '/auth/login'){
 	};
 }
 
-export function register({ username, password, website }, apiLink = '/auth/register'){
+export function register({ username, password, website }, apiLink = '/auth/signup'){
 	return (dispatch, getState, client) => {
 	    dispatch(initiateRegister());
 	    // post data should be a json object with data property

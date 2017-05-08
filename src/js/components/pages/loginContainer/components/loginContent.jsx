@@ -8,8 +8,8 @@ class LoginContent extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			username: 'sankalp@gmail.com',
-			password: 'passwordtext',
+			username: 'shashank734@gmail.com',
+			password: '123456789',
 			errors: {},
 		};
 	}

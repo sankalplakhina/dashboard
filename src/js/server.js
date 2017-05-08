@@ -24,6 +24,7 @@ import {
     port,
     apiHost,
     apiPort,
+    authProtocol,
     authHost,
     authPort,
     twHost,
@@ -31,15 +32,12 @@ import {
 } from 'config/env';
 
 const targetUrl = `http://${apiHost}:${apiPort}`;
-const authUrl = `http://${authHost}:${authPort}`;
+const authUrl = `${authProtocol}://${authHost}:${authPort}/neo/v1`;
 const twUrl = `http://${twHost}:${twPort}`;
 const pretty = new PrettyError();
 const app = express();
 const server = new http.Server(app);
-const proxy = httpProxy.createProxyServer({
-    target: targetUrl,
-    ws: true,
-});
+const proxy = httpProxy.createProxyServer();
 
 global.__CLIENT__ = false; // eslint-disable-line
 
@@ -47,7 +45,10 @@ app.use(compression());
 
 // Proxy to Auth server
 app.use('/auth', (req, res) => {
-    proxy.web(req, res, { target: `${authUrl}/auth` });
+    delete req.headers.host; // hack to allow localhost
+    proxy.web(req, res, {
+        target: `${authUrl}/auth`,
+    });
 });
 
 // Proxy to API server

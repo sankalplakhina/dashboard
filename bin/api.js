@@ -134,7 +134,7 @@ app.post('/auth/reset-password', function(req, res, next) {
 	});
 });
 
-app.post('/auth/register', function(req, res, next) {
+app.post('/auth/signup', function(req, res, next) {
 
 	const { username, password, website } = req.body;
 	const user = users[_.findIndex(users, {
