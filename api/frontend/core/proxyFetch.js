@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import { apiHost, apiPort } from 'config/env';
+import { port } from 'config/env';
 import fetch from 'isomorphic-fetch';
 
 function formatUrl(baseUrl, path) {
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
-  return 'http://' + apiHost + ':' + apiPort + adjustedPath.replace(baseUrl, '/twapi');
+  return 'http://' + 'localhost' + ':' + port + adjustedPath.replace(baseUrl, '/twapi');
 }
 
 const baseFetchOptions = {

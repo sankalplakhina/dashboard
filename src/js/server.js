@@ -54,14 +54,13 @@ app.use('/auth', (req, res) => {
 
 // Proxy to API server
 app.use('/twapi', (req, res) => {
-    proxy.web(req, res, { target: `${twUrl}/twapi` });
+    delete req.headers.host; // hack to allow localhost
+    proxy.web(req, res, { target: `${twUrl}` });
 });
 
 // Proxy to Frontend API server
 app.use('/fapi', (req, res) => {
-    // proxy.web(req, res, { target: `${targetUrl}/fapi` }); // uncomment this and comment bellow to bring in dummy data
-    delete req.headers.host; // hack to allow localhost
-    proxy.web(req, res, { target: `${twUrl}` });
+    proxy.web(req, res, { target: `${targetUrl}/fapi` });
 });
 
 // Proxy to API server
