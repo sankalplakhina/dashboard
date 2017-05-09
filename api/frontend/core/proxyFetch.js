@@ -4,7 +4,7 @@ import fetch from 'isomorphic-fetch';
 
 function formatUrl(baseUrl, path) {
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
-  return 'http://' + 'localhost' + ':' + port + adjustedPath.replace(baseUrl, '/twapi');
+  return 'http://' + '127.0.0.1' + ':' + port + adjustedPath.replace(baseUrl, '/twapi');
 }
 
 const baseFetchOptions = {
