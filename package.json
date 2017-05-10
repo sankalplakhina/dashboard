@@ -33,7 +33,6 @@
       "env": {
         "NODE_PATH": "./",
         "NODE_ENV": "development"
-        "NODE_ENV": "development"d
       }
     },
     "start-server": {
