@@ -1,5 +1,5 @@
 import cookie from 'react-cookie';
-import { twProtocol, twHost, twPort, apiHost, apiPort, cookieKey as COOKIE_KEY } from 'config/env';
+import { apiHost, apiPort, cookieKey as COOKIE_KEY } from 'config/env';
 import fetch from 'isomorphic-fetch';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
@@ -7,7 +7,7 @@ const methods = ['get', 'post', 'put', 'patch', 'del'];
 function formatUrl(path) {
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
   if (__CLIENT__) {
-    return `${twProtocol}://` + twHost + ':' + twPort + adjustedPath;
+    return adjustedPath;
   }
   return 'http://' + apiHost + ':' + apiPort + adjustedPath;
 }
