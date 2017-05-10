@@ -122,7 +122,7 @@ export function setDecision(decision, orderId, orderTimestamp, apiLink = '/twapi
         const state = getState();
         const secret = getUserSecretKey(state);
         return client
-        .post(`${apiLink}?secret=${secret}&order_id=${orderId}&action_type=${decision.value}&order_timestamp=${orderTimestamp}`)
+        .get(`${apiLink}?secret=${secret}&order_id=${orderId}&action_type=${decision.value}&order_timestamp=${orderTimestamp}`)
         .then(data => {
             // update new data
             dispatch({
