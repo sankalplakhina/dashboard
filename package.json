@@ -33,6 +33,7 @@
       "env": {
         "NODE_PATH": "./",
         "NODE_ENV": "development"
+        "NODE_ENV": "development"d
       }
     },
     "start-server": {
@@ -50,7 +51,7 @@
       }
     },
     "build": {
-      "command": "webpack --colors --display-error-details --config webpack/prod.config.js",
+      "command": "./node_modules/.bin/webpack --colors --display-error-details --config webpack/prod.config.js",
       "env": {
         "NODE_ENV": "production",
         "NODE_PATH": "./"
