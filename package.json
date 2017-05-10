@@ -4,14 +4,14 @@
   "description": "Thirdwatch - Mobile Data Management Platform",
   "main": "./bin/server.js",
   "scripts": {
-    "dev": "concurrently --kill-others \"better-npm-run webpack-dev-server\" \"better-npm-run dev-server\" \"better-npm-run dev-api\"",
-    "dev-api": "better-npm-run dev-api",
-    "dev-server": "better-npm-run dev-server",
-    "webpack-dev-server": "better-npm-run webpack-dev-server",
-    "start-api": "better-npm-run start-api",
-    "start-server": "better-npm-run start-server",
-    "build": "better-npm-run build",
-    "start": "npm run build && concurrently --kill-others \"better-npm-run start-server\" \"better-npm-run start-api\""
+    "dev": "concurrently --kill-others \"./node_modules/.bin/better-npm-run webpack-dev-server\" \"./node_modules/.bin/better-npm-run dev-server\" \"./node_modules/.bin/better-npm-run dev-api\"",
+    "dev-api": "./node_modules/.bin/better-npm-run dev-api",
+    "dev-server": "./node_modules/.bin/better-npm-run dev-server",
+    "webpack-dev-server": "./node_modules/.bin/better-npm-run webpack-dev-server",
+    "start-api": "./node_modules/.bin/better-npm-run start-api",
+    "start-server": "./node_modules/.bin/better-npm-run start-server",
+    "build": "./node_modules/.bin/better-npm-run build",
+    "start": "npm run build && concurrently --kill-others \"./node_modules/.bin/better-npm-run start-server\" \"./node_modules/.bin/better-npm-run start-api\""
   },
   "betterScripts": {
     "dev-server": {
