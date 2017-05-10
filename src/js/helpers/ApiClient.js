@@ -1,12 +1,15 @@
 import cookie from 'react-cookie';
-import { apiHost, port, cookieKey as COOKIE_KEY } from 'config/env';
+import { apiHost, apiPort, cookieKey as COOKIE_KEY } from 'config/env';
 import fetch from 'isomorphic-fetch';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
 function formatUrl(path) {
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
-  return 'http://' + apiHost + ':' + port + adjustedPath;
+  if (__CLIENT__) {
+    return adjustedPath;
+  }
+  return 'http://' + apiHost + ':' + apiPort + adjustedPath;
 }
 
 function checkStatus(response) {

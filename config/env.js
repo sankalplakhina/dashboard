@@ -1,5 +1,5 @@
 // server configs
-export const port = process.env.PORT || 3000;
+export const port = process.env.PORT || 4004;
 // auth configs
 export const authProtocol = 'https';
 export const authHost = 'api.thirdwatch.ai';
@@ -10,7 +10,7 @@ export const twHost = 'api.thirdwatch.ai';
 export const twPort = 443;
 // api configs
 export const apiHost = 'localhost';
-export const apiPort = 3001;
+export const apiPort = 4006;
 // webpack configs
 export const webpackHost = 'localhost';
 export const webpackPort = 3002;
