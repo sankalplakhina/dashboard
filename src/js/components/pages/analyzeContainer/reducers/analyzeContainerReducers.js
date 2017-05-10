@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import * as ACTIONS from '../actions/analyzeContainerActionTypes';
-import * as datePickerActions from 'src/js/components/dashboard/actions/dashboardDatePickerActionTypes';
+import * as datePickerActions from 'src/js/components/dashboard/actions/dashBoardDatePickerActionTypes';
 
 const initialState = {
     loaded: false,

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import * as ACTIONS from '../actions/dashboardDatePickerActionTypes';
+import * as ACTIONS from '../actions/dashBoardDatePickerActionTypes';
 
 export function dashboard(state = {}, action = {}) {
     switch (action.type) {

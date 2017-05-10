@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import * as ACTIONS from '../actions/reviewContainerActionTypes';
-import * as datePickerActions from 'src/js/components/dashboard/actions/dashboardDatePickerActionTypes';
+import * as datePickerActions from 'src/js/components/dashboard/actions/dashBoardDatePickerActionTypes';
 
 export function reducer(state = {}, action = {}) {
 

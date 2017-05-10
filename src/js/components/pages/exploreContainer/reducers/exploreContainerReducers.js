@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { combineReducers } from 'redux';
 import * as ACTIONS from '../actions/exploreContainerActionTypes';
-import * as datePickerActions from 'src/js/components/dashboard/actions/dashboardDatePickerActionTypes';
+import * as datePickerActions from 'src/js/components/dashboard/actions/dashBoardDatePickerActionTypes';
 
 const explore = combineReducers({
   overview,

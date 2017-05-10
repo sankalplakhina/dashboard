@@ -1,4 +1,4 @@
-import * as ACTIONS from './dashboardDatePickerActionTypes';
+import * as ACTIONS from './dashBoardDatePickerActionTypes';
 
 export function setDayBucket(dayBucket) {
     return {
