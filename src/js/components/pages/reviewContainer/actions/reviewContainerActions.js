@@ -1,5 +1,5 @@
 import * as ACTIONS from './reviewContainerActionTypes';
-import { getDayBucketValue } from 'src/js/components/dashboard/selectors/dashboardDatePickerSelectors';
+import { getDayBucketValue } from 'src/js/components/dashboard/selectors/dashBoardDatePickerSelectors';
 import { getUserSecretKey } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
 import {
     getReviewApiPath,

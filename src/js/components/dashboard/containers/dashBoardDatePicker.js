@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import DashboardDatePicker from '../components/dashboardDatePicker';
-import { getDayBucket, getDayBucketsList } from '../selectors/dashboardDatePickerSelectors';
+import DashboardDatePicker from '../components/dashBoardDatePicker';
+import { getDayBucket, getDayBucketsList } from '../selectors/dashBoardDatePickerSelectors';
 import { setDayBucket } from '../actions/dashboardDatePickerActions';
 
 function mapStateToProps(state) {

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 import { bindHandlers } from 'react-bind-handlers';
 import cx from 'classnames';
-import DbTable from 'src/js/components/dashboard/components/DbTable';
+import DbTable from 'src/js/components/dashboard/components/dbTable';
 
 class ReviewTable extends React.Component {
 

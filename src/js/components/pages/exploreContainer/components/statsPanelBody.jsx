@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import DbTable from 'src/js/components/dashboard/components/DbTable';
+import DbTable from 'src/js/components/dashboard/components/dbTable';
 import StatsMapContainer from './statsMapContainer';
 import StatsPanelBodyHeading from './statsPanelBodyHeading';
 import StatsPanelBase from './statsPanelBase';
