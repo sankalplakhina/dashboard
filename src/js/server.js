@@ -22,8 +22,6 @@ import getRoutes from './routes';
 import Html from './components/html/html';
 import {
     port,
-    apiHost,
-    apiPort,
     authProtocol,
     authHost,
     authPort,
@@ -32,7 +30,7 @@ import {
     twPort,
 } from 'config/env';
 
-const targetUrl = `http://${apiHost}:${apiPort}`;
+const frontendApiRouter = require('api/frontend');
 const authUrl = `${authProtocol}://${authHost}:${authPort}/neo/v1`;
 const twUrl = `${twProtocol}://${twHost}:${twPort}/neo/v1`;
 const pretty = new PrettyError();
@@ -58,16 +56,6 @@ app.use('/twapi', (req, res) => {
     proxy.web(req, res, { target: `${twUrl}` });
 });
 
-// Proxy to Frontend API server
-app.use('/fapi', (req, res) => {
-    proxy.web(req, res, { target: `${targetUrl}/fapi` });
-});
-
-// Proxy to API server
-app.use('/api', (req, res) => {
-    proxy.web(req, res, { target: `${targetUrl}/api` });
-});
-
 server.on('upgrade', (req, socket, head) => {
     proxy.ws(req, socket, head);
 });
@@ -91,6 +79,7 @@ app.use('/assets', express.static(path.resolve('public/assets')));
 app.use('/public', express.static(path.resolve('public')));
 app.use(favicon(path.join('public/static/images/favicon', 'favicon.ico')));
 
+app.use('/fapi', frontendApiRouter);
 app.use((req, res) => {
 
     if (process.env.NODE_ENV === 'development') {
