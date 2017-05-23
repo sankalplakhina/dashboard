@@ -10,5 +10,5 @@
 # PM2?
 * Global install PM2 by running `npm install pm2@latest -g`
 * Run `npm run build` to build assets for production.
-* Run `pm2 start ecosystem.config.json` to start dashboard and dashboard-api servers.
+* Run `pm2 start ecosystem.config.json` to start dashboard server.
 
