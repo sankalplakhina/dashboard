@@ -42,10 +42,10 @@ class Navbar extends React.Component {
     	            </ul>
     	            <div className="col-lg-12 menu navPad">
     	                <ul className="nav navbar-nav navbar-right">
-    	                    <li><a href="http://www.thirdwatch.ai/" target="_blank">Our products</a></li>
-    	                    <li><a href="http://www.thirdwatch.ai/" target="_blank">Resources</a></li>
-    	                    <li><a href="http://api.thirdwatch.ai/" target="_blank">Docs</a></li>
-    	                    <li><a href="http://www.thirdwatch.ai/" target="_blank">Pricing</a></li>
+    	                    <li><a href="//www.thirdwatch.ai/" target="_blank">Our products</a></li>
+    	                    <li><a href="//www.thirdwatch.ai/" target="_blank">Resources</a></li>
+    	                    <li><a href="//api.thirdwatch.ai/" target="_blank">Docs</a></li>
+    	                    <li><a href="//www.thirdwatch.ai/" target="_blank">Pricing</a></li>
     	                    <li><a href="mailto:hello@thirdwatch.ai" target="_blank">Support</a></li>
     	                </ul>
     	            </div>
