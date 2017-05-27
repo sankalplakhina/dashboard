@@ -22,6 +22,7 @@ const component = (
           filter={item => !item.deferred}
         />
       }
+      onUpdate={() => window.scrollTo(0,0)}
     >
     {getRoutes(store)}
   </Router>
