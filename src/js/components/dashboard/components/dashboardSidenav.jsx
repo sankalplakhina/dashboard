@@ -23,12 +23,14 @@ class DashboardSidenav extends React.Component {
                             Review
                         </Link>
         	        </li>
-        	        <li className={cx({"active": isAnalyzeView})}>
+        	        {
+                        /*<li className={cx({"active": isAnalyzeView})}>
         	            <Link to="/analyze">
         	                <figure className="analyze"></figure>
                             Analyze
                         </Link>
-        	        </li>
+        	            </li>*/
+                    }
         	    </ul>
         	</div>
         );
