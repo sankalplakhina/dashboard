@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
+import { Link } from 'react-router';
 import { bindHandlers } from 'react-bind-handlers';
 import cx from 'classnames';
 import { Table, Thead, Th, Tr, Td, Sort } from 'reactable';
@@ -92,7 +93,8 @@ class DbTable extends React.Component {
 				 					Object.keys(row).map((key, index) => {
 				 						const isSelectedBySort = (selectedColumn === key);
 				 						const value = row[key];
-				 						let children = value;
+				 						let children;
+
 				 						if (_.isObject(value)) {
 				 							switch(value.type) {
 				 								case 'score':
@@ -102,6 +104,7 @@ class DbTable extends React.Component {
 				 											{value.text}
 				 										</div>);
 				 								break;
+
 				 								case 'latestPaymentAbuseStatus':
 				 								children = (
 				 									<div
@@ -110,6 +113,7 @@ class DbTable extends React.Component {
 				 										{value.text}
 				 									</div>)
 				 								break;
+
 				 								case 'avsCvv':
 				 								children = (
 				 									<div>
@@ -123,11 +127,25 @@ class DbTable extends React.Component {
 				 									</div>);
 				 								break;
 				 							}
+				 						} else {
+				 							switch(key) {
+				 								case 'id':
+				 								children = (
+				 									<Link className="colorRed" to={`/order/${value}`}>
+				 										{value}
+				 									</Link>
+				 								);
+				 								break;
+
+				 								default:
+				 								children = value
+				 							}
 				 						}
 				 						return (
 				 							<Td className={cx({'sorting_1': isSelectedBySort})}
 				 								column={key}
-				 								key={index}
+				 								key={key}
+				 								label={key}
 				 							>
 				 							    {children}
 				 							</Td>
