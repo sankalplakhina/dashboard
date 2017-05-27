@@ -10,13 +10,13 @@ class Footer extends React.Component {
             return (
             	<div className="footer">
             	    <div className="pull-left">
-            	        <a href="http://www.thirdwatch.ai/" target="_blank">Our products</a>
-            	        <a href="http://www.thirdwatch.ai/" target="_blank">Resources</a>
-            	        <a href="http://api.thirdwatch.ai/" target="_blank">Docs</a>
-            	        <a href="http://www.thirdwatch.ai/" target="_blank">Pricing</a>
+            	        <a href="//www.thirdwatch.ai/" target="_blank">Our products</a>
+            	        <a href="//www.thirdwatch.ai/" target="_blank">Resources</a>
+            	        <a href="//api.thirdwatch.ai/" target="_blank">Docs</a>
+            	        <a href="//www.thirdwatch.ai/" target="_blank">Pricing</a>
             	        <a href="mailto:hello@thirdwatch.ai" target="_blank">Support</a>
             	    </div>
-            	    <div className="pull-right">&copy; ThirdWatch Pvt. Ltd. 2016 All Rights Reserved</div>
+            	    <div className="pull-right">&copy; ThirdWatch Pvt. Ltd. 2017 All Rights Reserved</div>
             	</div>
             );
         }
