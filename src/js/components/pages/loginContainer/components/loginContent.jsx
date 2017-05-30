@@ -34,7 +34,7 @@ class LoginContent extends React.Component {
 		}
 	}
 
-	updateFormWithErrors(errors) {
+	updateFormWithErrors(errors = {}) {
 		this.setState({
 			errors
 		})
