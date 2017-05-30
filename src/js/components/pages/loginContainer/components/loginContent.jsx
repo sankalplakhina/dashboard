@@ -7,11 +7,7 @@ class LoginContent extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			username: '',
-			password: '',
-			errors: {},
-		};
+		this.state = this.getInitState();
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -27,6 +23,7 @@ class LoginContent extends React.Component {
 		if (hasLoginLoaded && responseMessage) {
 			alert(responseMessage);
 			if (isResponseSuccess) {
+				this.initState();
 	        	router.replace('/');
 			} else {
 				this.updateFormWithErrors(responseErrors)
@@ -38,6 +35,18 @@ class LoginContent extends React.Component {
 		this.setState({
 			errors
 		})
+	}
+
+	getInitState(){
+		return {
+			username: '',
+			password: '',
+			errors: {},
+		};
+	}
+
+	initState(){
+		this.setState(this.getInitState());
 	}
 
 	handleSubmitClick(event) {
@@ -69,7 +78,7 @@ class LoginContent extends React.Component {
 			    <form onSubmit={this.handleSubmitClick}>
 			        <input type="text" value={username} onChange={this.handleChangeUsername} placeholder="E-mail or username" required />
 			        {errors['username'] && <div className="error-msg">{errors['username']}</div>}
-			        <input type="password" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
+			        <input type="password" minLength="8" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
 			        {errors['password'] && <div className="error-msg">{errors['password']}</div>}
 			        <input type="submit" value="LOGIN" />
 			        <div className="text-left">
