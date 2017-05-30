@@ -16,6 +16,7 @@ class RegisterContent extends React.Component {
 			isResponseSuccess,
 			responseMessage,
 			responseErrors,
+			router,
 		} = nextProps;
 
 		const hasRegistrationLoaded = !isRegisterationLoading && isRegisterationLoading !== this.props.isRegisterationLoading;
@@ -23,6 +24,7 @@ class RegisterContent extends React.Component {
 			alert(responseMessage);
 			if (isResponseSuccess) {
 				this.initState();
+				router.replace('/login');
 			} else {
 				this.updateFormWithErrors(responseErrors)
 			}
@@ -97,7 +99,7 @@ class RegisterContent extends React.Component {
 			    <form onSubmit={this.handleSubmitClick}>
 			        <input type="email" value={username} onChange={this.handleChangeUserName} placeholder="Username" required />
 			        {errors['email'] && <div className="error-msg">{errors['email']}</div>}
-			        <input type="password" minLength="7" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
+			        <input type="password" minLength="8" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
 			        {errors['password'] && <div className="error-msg">{errors['password']}</div>}
 			        <input type="email" value={website} onChange={this.handleChangeWebsite} placeholder="Website" required />
 			        {(errors['website'] || errors['name']) && <div className="error-msg">{errors['website'] || errors['name']}</div>}
