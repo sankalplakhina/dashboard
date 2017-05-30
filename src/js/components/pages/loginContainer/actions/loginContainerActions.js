@@ -83,28 +83,6 @@ export function setResetPasswordFailure(data){
 	};
 }
 
-
-export function initiateLogout(){
-	return {
-		type: ACTIONS.LOGOUT
-	};
-}
-
-export function setLogoutSuccess(data) {
-	cookie.remove(COOKIE_KEY, data); // remove login info from cookies
-	return {
-		type: ACTIONS.LOGOUT_SUCCESS,
-		data
-	};
-}
-
-export function setLogoutFailure(error){
-	return {
-		type: ACTIONS.LOGOUT_FAILURE,
-		error
-	};
-}
-
 export function tryAuthenticationWithCookies(){
 	return (dispatch, getState, client) => {
 		const data = cookie.load(COOKIE_KEY);
@@ -187,16 +165,7 @@ export function resetPassword({ password, resetToken }, apiLink = '/auth/reset-p
 	};
 }
 
-export function logout(router, apiLink = '/auth/logout'){
-	return (dispatch, getState, client) => {
-	    initiateLogout();
-	    // post data should be a json object with data property
-	    // as per configured in client
-	    return client.get(apiLink)
-	    .then((data) => {
-	        dispatch(setLogoutSuccess(data.data));
-	        router.replace('/login');
-	    })
-	    .catch((error) => dispatch(setLoginFailure(error)));
-	};
+export function logout(){
+	cookie.remove(COOKIE_KEY); // remove login info from cookies
+	return window.location.replace('/login');
 }

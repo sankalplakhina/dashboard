@@ -6,7 +6,6 @@ const initialState = {
 	isRegisterLoading: false,
 	isForgotPasswordLoading: false,
 	isResetPasswordLoading: false,
-	isLogoutLoading: false,
 };
 
 export default function auth(state = initialState, action = {}){
@@ -88,18 +87,6 @@ export default function auth(state = initialState, action = {}){
 			return _.defaults({
 				isLogoutLoading: true,
 				data: {},
-			}, state);
-
-		case ACTIONS.LOGOUT_SUCCESS:
-			return _.defaults({
-				isLogoutLoading: false,
-				data: action.data
-			}, state);
-
-		case ACTIONS.LOGOUT_FAILURE:
-			return _.defaults({
-				isLogoutLoading: false,
-				data: action.error
 			}, state);
 
 		default:

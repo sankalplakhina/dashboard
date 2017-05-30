@@ -19,11 +19,11 @@ const twApiRouter = require('api/tw');
 const { apiPort } = require('config/env');
 
 const users = [
-  {
-	name: "sankalp@gmail.com",
-	password: "passwordtext",
-	secret: "21359e4a71"
-  },
+ //  {
+	// name: "sankalp@gmail.com",
+	// password: "passwordtext",
+	// secret: "21359e4a71"
+ //  },
 ];
 
 // jwt passport strategy
