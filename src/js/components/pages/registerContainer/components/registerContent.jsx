@@ -7,13 +7,7 @@ class RegisterContent extends React.Component {
 
 	constructor(props) {
 		super(props);
-		// this.state = this.getInitState();
-		this.state = {
-			username: 'test@gmail.com',
-			password: 'hellopassword',
-			website: 'ABC',
-			errors: {},
-		};
+		this.state = this.getInitState();
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -46,6 +40,7 @@ class RegisterContent extends React.Component {
 			username: '',
 			password: '',
 			website: '',
+			acceptTerms: false,
 			errors: {},
 		};
 	}
@@ -56,10 +51,7 @@ class RegisterContent extends React.Component {
 
 	handleSubmitClick(event) {
 		event.preventDefault();
-		const { username, password, website } = this.state;
-		if (username && password && website) {
-			this.props.onRegisterSubmit(this.state);
-		}
+		this.props.onRegisterSubmit(this.state);
 	}
 
 	handleChangeUserName(event) {
@@ -84,12 +76,19 @@ class RegisterContent extends React.Component {
 		});
 	}
 
+	handleTermsCheck(event) {
+		this.setState({
+			acceptTerms: event.target.checked
+		});
+	}
+
 	render() {
 
 		const {
 			username,
 			password,
 			website,
+			acceptTerms,
 			errors,
 		} = this.state;
 
@@ -97,17 +96,16 @@ class RegisterContent extends React.Component {
 			<div className="content">
 			    <form onSubmit={this.handleSubmitClick}>
 			        <input type="email" value={username} onChange={this.handleChangeUserName} placeholder="Username" required />
-			        {errors['username'] && <div className="error-msg">{errors['username']}</div>}
-			        <input type="password" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
+			        {errors['email'] && <div className="error-msg">{errors['email']}</div>}
+			        <input type="password" minLength="7" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
 			        {errors['password'] && <div className="error-msg">{errors['password']}</div>}
-			        <input type="text" value={website} onChange={this.handleChangeWebsite} placeholder="Website" required />
-			        {errors['website'] && <div className="error-msg">{errors['website']}</div>}
-			        <div className="rememberMe">
-			            <input type="checkbox" />
+			        <input type="email" value={website} onChange={this.handleChangeWebsite} placeholder="Website" required />
+			        {(errors['website'] || errors['name']) && <div className="error-msg">{errors['website'] || errors['name']}</div>}
+			        <div className="rememberMe checkbox">
 			            <label>
-			            	<span></span>I accept all
+			            	<input type="checkbox" checked={acceptTerms} onChange={this.handleTermsCheck} required />
 			            </label>
-			            <a href="#"> Terms &amp; Condition</a>
+			            I accept all <a href="#"> Terms &amp; Condition</a>
 			        </div>
 			        <input type="submit" value="REGISTER" />
 			        <div className="text-left">
