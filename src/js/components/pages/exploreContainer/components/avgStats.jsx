@@ -33,7 +33,7 @@ class AvgStats extends React.Component {
 							case 'chart':
 							  Content = data[column].rows.map(
 											(row, idx) =>
-											<DbPieChart {...row} key={idx} />
+											<DbPieChart {...row} key={idx} width={300} height={230} />
 									  	);
 							break;
 		  				}

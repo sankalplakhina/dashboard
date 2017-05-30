@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import moment from 'moment';
 import React from 'react';
 import { Link } from 'react-router';
 import { bindHandlers } from 'react-bind-handlers';
@@ -135,6 +136,15 @@ class DbTable extends React.Component {
 				 										{value}
 				 									</Link>
 				 								);
+				 								break;
+
+				 								case 'date':
+				 								children = (
+				 									<div>
+				 										{moment(value).format('MMMM Do YYYY, h:mm:ss A')}
+				 									</div>
+				 								);
+
 				 								break;
 
 				 								default:
