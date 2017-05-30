@@ -8,8 +8,8 @@ class LoginContent extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			username: 'shashank734@gmail.com',
-			password: '123456789',
+			username: '',
+			password: '',
 			errors: {},
 		};
 	}
@@ -71,12 +71,6 @@ class LoginContent extends React.Component {
 			        {errors['username'] && <div className="error-msg">{errors['username']}</div>}
 			        <input type="password" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
 			        {errors['password'] && <div className="error-msg">{errors['password']}</div>}
-			        <div className="rememberMe">
-			            <input type="checkbox" />
-			            <label>
-			            	<span></span>Remember Me
-			            </label>
-			        </div>
 			        <input type="submit" value="LOGIN" />
 			        <div className="text-left">
 			        	<Link to="/forgot-password">Forgot your password?</Link>
