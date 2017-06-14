@@ -10,8 +10,8 @@ function processResponse(req, res, data) {
 			latestPaymentAbuseStatus: {
 				type: 'latestPaymentAbuseStatus',
 				text: value.status,
-				safe: value.flag === "green",
-				risky: value.flag === "red",
+				safe: (value.status === 'approved'),
+				risky: (value.status !== 'approved'),
 			},
 		};
 	});
