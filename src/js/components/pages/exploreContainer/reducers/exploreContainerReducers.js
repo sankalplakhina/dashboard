@@ -125,6 +125,7 @@ function updateOrderDecisionSuccess(state, action) {
 				decision: _.defaults({
 					loading: false,
 					loaded: true,
+					success: true,
 				}, action.decision, action.data)
 			}, state.data[action.orderId])
 		}, state.data)

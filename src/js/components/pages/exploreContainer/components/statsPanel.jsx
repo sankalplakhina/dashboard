@@ -40,6 +40,12 @@ class StatsPanel extends React.Component {
 						{
 							rows && rows.map(
 								(row, idx) => {
+
+									// hide row's for which decision taken
+									if (data[row].decision && data[row].decision.success) {
+										return null;
+									}
+
 									const isActive = (activeKey === idx);
 									const header = <StatsPanelHeader
 															onSelect={this.handleSelect}
