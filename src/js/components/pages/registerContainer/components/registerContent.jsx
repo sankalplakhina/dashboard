@@ -101,7 +101,14 @@ class RegisterContent extends React.Component {
 			        {errors['email'] && <div className="error-msg">{errors['email']}</div>}
 			        <input type="password" minLength="8" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
 			        {errors['password'] && <div className="error-msg">{errors['password']}</div>}
-			        <input type="email" value={website} onChange={this.handleChangeWebsite} placeholder="Website" required />
+			        <input
+			        	type="text"
+			        	value={website}
+			        	onChange={this.handleChangeWebsite}
+			        	placeholder="Website"
+			        	pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
+			        	required
+			        />
 			        {(errors['website'] || errors['name']) && <div className="error-msg">{errors['website'] || errors['name']}</div>}
 			        <div className="rememberMe checkbox">
 			            <label>
