@@ -16,17 +16,26 @@ class StatsMap extends React.Component {
 	handleInitMap() {
 		const { props: { data }, el } = this;
 		const { markers } = data;
+		const geocoder = new google.maps.Geocoder();
 		const map = new google.maps.Map(el, {
 			zoom: 4,
-			center: new google.maps.LatLng(-25.363, 131.044)
 		});
 		markers.map(function(mark) {
 			const markerData = data[mark];
-			const marker = new google.maps.Marker({
-				position: new google.maps.LatLng(markerData.lat, markerData.lang),
-				// icon: `/public/static/images/${markerData.icon}`,
-				title: mark,
-				map: map
+			geocoder.geocode({
+				'address': markerData.address
+			}, function(results, status) {
+				if (status == 'OK') {
+					map.setCenter(results[0].geometry.location);
+			        const marker = new google.maps.Marker({
+			            position: results[0].geometry.location,
+						icon: `/public/static/images/${markerData.icon}`,
+						title: mark,
+			            map: map,
+			        });
+			    } else {
+			    	console.warn('Geocode was not successful for the following reason: ' + status);
+			    }
 			});
 		});
 	}
