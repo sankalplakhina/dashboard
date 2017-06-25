@@ -7,10 +7,7 @@ class ForgotPasswordContent extends React.Component {
 
 	constructor(props) {
 		super(props);
-		// this.state = this.getInitState();
-		this.state = {
-			username: 'test@gmail.com',
-		};
+		this.state = this.getInitState();
 	}
 
 	componentWillReceiveProps(nextProps) {

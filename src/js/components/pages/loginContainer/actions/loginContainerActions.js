@@ -147,7 +147,7 @@ export function forgotPassword({ username }, apiLink = '/auth/forgot'){
 	};
 }
 
-export function resetPassword({ password, resetToken }, apiLink = '/auth/reset-password'){
+export function resetPassword({ password, resetToken }, apiLink = '/auth/resetpassword'){
 	return (dispatch, getState, client) => {
 	    dispatch(initiateResetPassword());
 	    // post data should be a json object with data property

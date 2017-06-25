@@ -7,11 +7,7 @@ class ResetPasswordContent extends React.Component {
 
 	constructor(props) {
 		super(props);
-		// this.state = this.getInitState();
-		this.state = {
-			password: 'hellopassword',
-			confirmPassword: 'hellopassword',
-		};
+		this.state = this.getInitState();
 	}
 
 	componentWillReceiveProps(nextProps) {
