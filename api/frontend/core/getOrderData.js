@@ -137,15 +137,11 @@ function getCollapsedDataLeftRowBillingShippingData(value){
 			icon: 'billing.png',
 			heading: value.billing_address.name,
 			address: getAddressText(value.billing_address),
-			lat: -25.363,
-			lang: 131.044,
 		},
 		shipping: {
 			icon: 'shipping.png',
 			heading: value.shipping_address.name,
 			address: getAddressText(value.shipping_address),
-			lat: -20.363,
-			lang: 131.044,
 		}
 	};
 }
