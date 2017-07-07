@@ -79,6 +79,11 @@ app.use('/assets', express.static(path.resolve('public/assets')));
 app.use('/public', express.static(path.resolve('public')));
 app.use(favicon(path.join('public/static/images/favicon', 'favicon.ico')));
 
+app.get('/robots.txt', (req, res) => {
+    res.type('text/plain');
+    res.send("User-agent: *\nDisallow: /");
+});
+
 app.use('/fapi', frontendApiRouter);
 app.use((req, res) => {
 
