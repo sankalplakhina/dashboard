@@ -7,8 +7,7 @@ export const isAuthViewSelector = (state) => {
   	return pathname === '/login' ||
            pathname === '/register' ||
   		   pathname === '/forgot-password' ||
-           pathname === '/reset-password' ||
-  		   pathname === '/404';
+           pathname === '/reset-password';
 };
 
 export const getIsExploreView = (state) => {

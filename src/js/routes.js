@@ -86,8 +86,7 @@ export default (store) => {
                 <Route path="review" component={ReviewContainer}/>
                 <Route path="analyze" component={AnalyzeContainer}/>
             </Route>
-            <Route path="404" component={NotFound} status={404} />
-            <Redirect path="*" to={'/404'} />
+            <Route path="*" component={NotFound} status={404} />
         </Route>
     );
 };

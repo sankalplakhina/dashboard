@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { isAuthViewSelector } from 'src/js/components/appContainer/selectors/appContainerSelectors';
@@ -19,4 +20,13 @@ function mapDispatchToProps(dispatch, ownProps) {
   	};
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));
+function mergeProps(stateProps, dispatchProps, ownProps) {
+	const { isNotFoundComponent } = ownProps;
+	const mergeProps = {};
+	if (isNotFoundComponent) {
+		mergeProps.addFakeNavSpace = false;
+	}
+  	return _.defaults(mergeProps, stateProps, dispatchProps, ownProps);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps, mergeProps)(Navbar));

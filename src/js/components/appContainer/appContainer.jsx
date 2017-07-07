@@ -5,11 +5,12 @@ import Footer from 'src/js/components/common/containers/footer';
 class AppContainer extends React.Component {
 
 	render() {
+		const isNotFoundComponent = (React.Children.only(this.props.children).type.name === 'NotFound');
 		return (
 			<div>
-				<Navbar />
+				<Navbar isNotFoundComponent={isNotFoundComponent} />
 				{this.props.children}
-				<Footer />
+				<Footer isNotFoundComponent={isNotFoundComponent} />
 			</div>
 		);
 	}
