@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { isAuthViewSelector } from 'src/js/components/appContainer/selectors/appContainerSelectors';
+import { isAuthViewSelector, getIsActivateView } from 'src/js/components/appContainer/selectors/appContainerSelectors';
 import { getUserData } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
 import { logout as onLogoutClick } from 'src/js/components/pages/loginContainer/actions/loginContainerActions';
 
@@ -11,6 +11,7 @@ function mapStateToProps(state) {
   	return {
   		addFakeNavSpace: !isAuthViewSelector(state),
   		userInfo: getUserData(state),
+  		isEnabled: !getIsActivateView(state),
   	};
 }
 
