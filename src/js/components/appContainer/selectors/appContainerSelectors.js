@@ -22,6 +22,11 @@ export const getIsAnalyzeView = (state) => {
   return getLocationPathName(state) === "/analyze";
 };
 
+export const getIsActivateView = (state) => {
+  return getLocationPathName(state) === "/activate";
+};
+
+
 export const getResetTokenParam = (state) => {
   return getRouteQueryParams(state).token;
 };

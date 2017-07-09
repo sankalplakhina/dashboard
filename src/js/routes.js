@@ -9,6 +9,7 @@ import OrderContainer from './components/pages/order/containers/orderContainer';
 import ExploreContainer from './components/pages/exploreContainer/containers/exploreContainer';
 import ReviewContainer from './components/pages/reviewContainer/containers/reviewContainer';
 import AnalyzeContainer from './components/pages/analyzeContainer/containers/analyzeContainer';
+import ActivateContainer from 'src/js/components/pages/activate/containers/activateContainer';
 import NotFound from './components/pages/notFound/components/notFound';
 import { isAuthDataLoaded } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
 import { tryAuthenticationWithCookies } from 'src/js/components/pages/loginContainer/actions/loginContainerActions';
@@ -78,6 +79,7 @@ export default (store) => {
                 <Route path="register" component={RegisterContainer}/>
                 <Route path="forgot-password" component={ForgotPasswordContainer}/>
                 <Route path="reset-password" component={ResetPasswordContainer}/>
+                <Route path="activate" component={ActivateContainer}/>
             </Route>
             {/* Routes requiring login */}
             <Route onEnter={requireLogin}>

@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { isAuthViewSelector } from 'src/js/components/appContainer/selectors/appContainerSelectors';
+import { isAuthViewSelector, getIsActivateView } from 'src/js/components/appContainer/selectors/appContainerSelectors';
 import Footer from '../components/footer';
 
 function mapStateToProps(state) {
   	return {
-  		hideFooter: isAuthViewSelector(state)
+  		hideFooter: isAuthViewSelector(state) || getIsActivateView(state)
   	};
 }
 
