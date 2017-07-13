@@ -1,17 +1,17 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router'
 import {
-	getIsLoginLoading,
+	getIsRegisterationLoading,
 	getIsResponseSuccess,
 	getResponseMessage,
 	getResponseErrors,
 } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
-import { login } from '../actions/loginContainerActions';
-import LoginContainer from '../components/loginContainer';
+import { register } from 'src/js/components/pages/loginContainer/actions/loginContainerActions';
+import NewRegisterContent from '../components/newRegisterContent';
 
 function mapStateToProps(state) {
   	return {
-  		isLoginLoading: getIsLoginLoading(state),
+  		isRegisterationLoading: getIsRegisterationLoading(state),
   		isResponseSuccess: getIsResponseSuccess(state),
   		responseMessage: getResponseMessage(state),
   		responseErrors: getResponseErrors(state),
@@ -20,10 +20,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch, ownProps) {
   	return {
-  		onLoginSubmit(username, password) {
-  			dispatch(login({ username, password }));
+  		onRegisterSubmit({ username, password, website }) {
+  			dispatch(register({ username, password, website }))
   		},
   	};
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginContainer));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewRegisterContent));

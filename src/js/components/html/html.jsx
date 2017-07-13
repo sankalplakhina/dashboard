@@ -41,6 +41,7 @@ class Html extends React.Component {
                         <style dangerouslySetInnerHTML={{ __html: require('../appContainer/styles/appContainer.less')._style }} />
                         : null
                     }
+                    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" />
                 </head>
                 <body>
                     <div id="root" dangerouslySetInnerHTML={{ __html: content }} />

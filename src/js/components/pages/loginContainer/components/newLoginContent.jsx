@@ -3,7 +3,7 @@ import { bindHandlers } from 'react-bind-handlers';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
 
-class LoginContent extends React.Component {
+class NewLoginContent extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -74,20 +74,20 @@ class LoginContent extends React.Component {
 		const { username, password, errors } = this.state;
 
 		return (
-			<div className="content">
-			    <form onSubmit={this.handleSubmitClick}>
-			        <input type="text" value={username} onChange={this.handleChangeUsername} placeholder="E-mail or username" required />
-			        {errors['username'] && <div className="error-msg">{errors['username']}</div>}
+			<div className="loginNbox">
+			    <form className="inputContainer" onSubmit={this.handleSubmitClick}>
+			        <input type="text" value={username} onChange={this.handleChangeUsername} placeholder="Email or Username" required />
+			        {/*errors['username'] && <div className="error-msg">{errors['username']}</div>*/}
 			        <input type="password" minLength="8" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
-			        {errors['password'] && <div className="error-msg">{errors['password']}</div>}
-			        <input type="submit" value="LOGIN" />
-			        <div className="text-left">
-			        	<Link to="/forgot-password">Forgot your password?</Link>
-			        </div>
+			        {/*errors['password'] && <div className="error-msg">{errors['password']}</div>*/}
+			        <button type="submit">Log In</button>
 			    </form>
+			    <div className="link">
+			        <Link to="/forgot-password">Forgot Password?</Link>
+			    </div>
 			</div>
 		);
 	}
 }
 
-export default bindHandlers(LoginContent);
+export default bindHandlers(NewLoginContent);

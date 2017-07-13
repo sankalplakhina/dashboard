@@ -13,7 +13,6 @@ class ForgotPasswordContainer extends React.Component {
 			        <h1>Forgot Password</h1>
 			        <p><em>Input your registered email id</em></p>
 			        <ForgotPasswordContent {...this.props} />
-			        <h1>Login instead?? <Link to="/login">Login Now</Link></h1>
 			    </div>
 			</div>
 		);

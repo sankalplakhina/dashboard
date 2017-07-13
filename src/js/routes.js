@@ -1,8 +1,8 @@
 import React from 'react';
 import { IndexRoute, Route, Redirect } from 'react-router';
-import AppContainer from './components/appContainer/appContainer';
-import LoginContainer from './components/pages/loginContainer/containers/loginContainer';
-import RegisterContainer from './components/pages/registerContainer/containers/registerContainer';
+import AppContainer from 'src/js/components/appContainer/appContainer';
+import LoggedOutAppContainer from 'src/js/components/appContainer/loggedOutAppContainer';
+import NewLoginContainer from 'src/js/components/pages/loginContainer/containers/newLoginContainer';
 import ForgotPasswordContainer from './components/pages/forgotPassword/containers/forgotPasswordContainer';
 import ResetPasswordContainer from './components/pages/resetPassword/containers/resetPasswordContainer';
 import OrderContainer from './components/pages/order/containers/orderContainer';
@@ -72,17 +72,17 @@ export default (store) => {
 
 
     return (
-        <Route path="/" component={AppContainer}>
+        <Route path="/">
             <IndexRoute onEnter={redirectFromIndex} />
-            <Route onEnter={requireLogout}>
-                <Route path="login" component={LoginContainer}/>
-                <Route path="register" component={RegisterContainer}/>
+            <Route onEnter={requireLogout} path="activate" component={ActivateContainer}/>
+            <Route onEnter={requireLogout} component={LoggedOutAppContainer}>
+                <Route path="login" component={NewLoginContainer}/>
+                <Route path="register" component={NewLoginContainer}/>
                 <Route path="forgot-password" component={ForgotPasswordContainer}/>
                 <Route path="reset-password" component={ResetPasswordContainer}/>
-                <Route path="activate" component={ActivateContainer}/>
             </Route>
             {/* Routes requiring login */}
-            <Route onEnter={requireLogin}>
+            <Route onEnter={requireLogin} component={AppContainer}>
                 <Route path="explore" component={ExploreContainer}/>
                 <Route path="order/:orderId" component={OrderContainer}/>
                 <Route path="review" component={ReviewContainer}/>

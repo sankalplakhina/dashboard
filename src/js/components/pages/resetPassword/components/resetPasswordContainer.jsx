@@ -13,7 +13,6 @@ class ResetPasswordContainer extends React.Component {
 			        <h1>Reset Password</h1>
 			        <p><em>Set your new password</em></p>
 			        <ResetPasswordContent {...this.props} />
-			        <h1>Login instead? <Link to="/login">Login Now</Link></h1>
 			    </div>
 			</div>
 		);

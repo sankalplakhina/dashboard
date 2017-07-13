@@ -10,6 +10,14 @@ export const isAuthViewSelector = (state) => {
            pathname === '/reset-password';
 };
 
+export const getIsRegisterView = (state) => {
+  return getLocationPathName(state) === "/register";
+};
+
+export const getIsLoginView = (state) => {
+  return getLocationPathName(state) === "/login";
+};
+
 export const getIsExploreView = (state) => {
   return getLocationPathName(state) === "/explore";
 };

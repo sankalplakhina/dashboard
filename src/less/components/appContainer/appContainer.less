@@ -196,7 +196,7 @@ h1.priceDestH1 {text-align: center; color: #d0011b; text-transform: uppercase; m
 
 /* Login */
 .error-404 {display: inline-block; width:600px; margin-top: 105px; padding: 100px;}
-.loginBox {display: inline-block; width:600px; margin-top: 105px;}
+.loginBox {display: inline-block; width:600px;}
 .loginBox h1 {font-family: 'AvenirNext-Bold'; font-size: 28px; color: #313131; font-weight: bold; margin: 30px 0;}
 .loginBox p {margin-bottom: 30px; font-size: 16px;font-family: 'AvenirNext-Medium';}
 .loginBox a {color: #d0011b; text-decoration: underline;}
@@ -419,6 +419,45 @@ span.bgGreen, span.bgRed {width: 45px; font-size: 12px; display: block;padding: 
 .content h4.media-heading {font-size: 14px;color: #333333;}
 
 /* New Login */
+div.login { background: #fff; padding-top: 105px;font-family: 'Roboto', sans-serif; }
+div.login .navbar { background: #fff; box-shadow: 0 0 10px #eee; }
+div.login .navbar > .container-fluid .navbar-brand { margin-top: 25px; }
+.loginNbox { float: right; margin: 20px 0; padding-right: 50px; }
+.inputContainer input, .inputContainer button { height: 36px; padding: 0 15px; background: #f5f5f5; border:none; margin-left: 10px; outline: none; border-radius: 2px; width: 160px; font-weight: 500;}
+.inputContainer button { background: #d0011b; color: #fff; width: auto; }
+.loginNbox .link { padding: 10px 0 0 185px; }
+.loginNbox .link a { color: #999;}
+.mirta { padding:40px 50px; }
+.aboutMitra h1 { font-size: 36px; font-weight: 700; color:#d0011b; }
+.aboutMitra p { padding-left: 40px; margin-bottom: 30px; }
+.aboutMitra .infograph { padding-left: 40px;}
+.aboutMitra h1 img { display: inline-block; margin-top: -7px; }
+.aboutMitra { padding-right: 30px; }
+.createAccount { padding-left: 30px;}
+.createAccount { float: right;  }
+.createAccount:after { position: absolute; content: ""; top: 0; left: -1px; width: 1px; height: 100%; background: #eee; }
+.createAccount h3 { position: relative; padding-bottom: 40px; }
+.createAccount h3:after { position: absolute; content: ""; bottom: 20px; left: 0; background: #d0011b; width: 80px; height: 2px;}
+
+.createAccount .inputContainer { margin-bottom: 20px; display: inline-block; width: 100%; }
+.createAccount .inputContainer input { width: 300px; margin: 0; }
+.createAccount .inputContainer button { margin: 0; }
+.createAccount p { margin: 20px 0; }
+.createAccount p a { color: #4785fa; text-decoration: underline; }
+
+/* footer */
+.footerContent, .otherLinks { border-top: solid 2px #eee; padding: 0 0;}
+.footerContent ul { text-align: center; margin: 25px 0; display: block;  }
+.footerContent ul li, .otherLinks ul li {display: inline-block; padding: 0 15px; line-height: 50px; }
+.footerContent ul li a, .otherLinks ul li a {color: #999; font-weight: 500;}
+.footerContent ul li a:hover, .otherLinks ul li a:hover {color: #d0011b;}
+.footerContent ul.social li a { width: 40px; height: 40px; display: inline-block; background: #fafafa; border-radius: 50%; transition: background .5s ease; }
+.footerContent ul li a svg {fill: #999; width: 18px; height: 18px;transition: fill .5s ease;}
+.footerContent ul.social li a:hover {background: #d0011b;}
+.footerContent ul li a:hover svg {fill: #fff;}
+.otherLinks ul { text-align: center; margin: 20px 0; }
+.otherLinks ul li a { font-size: 14px; }
+
 .redirect { width: 500px; margin: 10% auto; text-align: center; }
 
 
@@ -437,12 +476,26 @@ span.bgGreen, span.bgRed {width: 45px; font-size: 12px; display: block;padding: 
     .treeChartLabels li img {width: 24px;}
     .treeChartLabels li {font-size: 16px; padding: 0;}
     .progress.treeChart .sr-only {font-size: 16px;}
+
+    /* New */
+    .infograph img  { width: 100%; }
 }
 @media screen and (max-width: 991px) {
     .navFakeSpace, .wrapper {padding-right: 15px;}
     .padR-7 {padding-right: 15px;}
     .padL-7 {padding-left: 15px;}
     .borderRight {border: none;}
+}
+/* New */
+@media screen and (max-width: 800px) {
+    body.login { padding-top: 180px; }
+    .loginNbox { width: 100%; padding: 0 30px; }
+    .inputContainer input { width: 40%; }
+    .loginNbox .link { padding-left: 44%; }
+    .mirta { padding: 40px 30px; }
+    .aboutMitra p, .aboutMitra .infograph { padding-left: 0; }
+    .dashCont, .footer.dash { padding: 0 20px; }
+    .footer.dash div { float: none !important; display: block; text-align: center; line-height: 32px; }
 }
 .footer {padding: 0 15px;}
 @media screen and (max-width: 767px) {
@@ -494,6 +547,41 @@ span.bgGreen, span.bgRed {width: 45px; font-size: 12px; display: block;padding: 
 
     /*  Analyze  */
     .graphsControl > div {text-align: center; padding-bottom: 15px;}
+
+    /* New */
+    div.login { padding-top: 0; }
+    div.login .navbar { position: static; border: none; }
+    div.login .navbar > .container-fluid .navbar-brand { margin: 0; width: 100%; text-align: center; }
+    .navbar-brand > img { display: inline-block; }
+    .loginNbox { padding: 0 20px; }
+    .inputContainer input, .inputContainer button { margin: 5px 0;  width: 100%; }
+    .loginNbox .link { padding-left: 0; text-align: center; }
+    .mirta { padding: 20px; }
+    .aboutMitra, .createAccount { padding:0 15px; float: none;}
+    .createAccount:after { display: none; }
+    .createAccount .inputContainer input { width: 100%; }
+    .aboutMitra h1, .aboutMitra p, .aboutMitra .infograph { text-align: center; }
+    .footerContent ul.links li, .otherLinks ul li { line-height: 30px; padding: 0; margin-bottom: 5px; }
+    .footerContent ul.links li a, .otherLinks ul li a{ background: #fafafa; padding: 0 15px; display: inline-block;border-radius: 2px; }
+    .footerContent ul.links li a:hover, .otherLinks ul li a:hover{ background: #d0011b; color: #fff; }
+
+    .dashCont, .footer.dash { padding: 0 15px; }
+    .navPad { padding: 0 0 0 30px; }
+    div.login .navPad { padding: 0; }
+    .dashboard { margin-top: 65px; }
+    .profile { width: 100%; padding: 0 15px 20px; line-height: 24px; }
+    .profile .textBreak { line-height: 24px; }
+    .profile .edit { text-align: right; padding: 0 15px; }
+    .profile .edit a {  background: #fafafa; padding: 0 5px;}
+    .profile button {width: 100%; }
+    .footer a { background: #fff; padding: 0 10px; margin: 2px; }
+    .footer a:hover {  background: #d0011b; color: #fff;  }
+    .orderInfo { margin: 0; width: 49%; display: inline-block; }
+    .redirect { width: 100%; padding: 0 15%; }
+}
+/* New */
+@media screen and (max-width: 341px) {
+    .descisonMsg { width: 300px; }
 }
 table.dataTable.no-footer {border: none;}
 

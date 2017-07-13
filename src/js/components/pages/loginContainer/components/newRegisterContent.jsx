@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { bindHandlers } from 'react-bind-handlers';
 import { Link } from 'react-router';
 
-class RegisterContent extends React.Component {
+class NewRegisterContent extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -95,35 +95,34 @@ class RegisterContent extends React.Component {
 		} = this.state;
 
 		return (
-			<div className="content">
-			    <form onSubmit={this.handleSubmitClick}>
-			        <input type="email" value={username} onChange={this.handleChangeUserName} placeholder="Username" required />
-			        {errors['email'] && <div className="error-msg">{errors['email']}</div>}
-			        <input type="password" minLength="8" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
-			        {errors['password'] && <div className="error-msg">{errors['password']}</div>}
+			<form className="col-sm-6 createAccount" onSubmit={this.handleSubmitClick}>
+			    <h3>Create your account</h3>
+			    <div className="inputContainer">
+			        <input type="email" value={username} onChange={this.handleChangeUserName} placeholder="Email or Username" required />
+			        {/*errors['email'] && <div className="error-msg">{errors['email']}</div>*/}
+			    </div>
+			    <div className="inputContainer">
 			        <input
 			        	type="text"
 			        	value={website}
 			        	onChange={this.handleChangeWebsite}
-			        	placeholder="Website"
+			        	placeholder="Your Website"
 			        	pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
 			        	required
 			        />
 			        {(errors['website'] || errors['name']) && <div className="error-msg">{errors['website'] || errors['name']}</div>}
-			        <div className="rememberMe checkbox">
-			            <label>
-			            	<input type="checkbox" checked={acceptTerms} onChange={this.handleTermsCheck} required />
-			            </label>
-			            I accept all <a href="#"> Terms &amp; Condition</a>
-			        </div>
-			        <input type="submit" value="REGISTER" />
-			        <div className="text-left">
-			        	<Link href="/forgot-password">Forgot your password?</Link>
-			        </div>
-			    </form>
-			</div>
+			    </div>
+			    <div className="inputContainer">
+			        <input type="password" minLength="8" value={password} onChange={this.handleChangePassword} placeholder="Password" required />
+			        {errors['password'] && <div className="error-msg">{errors['password']}</div>}
+			    </div>
+			    <p>By clicking Create an account, you agree to our <a href="#">Terms &amp; Condition</a></p>
+			    <div className="inputContainer">
+			        <button type="submit">Register</button>
+			    </div>
+			</form>
 		);
 	}
 }
 
-export default bindHandlers(RegisterContent);
+export default bindHandlers(NewRegisterContent);
