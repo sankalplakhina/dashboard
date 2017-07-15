@@ -27,7 +27,6 @@ class StatsPanelHeader extends React.Component {
 		if (hasDecisionLoaded && decisionMsg) {
 			this.handleDecisionMsgModalHide();
 			onDecisionComplete(decisionMsg, orderId);
-			// alert(decisionMsg);
 		}
 	}
 

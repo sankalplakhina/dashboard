@@ -8,6 +8,7 @@ import {
 } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
 import { login } from '../actions/loginContainerActions';
 import NewLoginContent from '../components/newLoginContent';
+import { showGlobalAlert } from 'src/js/components/globalAlert/actions';
 
 function mapStateToProps(state) {
   	return {
@@ -23,6 +24,9 @@ function mapDispatchToProps(dispatch, ownProps) {
   		onLoginSubmit(username, password) {
   			dispatch(login({ username, password }));
   		},
+        onResponseMessage(responseMessage) {
+            dispatch(showGlobalAlert(responseMessage));
+        }
   	};
 }
 

@@ -16,14 +16,17 @@ class ResetPasswordContent extends React.Component {
 			isResponseSuccess,
 			responseMessage,
 			router,
+			onSubmitMessage,
 		} = nextProps;
 
 		const hasResetPasswordLoaded = !isResetPasswordLoading && isResetPasswordLoading !== this.props.isResetPasswordLoading;
 		if (hasResetPasswordLoaded && responseMessage) {
-			alert(responseMessage);
 			if (isResponseSuccess) {
 				this.initState();
+				alert(responseMessage);
 				router.replace('/login');
+			} else {
+				onSubmitMessage(responseMessage);
 			}
 		}
 	}

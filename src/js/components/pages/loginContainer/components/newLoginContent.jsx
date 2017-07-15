@@ -17,15 +17,17 @@ class NewLoginContent extends React.Component {
 			responseMessage,
 			responseErrors,
 			router,
+			onResponseMessage,
 		} = nextProps;
 
 		const hasLoginLoaded = !isLoginLoading && isLoginLoading !== this.props.isLoginLoading;
 		if (hasLoginLoaded && responseMessage) {
-			alert(responseMessage);
 			if (isResponseSuccess) {
 				this.initState();
+				alert(responseMessage);
 	        	router.replace('/');
 			} else {
+				onResponseMessage(responseMessage);
 				this.updateFormWithErrors(responseErrors)
 			}
 		}

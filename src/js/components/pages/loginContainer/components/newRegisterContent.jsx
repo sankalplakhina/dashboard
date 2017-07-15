@@ -17,15 +17,17 @@ class NewRegisterContent extends React.Component {
 			responseMessage,
 			responseErrors,
 			router,
+			onResponseMessage,
 		} = nextProps;
 
 		const hasRegistrationLoaded = !isRegisterationLoading && isRegisterationLoading !== this.props.isRegisterationLoading;
 		if (hasRegistrationLoaded && responseMessage) {
-			alert(responseMessage);
 			if (isResponseSuccess) {
 				this.initState();
+				alert(responseMessage);
 				router.replace('/login');
 			} else {
+				onResponseMessage(responseMessage);
 				this.updateFormWithErrors(responseErrors)
 			}
 		}
