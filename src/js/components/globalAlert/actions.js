@@ -1,7 +1,5 @@
 import * as ACTIONS from './actionTypes';
-import {
-	getGlobalAlertCallbackAction,
-} from './selectors';
+import { getGlobalAlertCallbackAction } from './selectors';
 
 export function showGlobalAlert(alertText, callbackAction) {
 	if (typeof callbackAction === 'function') {
@@ -28,14 +26,16 @@ export function removeCallbackAction() {
 
 export function closeGlobalAlert() {
     return (dispatch, getState) => {
-    	const state = getState();
-    	const callbackAction = getGlobalAlertCallbackAction(state);
 
     	// hide alert as it will take it's transition time to hide
     	dispatch(dismissGlobalAlert());
 
-		// fire callback action and remove it from store
-    	dispatch(callbackAction);
-    	dispatch(removeCallbackAction());
+    	const callbackAction = getGlobalAlertCallbackAction(getState());
+
+    	// fire callback action and remove it from store
+    	if (callbackAction) {
+    		dispatch(callbackAction);
+    		dispatch(removeCallbackAction());
+    	}
     };
 }
