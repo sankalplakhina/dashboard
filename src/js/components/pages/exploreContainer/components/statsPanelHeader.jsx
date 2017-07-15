@@ -33,7 +33,7 @@ class StatsPanelHeader extends React.Component {
 	}
 
 	handleDecisionButtonClick(){
-		if (!this.state.isDecisionTaken) {
+		if (!this.props.decisionMsg) {
 			this.setState({
 				isDecisionOptionsOpen: !this.state.isDecisionOptionsOpen
 			})

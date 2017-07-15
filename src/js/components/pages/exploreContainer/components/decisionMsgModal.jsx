@@ -6,9 +6,7 @@ import Button from 'react-bootstrap/lib/Button';
 class DecisionMsgModal extends React.Component {
 	constructor() {
 		super();
-		this.state = {
-			decisionMsgText: ''
-		};
+		this.state = this.getInitState();
 	}
 
 	componentWillReceiveProps({ options }) {
@@ -18,12 +16,20 @@ class DecisionMsgModal extends React.Component {
 	}
 
 	handleResetText() {
-		this.setState({
+		this.setState(this.getInitState());
+	}
+
+	getInitState() {
+		return {
 			decisionMsgText: '',
-		});
+			isDecisionInProgress: false,
+		};
 	}
 
 	handleDecisionClick() {
+		this.setState({
+			isDecisionInProgress: true
+		});
 		const {
 			options: {
 				action,
@@ -48,7 +54,7 @@ class DecisionMsgModal extends React.Component {
 
 	render () {
 		const { show, onHide, options : { action = {} } } = this.props;
-		const { decisionMsgText } = this.state;
+		const { decisionMsgText, isDecisionInProgress } = this.state;
 		return (
 			<Modal
 				dialogClassName="descisonMsg"
@@ -72,6 +78,7 @@ class DecisionMsgModal extends React.Component {
 		            <Button onClick={this.handleHide}>Cancel</Button>
 		            <Button
 		            	bsStyle="primary"
+		            	disabled={isDecisionInProgress}
 		            	onClick={this.handleDecisionClick}
 		            	>{action.label}
 		            </Button>
