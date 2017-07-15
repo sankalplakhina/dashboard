@@ -113,9 +113,8 @@ export function loadStatsPanelsWithPrevLink(prevApiUrl) {
     }
 }
 
-export function setDecision(decision, orderId, orderTimestamp, apiLink = '/twapi/action') {
+export function setDecision(decision, orderId, orderTimestamp, decisionMsgText, apiLink = '/twapi/action') {
     return (dispatch, getState, client) => {
-        return console.log('setDecision', decision, orderId, orderTimestamp)
         dispatch({
             type: ACTIONS.SET_DECISION_PENDING,
             orderId
@@ -128,6 +127,7 @@ export function setDecision(decision, orderId, orderTimestamp, apiLink = '/twapi
                 order_id: orderId,
                 action_type: decision.value,
                 order_timestamp: orderTimestamp,
+                message: decisionMsgText,
             }
         })
         .then(data => {

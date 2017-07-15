@@ -2,24 +2,28 @@ import React from 'react';
 import { Link } from 'react-router';
 import cx from 'classnames';
 import { bindHandlers } from 'react-bind-handlers';
+import DecisionMsgModal from './decisionMsgModal';
 
 class StatsPanelHeader extends React.Component {
 	constructor(){
 		super();
 		this.state = {
 			isDecisionOptionsOpen: false,
-
+			isDecisionMsgModalOpen: false,
+			modalOptions: {},
 		};
 	}
 
 	componentWillReceiveProps(nextProps) {
 		const {
 			isDecisionLoading,
+			isDecisionLoaded,
 			decisionMsg,
 		} = nextProps;
 
-		const hasDecisionLoaded = !isDecisionLoading && isDecisionLoading !== this.props.isDecisionLoading;
+		const hasDecisionLoaded = !isDecisionLoading && isDecisionLoaded;
 		if (hasDecisionLoaded && decisionMsg) {
+			this.handleDecisionMsgModalHide();
 			alert(decisionMsg);
 		}
 	}
@@ -37,8 +41,29 @@ class StatsPanelHeader extends React.Component {
 	}
 
 	handleDecisionOptionClick(action, orderId, orderTimestamp){
+
 		const { onDecisionClick } = this.props;
-		onDecisionClick(action, orderId, orderTimestamp);
+
+		this.setState({
+			isDecisionMsgModalOpen: true,
+			modalOptions: {
+				action,
+				orderId,
+				orderTimestamp,
+				onDecisionClick,
+			}
+		});
+	}
+
+	handleDecisionMsgModalHide(callback) {
+		this.setState({
+			isDecisionMsgModalOpen: false,
+		}, () => {
+			this.setState({
+				modalOptions: {},
+			});
+			callback && callback();
+		});
 	}
 
 	render() {
@@ -54,7 +79,11 @@ class StatsPanelHeader extends React.Component {
 			decisionMsg,
 		} = this.props;
 
-		const { isDecisionOptionsOpen } = this.state;
+		const {
+			isDecisionOptionsOpen,
+			isDecisionMsgModalOpen,
+			modalOptions,
+		} = this.state;
 		return (
 			<div className="row">
 				{
@@ -111,6 +140,11 @@ class StatsPanelHeader extends React.Component {
 						</div>
 					</div>
 				}
+				<DecisionMsgModal
+					show={isDecisionMsgModalOpen}
+					onHide={this.handleDecisionMsgModalHide}
+					options={modalOptions}
+					/>
 				{
 					!disableCollapse &&
 					<div className="col-sm-1 text-right" onClick={this.handleCollapsedButtonClick}>

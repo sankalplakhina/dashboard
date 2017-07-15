@@ -4,6 +4,7 @@ import {
 	getExploreOrdersDecisionOptions,
 	getExploreOrderIsDecisionLoading,
 	getExploreOrderDecisionMsg,
+  getExploreOrderIsDecisionLoaded,
 } from '../selectors/exploreContainerSelectors';
 import { setDecision } from '../actions/exploreContainerActions';
 
@@ -11,15 +12,16 @@ function mapStateToProps(state, ownProps) {
 	const { data: { orderId } } = ownProps;
   	return {
   		decisionOptions: getExploreOrdersDecisionOptions(state),
-  		isDecisionLoading: getExploreOrderIsDecisionLoading(state, orderId),
+      isDecisionLoading: getExploreOrderIsDecisionLoading(state, orderId),
+  		isDecisionLoaded: getExploreOrderIsDecisionLoaded(state, orderId),
   		decisionMsg: getExploreOrderDecisionMsg(state, orderId),
   	};
 }
 
 function mapDispatchToProps(dispatch) {
   	return {
-  		onDecisionClick(action, orderId, orderTimestamp){
-  			dispatch(setDecision(action, orderId, orderTimestamp));
+  		onDecisionClick(action, orderId, orderTimestamp, decisionMsgText){
+  			dispatch(setDecision(action, orderId, orderTimestamp, decisionMsgText));
   		}
   	};
 }

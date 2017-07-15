@@ -76,6 +76,10 @@ export const getExploreOrderIsDecisionLoading = (state, orderId) => {
 	return _.get(getExploreOrderDecision(state, orderId), 'loading');
 };
 
+export const getExploreOrderIsDecisionLoaded = (state, orderId) => {
+	return _.get(getExploreOrderDecision(state, orderId), 'loaded');
+};
+
 export const getExploreOrderDecisionMsg = (state, orderId) => {
 	return _.get(getExploreOrderDecision(state, orderId), 'msg');
 };
