@@ -8,6 +8,12 @@ class GlobalAlert extends React.Component {
 		super();
 	}
 
+	componentWillReceiveProps({ activeRoute, onHide }) {
+		if (activeRoute !== this.props.activeRoute) {
+			onHide();
+		}
+	}
+
 	render () {
 		const { isActive, alertText, onHide } = this.props;
 		return (

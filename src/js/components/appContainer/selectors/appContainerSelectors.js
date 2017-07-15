@@ -1,6 +1,8 @@
 export const getLocation = (state) => state.routing.locationBeforeTransitions;
 export const getLocationPathName = (state) => getLocation(state).pathname;
 export const getRouteQueryParams = (state) => getLocation(state).query;
+export const getRouteSearch = (state) => getLocation(state).search;
+export const getRouteHash = (state) => getLocation(state).hash;
 
 export const isAuthViewSelector = (state) => {
 	const pathname = getLocationPathName(state);

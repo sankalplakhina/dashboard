@@ -15,11 +15,12 @@ class ForgotPasswordContent extends React.Component {
 			isForgotPasswordLoading,
 			isResponseSuccess,
 			responseMessage,
+			onResponseMessage,
 		} = nextProps;
 
 		const hasForgotPasswordLoaded = !isForgotPasswordLoading && isForgotPasswordLoading !== this.props.isForgotPasswordLoading;
 		if (hasForgotPasswordLoaded && responseMessage) {
-			alert(responseMessage);
+			onResponseMessage(responseMessage);
 			if (isResponseSuccess) {
 				this.initState();
 			}

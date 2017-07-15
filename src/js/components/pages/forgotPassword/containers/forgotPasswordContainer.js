@@ -7,6 +7,7 @@ import {
 } from 'src/js/components/pages/loginContainer/selectors/loginContainerSelectors';
 import { forgotPassword } from 'src/js/components/pages/loginContainer/actions/loginContainerActions';
 import ForgotPasswordContainer from '../components/forgotPasswordContainer';
+import { showGlobalAlert } from 'src/js/components/globalAlert/actions';
 
 function mapStateToProps(state) {
   	return {
@@ -18,9 +19,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch, ownProps) {
   	return {
-  		onSubmit({ username }) {
+        onSubmit({ username }) {
   			dispatch(forgotPassword({ username }))
   		},
+        onResponseMessage(responseMessage) {
+            dispatch(showGlobalAlert(responseMessage));
+        }
+
   	};
 }
 

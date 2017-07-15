@@ -1,6 +1,7 @@
 import React from 'react';
 import LoggedOutNavbar from 'src/js/components/common/components/loggedOutNavbar';
 import LoggedOutFooter from 'src/js/components/common/components/loggedOutFooter';
+import GlobalAlert from 'src/js/components/globalAlert/containers/globalAlert';
 
 class LoggedOutAppContainer extends React.Component {
 
@@ -10,6 +11,7 @@ class LoggedOutAppContainer extends React.Component {
 			<div className="login">
 				<LoggedOutNavbar />
 				{this.props.children}
+				<GlobalAlert />
 				<LoggedOutFooter />
 			</div>
 		);

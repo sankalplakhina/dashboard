@@ -42,16 +42,16 @@ class ResetPasswordContent extends React.Component {
 	handleSubmitClick(event) {
 		event.preventDefault();
 		const { password, confirmPassword } = this.state;
-		const { resetToken } = this.props;
+		const { resetToken, onSubmit, onSubmitMessage  } = this.props;
 		if (resetToken && password && confirmPassword) {
 			if (password === confirmPassword) {
 				const { resetToken } = this.props;
-				this.props.onSubmit(this.state, resetToken);
+				onSubmit(this.state, resetToken);
 			} else {
-				alert(`Password's don't match!`);
+				onSubmitMessage(`Password's don't match!`);
 			}
 		} else {
-			alert('Reset token missing');
+			onSubmitMessage('Reset token missing');
 		}
 
 	}
