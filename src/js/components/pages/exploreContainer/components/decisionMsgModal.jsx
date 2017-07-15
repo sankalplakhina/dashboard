@@ -63,7 +63,7 @@ class DecisionMsgModal extends React.Component {
 				backdrop={false}
 				>
 
-				<Modal.Header closeButton onHide={this.handleHide}>
+				<Modal.Header closeButton>
 					<Modal.Title>Make a descison</Modal.Title>
 				</Modal.Header>
 
