@@ -149,3 +149,10 @@ export function setDecision(decision, orderId, orderTimestamp, decisionMsgText, 
         });
     };
 }
+
+export function removeDecisionCompleteOrder(orderId) {
+    return {
+        type: ACTIONS.REMOVE_ORDER,
+        orderId,
+    }
+}

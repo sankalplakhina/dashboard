@@ -21,7 +21,7 @@ function mapDispatchToProps(dispatch) {
 	return {
 		onUpdateView(){
 			dispatch(load())
-		}
+		},
 	};
 }
 

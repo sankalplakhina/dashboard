@@ -9,3 +9,4 @@ export const REMOVE_ORDERS_PREV_API_URL = 'app/explore-data/remove-orders-prev-a
 export const SET_DECISION_PENDING = 'app/explore-data/set-decision-pending';
 export const SET_DECISION_SUCCESS = 'app/explore-data/set-decision-success';
 export const SET_DECISION_FAIL = 'app/explore-data/set-decision-fail';
+export const REMOVE_ORDER = 'app/explore-data/remove-order';

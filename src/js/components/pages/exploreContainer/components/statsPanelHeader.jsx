@@ -19,11 +19,14 @@ class StatsPanelHeader extends React.Component {
 			isDecisionLoading,
 			isDecisionLoaded,
 			decisionMsg,
+			data: { orderId },
+			onDecisionComplete
 		} = nextProps;
 
 		const hasDecisionLoaded = !isDecisionLoading && this.props.isDecisionLoading && isDecisionLoaded;
 		if (hasDecisionLoaded && decisionMsg) {
 			this.handleDecisionMsgModalHide();
+			onDecisionComplete(decisionMsg, orderId);
 			alert(decisionMsg);
 		}
 	}

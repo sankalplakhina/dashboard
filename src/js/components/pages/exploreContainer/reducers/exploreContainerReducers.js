@@ -55,6 +55,9 @@ function orders(state = {}, action) {
 		case ACTIONS.SET_DECISION_FAIL:
 			return updateOrderDecisionFail(state, action);
 
+		case ACTIONS.REMOVE_ORDER:
+			return removeOrder(state, action);
+
 		case datePickerActions.SET_DATE_BUCKET:
 			return updateStateOnDateSelection(state);
 
@@ -141,6 +144,14 @@ function updateOrderDecisionFail(state, action) {
 					loaded: true,
 				}, action.decision, action.error)
 			}, state.data[action.orderId])
+		}, state.data)
+	}, state);
+}
+
+function removeOrder(state, action) {
+	return _.defaults({
+		data: _.defaults({
+			rows: _.pull(state.data.rows, action.orderId)
 		}, state.data)
 	}, state);
 }

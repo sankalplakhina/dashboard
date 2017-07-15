@@ -7,6 +7,7 @@ import explore from '../components/pages/exploreContainer/reducers/exploreContai
 import { reducer as review } from 'src/js/components/pages/reviewContainer/reducers/reviewContainerReducers';
 import { reducer as analyze } from 'src/js/components/pages/analyzeContainer/reducers/analyzeContainerReducers';
 import order from 'src/js/components/pages/order/reducers/orderContainerReducers';
+import globalAlert from 'src/js/components/globalAlert/reducers';
 
 // root reducer
 const reducers = combineReducers({
@@ -18,6 +19,7 @@ const reducers = combineReducers({
   order,
   review,
   analyze,
+  globalAlert,
 });
 
 export default reducers;
