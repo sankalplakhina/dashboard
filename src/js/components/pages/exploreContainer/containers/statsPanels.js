@@ -16,7 +16,7 @@ function mapStateToProps(state) {
   		data: getExploreOrdersData(state),
         paginationData: getExploreOrdersPaginationData(state),
         prevApiLink: getExploreOrdersPrevApiUrl(state),
-        isLoaded: !getIsExploreOrdersLoading(state),
+        isExploreOrdersLoading: getIsExploreOrdersLoading(state),
   	};
 }
 

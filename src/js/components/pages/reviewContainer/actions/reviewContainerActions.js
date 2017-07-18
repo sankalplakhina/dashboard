@@ -21,6 +21,13 @@ export function loadSuccess(data) {
   };
 }
 
+export function initiateLoading(apiUrl) {
+  return {
+        type: ACTIONS.LOAD,
+        apiUrl,
+    };
+}
+
 function loadReview(apiUrl) {
     // returning a thunk as this is any async action
     // dispatch and getState and default params from
@@ -29,10 +36,9 @@ function loadReview(apiUrl) {
     // Check createStore where when we set middlewares, we add
     // thunk middleware as thunk.withExtraArgument(client)
     return (dispatch, getState, client) => {
-        dispatch({
-          type: ACTIONS.LOAD,
-          apiUrl,
-        });
+
+        dispatch(initiateLoading(apiUrl));
+
         return client.get(apiUrl)
         .then(data => dispatch(loadSuccess(data)))
         .catch(error => dispatch(loadFail(error)));

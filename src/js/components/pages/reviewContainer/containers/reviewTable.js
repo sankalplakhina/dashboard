@@ -4,6 +4,7 @@ import {
 	getReviewPrevApiUrl,
 	getReviewPaginationData,
 	getReviewNextQuery,
+	getIsreviewDataLoading,
 } from '../selectors/reviewContainerSelectors';
 import {
 	loadReviewWithNextQuery,
@@ -15,6 +16,7 @@ function mapStateToProps(state) {
 		paginationData: getReviewPaginationData(state),
 		prevApiLink: getReviewPrevApiUrl(state),
 		nextQuery: getReviewNextQuery(state),
+		isReviewDataLoading: getIsreviewDataLoading(state),
 	};
 }
 

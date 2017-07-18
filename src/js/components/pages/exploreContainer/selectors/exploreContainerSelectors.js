@@ -6,7 +6,7 @@ const DECESION_OPTIONS = [
 ];
 
 export const getOrdersApiPath = () => '/fapi/orders';
-export const getOrdersApiRowsCount = () => '3';
+export const getOrdersApiRowsCount = () => '10';
 
 export const getExploreOrdersDecisionOptions = () => DECESION_OPTIONS;
 

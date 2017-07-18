@@ -3,6 +3,7 @@ import React from 'react';
 import cx from 'classnames';
 import { bindHandlers } from 'react-bind-handlers';
 import StatsPanel from './statsPanel';
+import loadingGif from 'public/static/images/loading.gif';
 
 class StatsPanels extends React.Component {
 
@@ -26,18 +27,22 @@ class StatsPanels extends React.Component {
 	}
 
 	handlePreviousClick() {
-		const { onPreviousButtonClick, prevApiLink } = this.props;
-		onPreviousButtonClick(prevApiLink);
+		const { onPreviousButtonClick, prevApiLink, isExploreOrdersLoading } = this.props;
+		if (!isExploreOrdersLoading){
+			onPreviousButtonClick(prevApiLink);
+		}
 	}
 
 	handleNextClick() {
-		const { onNextButtonClick, data: { next } } = this.props;
-		onNextButtonClick(next);
+		const { onNextButtonClick, data: { next }, isExploreOrdersLoading } = this.props;
+		if (!isExploreOrdersLoading) {
+			onNextButtonClick(next);
+		}
 	}
 
 	render(){
 
-		const { data, prevApiLink, paginationData } = this.props;
+		const { data, prevApiLink, paginationData, isExploreOrdersLoading } = this.props;
 
 		if (data) {
 			const { rows, next } = data;
@@ -48,13 +53,14 @@ class StatsPanels extends React.Component {
 				<div className="expPaginate">
 					<div className="col-md-6 nopad bottomPad15 lh32">
 						<div className="dataTables_paginate paging_simple_numbers pull-left">
-							<a className={cx("paginate_button previous", {'disabled': !prevApiLink})}
+							<a className={cx("paginate_button previous", {'disabled': !prevApiLink || isExploreOrdersLoading})}
 								onClick={prevApiLink? this.handlePreviousClick: _.noop}
 							/>
-							<a className={cx("paginate_button next", {'disabled': !next})}
+							<a className={cx("paginate_button next", {'disabled': !next || isExploreOrdersLoading})}
 								onClick={next? this.handleNextClick: _.noop} />
 						</div>
-						<div className="dataTables_info pull-left">
+			    		{isExploreOrdersLoading && <figure className="table-loader"><img src={loadingGif} /></figure>}
+						<div className="page-text dataTables_info pull-left">
 							<strong>{`Showing ${start} to ${end} orders`}</strong>
 						</div>
 					</div>
