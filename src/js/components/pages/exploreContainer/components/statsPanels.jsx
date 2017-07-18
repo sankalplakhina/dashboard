@@ -61,7 +61,7 @@ class StatsPanels extends React.Component {
 						</div>
 			    		{isExploreOrdersLoading && <figure className="table-loader"><img src={loadingGif} /></figure>}
 						<div className="page-text dataTables_info pull-left">
-							<strong>{`Showing ${start} to ${end} orders`}</strong>
+							<strong>{`${isExploreOrdersLoading? 'Loading' : 'Showing'} ${start} to ${end} orders`}</strong>
 						</div>
 					</div>
 					<div className="hidden col-md-6 text-right nopad bottomPad15 lh32">

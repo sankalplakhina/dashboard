@@ -35,7 +35,7 @@ class ReviewTable extends React.Component {
 				<div className="reviewDatatable_wrapper dataTables_wrapper no-footer">
 					<div className="top">
 						<div className="dataTables_info">
-							<strong>{`Showing ${start} to ${end} orders`}</strong>
+							<strong>{`${isReviewDataLoading? 'Loading' : 'Showing'} ${start} to ${end} orders`}</strong>
 						</div>
 			    		{isReviewDataLoading && <figure className="table-loader"><img src={loadingGif} /></figure>}
 						<div className="dataTables_paginate paging_simple_numbers pull-left">
