@@ -64,7 +64,7 @@ class StatsPanels extends React.Component {
 							<strong>{`Showing ${start} to ${end} orders`}</strong>
 						</div>
 					</div>
-					<div className="col-md-6 text-right nopad bottomPad15 lh32">
+					<div className="hidden col-md-6 text-right nopad bottomPad15 lh32">
 						<label className="mr5">Sort by</label>
 						<div
 							className={cx("dropdown pull-right", {"open": isSortDropdownOpen })}
