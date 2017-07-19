@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 import mitraIcon from 'public/static/images/mitraIcon.png';
 import mitraInfograph from 'public/static/images/mitraInfograph.png';
-import NewRegisterContent from '../containers/NewRegisterContent';
+import NewRegisterContent from '../containers/newRegisterContent';
 
 class NewLoginContainer extends React.Component {
 	render() {
