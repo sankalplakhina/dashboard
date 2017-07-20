@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 
 import DashboardBreadcrumbs from 'src/js/components/dashboard/containers/dashboardBreadcrumbs';
 import DashboardDatePicker from 'src/js/components/dashboard/containers/dashBoardDatePicker';
+import DashboardSearchBar from 'src/js/components/dashboard/containers/dashboardSearchBar';
 import ExploreContent from 'src/js/components/pages/exploreContainer/containers/exploreContent';
 import OrderContent from 'src/js/components/pages/order/containers/orderContent';
 import ReviewContent from 'src/js/components/pages/reviewContainer/containers/reviewContent';
@@ -29,6 +30,7 @@ class DashboardContent extends React.Component {
                         {isReviewView && <DashboardBreadcrumbs isReviewView />}
                         {isAnalyzeView && <DashboardBreadcrumbs isAnalyzeView />}
                         {!isOrderView && <DashboardDatePicker onUpdateView={onUpdateView} />}
+                        <DashboardSearchBar />
                     </div>
                 </div>
                 {isExploreView && <ExploreContent />}

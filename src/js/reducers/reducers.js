@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { reducer as reduxAsyncConnect } from 'redux-connect';
 import auth from 'src/js/components/pages/loginContainer/reducers/loginContainerReducers';
-import { dashboard } from 'src/js/components/dashboard/reducers/dashBoardDatePickerReducers';
+import dashboard from 'src/js/components/dashboard/reducers/dashboardReducer';
 import explore from '../components/pages/exploreContainer/reducers/exploreContainerReducers';
 import { reducer as review } from 'src/js/components/pages/reviewContainer/reducers/reviewContainerReducers';
 import { reducer as analyze } from 'src/js/components/pages/analyzeContainer/reducers/analyzeContainerReducers';

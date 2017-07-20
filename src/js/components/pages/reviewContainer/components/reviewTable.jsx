@@ -50,7 +50,7 @@ class ReviewTable extends React.Component {
 				<DbTable
 					className="reviewDatatable"
 					data={data}
-					searchEnabled={true} />
+					/>
 			</div>
 		);
 	}
