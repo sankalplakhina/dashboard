@@ -26,7 +26,7 @@ class DashboardSearchBar extends React.Component {
 		if (isSearchBarResponseSuccess && !this.props.isSearchBarResponseSuccess) {
 			router.push('/order/' + loadingOrderId);
 		} else if (isSearchBarResponseError && !this.props.isSearchBarResponseError) {
-			onResponseError(`Sorry! We did not found any order with starting with ${loadingOrderId}. Please check the order id and try again.`);
+			onResponseError(`Sorry! We did not found any order starting with ${loadingOrderId}. Please check the order id and try again.`);
 		}
 	}
 
