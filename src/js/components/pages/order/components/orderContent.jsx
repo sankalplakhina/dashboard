@@ -10,7 +10,6 @@ class OrderContent extends React.Component {
 	  				<div className="col-sm-12">
 						<StatsPanel
 							data={data}
-							isDecisionButtonsHidden
 							isFirstExpanded
 							isFixedExpanded />
 	  				</div>
